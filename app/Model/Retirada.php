@@ -92,7 +92,11 @@ class Retirada extends Model {
 	);
 
 	/**
-	 * Executa método antes de salvar
+	 * Executa método antes de salvar a retirada
+	 *
+	 * - As retiradas só seram salves se possuir alguma quantidade.
+	 * - Caso a retirada NÃO possua quantidade mas possui ID (já foi salva antes), as aplicações desta serão excluída
+	 * - A quantidade das aplicações NÃO podem extrapolar a quantidade das retiradas
 	 *
 	 * @return boolean		Verdadeiro para continuar, Falso pra cancelar
 	 */
@@ -100,11 +104,14 @@ class Retirada extends Model {
 	{
 		$data 	= array();
 		$delIds = array();
+		$totRet = 0;
+		$totApl = 0;
 		foreach($this->data as $_l => $_arrMods)
 		{
 			if (isset($_arrMods['Retirada']['reti_qtd']))
 			{
 				$data[$_l] = $_arrMods;
+				$totRet += $_arrMods['Retirada']['reti_qtd'];
 			} elseif(isset($_arrMods['Retirada']['id']) && $_arrMods['Retirada']['id']>0)
 			{
 				$delIds[$_l]['Retirada']['id'] = $_arrMods['Retirada']['id'];
@@ -116,6 +123,23 @@ class Retirada extends Model {
 			$this->erros['0'] = 'Nenhuma retirada foi informada !!!';
 			return false;
 		}
+
+		// verificando as aplicações
+		if (isset($this->aplicacoes))
+		{
+			foreach($this->aplicacoes as $_l => $_arrMods)
+			{
+				$totApl += isset($_arrMods['Aplicacao']['apli_qtd'])
+					? $_arrMods['Aplicacao']['apli_qtd']
+					: 0;
+			}
+			if ($totApl>$totRet)
+			{
+				$this->erros['0'] = 'A quantidade das aplicações NÃO podem extrapolar a quantidade retirada !!!';
+				return false;
+			}
+		}
+
 		$this->data = $data;
 		return parent::beforeSave();
 	}

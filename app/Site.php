@@ -259,21 +259,6 @@ class Site {
 	}
 
 	/**
-	 * Configura o debug
-	 *
-	 */
-	public function debug()
-	{
-		if (isset($_SESSION['debug']))
-		{
-			unset($_SESSION['debug']);
-		} else
-		{
-			$_SESSION['debug'] = true;
-		}
-	}	
-
-	/**
 	 * Salva as aplicações
 	 *
 	 * @param 	array 	$_POST['data'] 	Array com os dados a serem salvos
@@ -282,9 +267,13 @@ class Site {
 	{
 		if (isset($_POST['data']))
 		{
+			// salvando as regtiradas e as aplicações
 			include_once(APP.'Model/Retirada.php');
-			$Retirada = new Retirada();
-			$dataC = $_POST['data']['0']['Retirada']['data'];
+			$Retirada 	= new Retirada();
+			$dataC 		= $_POST['data']['0']['Retirada']['data'];
+
+			if (isset($_POST['aplicacao'])) $Retirada->aplicacoes = $_POST['aplicacao'];
+
 			if ($Retirada->save($_POST['data']))
 			{
 				$msg 	= 'A Retirada foi salva com sucesso ...';
