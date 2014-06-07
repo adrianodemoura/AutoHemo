@@ -81,21 +81,12 @@ class Site {
 	 */
 	public function getBase()
 	{
-/*		$base = '';
-		$base = isset($_SERVER['REQUEST_SCHEME'])?$_SERVER['REQUEST_SCHEME']:'http';
-		$base .= '://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
-		$base = str_replace('webroot/','',$base);
-		$base = str_replace('public/','',$base);
-		$base = str_replace('index.php','',$base);
-*/
-		$base2 = '';
-		$base2 = $_SERVER['REQUEST_SCHEME'].'://';
-		$base2 .= $_SERVER['HTTP_HOST'];
-		$base2 .= str_replace('index.php', '', $_SERVER['PHP_SELF']);
-
-		return $base2;
+		$base = '';
+		$base = $_SERVER['REQUEST_SCHEME'].'://';
+		$base .= $_SERVER['HTTP_HOST'];
+		$base .= str_replace('index.php', '', $_SERVER['PHP_SELF']);
+		return $base;
 	}
-
 
 	/**
 	 * Retorna o nome da página corrente
