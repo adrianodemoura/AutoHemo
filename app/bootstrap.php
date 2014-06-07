@@ -22,7 +22,7 @@
 
     // jogamos o conteúdo do bloco numa variável, lá no layout ele será usado
     ob_start();
-    include_once(WWW.$Site->pagina.'.phtml');
+    include_once(APP.'View/'.$Site->pagina.'.phtml');
     $conteudo = ob_get_contents();
     ob_end_clean();
 
