@@ -81,7 +81,7 @@ class Site {
 	 */
 	public function getBase()
 	{
-		$base = '';
+		$base = 'http://';
 		if(isset($_SERVER['REQUEST_SCHEME'])) $base .= $_SERVER['REQUEST_SCHEME'].'://';
 		$base .= $_SERVER['HTTP_HOST'];
 		$base .= str_replace('index.php', '', $_SERVER['PHP_SELF']);
