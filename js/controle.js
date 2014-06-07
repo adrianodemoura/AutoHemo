@@ -15,17 +15,13 @@ $(document).ready(function()
 		var vlr		= $(this).val();
 		var checked = $(this).is(':checked');
 		$(this).toggleAttr('checked');
+	});
 
-		//var checked = $(this).attr('previousValue');
-		//var radioChecked = !checked;
-		//$(this).attr('checked', radioChecked);
-		/*if (checked==true)
-		{
-			$(this).attr('checked', false);
-			//$(this).removeAttr('checked');
-		} else
-		{
-			//$(this).attr('checked', true);
-		}*/
+	$(".rdAplicacao").click(function()
+	{
+		var id 		= $(this).attr('id');
+		var vlr		= $(this).val();
+		var checked = $(this).is(':checked');
+		$(this).toggleAttr('checked');
 	});
 });

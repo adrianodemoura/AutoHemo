@@ -262,6 +262,44 @@ class Model {
 	{
 	}
 
+		/**
+	 * Exclui um registro no banco de dados
+	 *
+	 * @params array 	$params Parâmetros da exclusão, params['tabela'], params['where']
+	 */
+	public function exclude($data=array())
+	{
+		$this->data = $data;
+
+		if (!$this->beforeExclude()) return false;
+
+		$sqls = array();
+		foreach($data as $_l => $_arrMods)
+		{
+			$where = '';
+			foreach($_arrMods[$this->name] as $_cmp => $_vlr)
+			{
+				if (!empty($where)) $where .= ' AND ';
+				if (is_numeric($_vlr))
+				{
+					$where .= "$_cmp=$_vlr";
+				} else
+				{
+					$where .= "$_cmp='$_vlr'";
+				}
+			}
+			$sql = 'DELETE FROM '.$this->prefixo.$this->tabela.' WHERE '.$where;
+			array_push($sqls, $sql);
+		}
+
+		foreach($sqls as $_l => $_sql)
+		{
+			$res = $this->query($_sql);
+		}
+
+		if (empty($this->erros)) return true; else return false;
+	}
+
 	/**
 	 * Execute SQL code in database
 	 * 
@@ -328,61 +366,6 @@ class Model {
 		if (isset($this->db))
 		{
 			//$this->db->close();
-		}
-	}
-
-	/**
-	 * Exclui um registro no banco de dados
-	 *
-	 * @params array 	$params Parâmetros da exclusão, params['tabela'], params['where']
-	 */
-	public function exclude($data=array())
-	{
-		$this->data = $data;
-
-		if (!$this->beforeExclude()) return false;
-
-		$sqls = array();
-		foreach($data as $_l => $_arrMods)
-		{
-			$where = '';
-			foreach($_arrMods[$this->name] as $_cmp => $_vlr)
-			{
-				if (!empty($where)) $where .= ' AND ';
-				if (is_numeric($_vlr))
-				{
-					$where .= "$_cmp=$_vlr";
-				} else
-				{
-					$where .= "$_cmp='$_vlr'";
-				}
-			}
-			$sql = 'DELETE FROM '.$this->prefixo.$this->tabela.' WHERE '.$where;
-			array_push($sqls, $sql);
-		}
-
-		try
-		{
-			$this->open();
-			$this->db->beginTransaction();
-			array_push($this->sqls,array('sql'=>'BEGIN;','ts'=>0.0001,'li'=>1));
-			foreach($sqls as $_l => $_sql)
-			{
-				$ini = microtime(true);
-				$this->db->exec($_sql);
-				$ts = microtime(true);
-				$ts = round(($ts-$ini),6);
-				array_push($this->sqls,array('sql'=>$_sql,'ts'=>$ts,'li'=>1));
-			}
-			$this->afterExclude();
-			array_push($this->sqls,array('sql'=>'COMMIT;','ts'=>0.0001,'li'=>1));
-			$this->db->commit();
-			return true;
-		} catch(PDOException $e)
-		{
-			$this->db->rollBack();
-			$this->erro = $e->getMessage();
-			return false;
 		}
 	}
 

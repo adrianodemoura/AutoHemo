@@ -303,13 +303,12 @@ class Site {
 					$Aplicacao = new Aplicacao();
 					if ($Aplicacao->save($aplicacoes))
 					{
-						$msg = 'As aplicações foram salvas com sucesso ...';
+						$msg = 'A Retirada e as aplicações foram salvas com sucesso !!!';
 					} else
 					{
-						$msg = 'Não foi possível salvar as aplicações !!!';
+						$msg 	= 'A Retirada foi salva com sucesso, mas nenhuma aplicação foi criada ...';
 					}
 					$this->sqls['Aplicacao'] = $Aplicacao->sqls;
-					//debug($Aplicacao->data);
 				}
 			} else
 			{
@@ -345,11 +344,12 @@ class Site {
 		}
 
 		include_once(APP.'Model/Retirada.php');
-		$this->Model = new Retirada();
+		$Retirada = new Retirada();
 
-		if (!$this->Model->exclude($data))
+		if (!$Retirada->exclude($data))
 		{
-			die('erro ao tentar excluir retirada');
+			debug($Retirada->erro);
+			die('erro ao tentar excluir retirada !!!');
 		} else
 		{
 			$this->sqls['Retirada'] = $this->Model->sqls;

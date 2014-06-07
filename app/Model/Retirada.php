@@ -111,9 +111,9 @@ class Retirada extends Model {
 			}
 		}
 		if (!empty($delIds)) $this->delIds = $delIds;
-		if (empty($data))
+		if (empty($data) && empty($delIds))
 		{
-			$this->erros['0'] = 'Nenhuma quantidade foi informada !!!';
+			$this->erros['0'] = 'Nenhuma retirada foi informada !!!';
 			return false;
 		}
 		$this->data = $data;
@@ -131,7 +131,10 @@ class Retirada extends Model {
 		{
 			if (!$this->exclude($this->delIds))
 			{
-				die('Erro ao tentar excluir retiradas ...');
+				debug('Erro ao tentar excluir retiradas ...');
+				debug($this->erro);
+				debug($this->delIds);
+				die(' NOJENTO !!!');
 			} else
 			{
 				$this->msg = 'Excluir '.count($this->delIds).' retiradas ...';
