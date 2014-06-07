@@ -1,11 +1,15 @@
 <?php
 /**
+ * Class html
  *
- *
+ * Helper paa a view
+ * 
+ * @package 	Html
+ * @subpcakge	Autohemo.view.helper
  */
 class Html {
 	/**
-	 * Retorna o input tipo data
+	 * Retorna o input tipo data nofrmato brasileiro, d/m/Y
 	 * 
 	 * @return 	string
 	 */
