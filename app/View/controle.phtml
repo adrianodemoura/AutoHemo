@@ -109,6 +109,7 @@
 					/>
 				</td>
 				<?php
+					$c = 0;
 					foreach($Site->esquema['Retirada']['reti_qtd']['options'] as $_vlr => $_label) : 
 				?>
 					<td align='center'>
@@ -117,11 +118,12 @@
 						<input type='radio' 
 							value='<?= $_vlr?>' 
 							name='data[<?= $_l ?>][Retirada][reti_qtd]' 
-							class='radioRetirada' <?php if ($_vlr==$vlrQtd) echo "checked='checked'" ?>
+							id='rdRetirada<?= $_l.$c ?>'
+							class='rdRetirada' <?php if ($_vlr==$vlrQtd) echo "checked='checked'" ?>
 						/>
 
 					</td>
-				<?php endforeach; ?>
+				<?php $c++; endforeach; ?>
 				</tr>
 
 				<?php endif; endforeach; ?>
@@ -211,7 +213,8 @@
 					/>
 				</td>
 
-				<?php 
+				<?php
+					$c = 0;
 					foreach($Site->esquema['Aplicacao']['apli_qtd']['options'] as $_vlr => $_label) : 
 				?>
 				<td align="center">
@@ -219,10 +222,11 @@
 					<input type='radio' 
 						value='<?= $_vlr?>' 
 						name='aplicacao[<?= $_l ?>][Aplicacao][apli_qtd]' 
-						class='radioAplicacao' <?php if ($_vlr==$vlrQtd) echo "checked='checked'" ?>
+						id='rdAplicacao<?= $_l.$c ?>'
+						class='rdAplicacao' <?php if ($_vlr==$vlrQtd) echo "checked='checked'" ?>
 					/>
 				</td>
-				<?php endforeach; ?>
+				<?php $c++; endforeach; ?>
 				</tr>
 
 				<?php endif; endforeach ?>
