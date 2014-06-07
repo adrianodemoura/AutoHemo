@@ -259,6 +259,22 @@ class Site {
 	}
 
 	/**
+	 * Configura o debug
+	 *
+	 * @return void
+	 */
+	public function debug()
+	{
+		if (isset($_SESSION['debug']))
+		{
+			unset($_SESSION['debug']);
+		} else
+		{
+			$_SESSION['debug'] = true;
+		}
+	}	
+
+	/**
 	 * Salva as aplicações
 	 *
 	 * @param 	array 	$_POST['data'] 	Array com os dados a serem salvos
