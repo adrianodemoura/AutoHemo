@@ -1,0 +1,15 @@
+.tabRetiradas tr th
+{
+	min-width: 110px;
+}
+
+.tabAplicacoes tr th
+{
+	min-width: 110px;
+}
+
+.thRetiLocal,
+.thApliLocal
+{
+	width: 200px;
+}

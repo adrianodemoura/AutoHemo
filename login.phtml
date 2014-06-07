@@ -1,0 +1,51 @@
+<?php
+	if (isset($_SESSION['Usuario']))
+	{
+		$Site->setMsgFlash('O Usuário já foi autenticado !!!','msgErro');
+		redirect($Site->base);
+	}
+
+	if (isset($_POST['btEnviar']))
+	{
+		if ($Site->autentica($_POST['data']['email'], $_POST['data']['senha']))
+		{
+			$Site->setMsgFlash('Usuário autenticado com sucesso ...','msgOk');
+			redirect($Site->base);
+		}
+	}
+
+?>
+<div class='login'>
+
+<form name='formLogin' method='post' action='<?= $Site->base ?>login' class="form-signin" />
+	<div class='linha'>
+		<input type='text' name='data[email]' id='email' autofocus="autofocus" 
+			class="email form-control"
+			placeholder="e-mail"
+			value='admin@autohemo.com.br'
+			/>
+	</div>
+
+	<div class='linha'>
+		<input type='password' name='data[senha]' id='senha' 
+			class="password form-control"
+			placeholder="senha"
+			value='admin'
+			/>
+	</div>
+
+	<div class='botoes'>
+	<center>
+		<input type='submit' name='btEnviar' value = 'Enviar' class="btn btn-large btn-primary" />
+	</center>
+	</div>
+
+</form>
+</div>
+<br /><br />
+<div>
+<center>
+	<a href='<?= $Site->base ?>lembrar_senha'>Lembrar Senha</a>
+	&nbsp;&nbsp;|&nbsp;&nbsp; <a href='<?= $Site->base ?>recuperar_senha'>Recuperar Senha</a>
+</center>
+</div>

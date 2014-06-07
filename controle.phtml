@@ -1,0 +1,247 @@
+<?php
+	if (!isset($_SESSION['Usuario']))
+	{
+		$Site->setMsgFlash('Acesso permitido somente para usuários autenticados !!!','msgErro');
+		redirect($Site->base.'login');
+	} 
+	$data 	= $Site->getMinhasAplicacoes();
+	$locais = $Site->getLocais();
+	$ids 	= array();
+
+	// helper
+    include(APP.'Html.php');
+    $Html = new Html();
+?>
+<div class='container'>
+<p>Este formulário tem o intuito de controlar as aplicações para Autohemoterapia, especificando a dosagem aplicada, assim como o braço que foi retirado o sangue, o que foi aplicado o sangue e a data de realização do procedimento.</p>
+
+</div>
+
+<div class='row-fluid'>
+
+	<div class='col-md-2'><!-- esquerda -->
+	<div style="text-align: center;"><!-- data -->
+		<label>Data: </label>
+		<?php 
+			$dataC = (!empty($Site->params['data'])) ? $Site->params['data'] : date('d-m-Y');
+			echo $Html->getInputData('0.Retirada.data', array('value'=>$dataC)); 
+		?>
+	</div>
+	<div style="margin-top: 20px; text-align: center;">
+		<?php 
+			foreach($Site->ultimas as $_l => $_data) : 
+			$_data = str_replace('/', '-', $_data);
+			if ($_data!=$dataC) : 
+		?>
+		<p><a href='<?= $Site->base.'controle/data:'.$_data ?>'><?= $_data ?></a></p>
+		<?php endif; endforeach ?>
+	</div>
+	</div>
+
+<form name='formControle' id='formControle' method="post" action="<?= $Site->base ?>salvar_retirada">
+
+	<div class='col-md-10'><!-- direita -->
+		<div>
+			<h3>Retirada: <div id='totRetirada'></div></h3>
+			<span>Escolha o local que foi retirado o sangue e a quantidade retirada.</span>
+			<div>
+				<table class='tabRetiradas' border='1'>
+				<tr>
+				<th class="thRetiLocal">Local</th>
+				<?php foreach($Site->esquema['Retirada']['reti_qtd']['options'] as $_vlr => $_label) : ?>
+					<th><center><?= $_label ?></center></th>
+				<?php endforeach; ?>
+				</tr>
+
+				<?php 
+				foreach($locais as $_l => $_arrMods) : 
+				if ($_arrMods['Local']['retirada'])  : 
+				?>
+
+				<tr>
+				<td>
+					<?= $_arrMods['Local']['nome'] ?>
+
+					<?php 
+						$vlrId 		= 0;
+						$vlrData 	= $dataC.' '.date('H:i:s');
+						$vlrUsuario = $_SESSION['Usuario']['id'];
+						$vlrQtd 	= 0;
+
+						foreach($data as $_l2 => $_arrMods2)
+						{
+							if ($_arrMods2['Retirada']['local_id']==$_arrMods['Local']['id'])
+							{
+								$vlrId 		= $_arrMods2['Retirada']['id'];
+								$vlrData 	= $_arrMods2['Retirada']['data'];
+								$vlrUsuario	= $_arrMods2['Retirada']['usuario_id'];
+								$vlrQtd	 	= $_arrMods2['Retirada']['reti_qtd'];
+								if (!in_array($vlrId, $ids)) array_push($ids, $vlrId);
+							}
+						}
+					?>
+					<!-- id -->
+					<input type='hidden' 
+						value='<?= $vlrId ?>'
+						name='data[<?= $_l ?>][Retirada][id]' 
+						class='idRetirada'
+					/>
+
+					<!-- data -->
+					<input type='hidden' 
+						value='<?= $vlrData ?>'
+						name='data[<?= $_l ?>][Retirada][data]' 
+						class='dataRetirada'
+					/>
+
+					<!-- usuario -->
+					<input type='hidden' 
+						value='<?= $vlrUsuario ?>'
+						name='data[<?= $_l ?>][Retirada][usuario_id]' 
+						class='usuarioRetirada'
+					/>
+
+					<!-- local -->
+					<input type='hidden' 
+						value='<?= $_arrMods['Local']['id'] ?>' 
+						name='data[<?= $_l ?>][Retirada][local_id]' 
+						class='localRetirada' 
+					/>
+				</td>
+				<?php
+					foreach($Site->esquema['Retirada']['reti_qtd']['options'] as $_vlr => $_label) : 
+				?>
+					<td align='center'>
+
+						<!-- quantidade retirada -->
+						<input type='radio' 
+							value='<?= $_vlr?>' 
+							name='data[<?= $_l ?>][Retirada][reti_qtd]' 
+							class='radioRetirada' <?php if ($_vlr==$vlrQtd) echo "checked='checked'" ?>
+						/>
+
+					</td>
+				<?php endforeach; ?>
+				</tr>
+
+				<?php endif; endforeach; ?>
+				</table>
+			</div>
+		</div>
+
+		<?php if (!empty($ids)) : ?>
+		<div>
+			<h3>Aplicação <div id='totAplicado'></div></h3>
+			<span>Escolha aonde será aplicado.</span>
+			<table class='tabAplicacoes' border='1'>
+				<tr>
+				<th class="thApliLocal">Local</th>
+				<?php foreach($Site->esquema['Aplicacao']['apli_qtd']['options'] as $_vlr => $_label) : ?>
+					<th><center><?= $_label ?></center></th>
+				<?php endforeach; ?>
+				</tr>
+
+				<?php 
+				foreach($locais as $_l => $_arrMods) : 
+				if ($_arrMods['Local']['aplicacao'])  : 
+				?>
+
+				<tr>
+				<td>
+					<?= $_arrMods['Local']['nome'] ?>
+
+					<?php
+						$vlrId 		= 0;
+						$vlrData 	= $dataC.' '.date('H:i:s');
+						$vlrUsuario = $_SESSION['Usuario']['id'];
+						$vlrQtd 	= 0;
+						$vlrLocal 	= 0;
+
+						foreach($data as $_l2 => $_arrMods2)
+						{
+							if (isset($_arrMods2['Aplicacao']))
+							{
+								foreach($_arrMods2['Aplicacao'] as $_l3 => $_arrCmps3)
+								{
+									if ($_arrMods2['Aplicacao'][$_l3]['local_id']==$_arrMods['Local']['id'])
+									{
+										$vlrId 		= $_arrCmps3['id'];
+										$vlrData 	= $_arrCmps3['data'];
+										$vlrQtd	 	= $_arrCmps3['apli_qtd'];
+										$vlrLocal 	= $_arrCmps3['local_id'];
+									}
+								}
+							}
+						}
+
+					?>
+					<!-- id -->
+					<input type='hidden' 
+						value='<?= $vlrId ?>'
+						name='aplicacao[<?= $_l ?>][Aplicacao][id]' 
+						class='idAplicacao'
+					/>
+
+					<!-- data -->
+					<input type='hidden' 
+						value='<?= $vlrData ?>'
+						name='aplicacao[<?= $_l ?>][Aplicacao][data]' 
+						class='dataAplicacao'
+					/>
+
+					<!-- local -->
+					<input type='hidden' 
+						value='<?= $vlrLocal ?>'
+						name='aplicacao[<?= $_l ?>][Aplicacao][local_id]' 
+						class='localAplicacao'
+					/>
+
+					<!-- usuario -->
+					<input type='hidden' 
+						value='<?= $vlrUsuario ?>'
+						name='aplicacao[<?= $_l ?>][Aplicacao][usuario_id]' 
+						class='usuarioAplicacao'
+					/>
+
+					<!-- local -->
+					<input type='hidden' 
+						value='<?= $_arrMods['Local']['id'] ?>' 
+						name='aplicacao[<?= $_l ?>][Aplicacao][local_id]' 
+						class='localAplicacao' 
+					/>
+				</td>
+
+				<?php 
+					foreach($Site->esquema['Aplicacao']['apli_qtd']['options'] as $_vlr => $_label) : 
+				?>
+				<td align="center">
+					<!-- quantidade aplicada -->
+					<input type='radio' 
+						value='<?= $_vlr?>' 
+						name='aplicacao[<?= $_l ?>][Aplicacao][apli_qtd]' 
+						class='radioAplicacao' <?php if ($_vlr==$vlrQtd) echo "checked='checked'" ?>
+					/>
+				</td>
+				<?php endforeach; ?>
+				</tr>
+
+				<?php endif; endforeach ?>
+
+			</table><!-- fim tabela Aplicações -->
+		</div>
+		<?php endif ?>
+
+		<div class="container" style="margin-top: 50px;">
+			<input type='submit' name='btSalvar' id='btSalvar' value='Salvar' class="btn btn-primary" />
+
+			<?php if (!empty($ids)) : ?>
+			<input type='button' name='btExcluir' id='btExcluir' value='Apagar' class="btn btn-danger" 
+				onclick="document.location.href='<?= $Site->base ?>
+					excluir_retirada/data:<?= str_replace('/','-',$dataC) ?>/ids:<?= implode(',',$ids) ?>'" />
+			<?php endif ?>
+		</div>
+
+	</div>
+
+</form>
+</div>

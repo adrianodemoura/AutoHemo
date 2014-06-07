@@ -1,0 +1,14 @@
+<?php
+	require_once(APP.'database.php');
+	$DBConf = new Database_Config();
+?>
+<div class="container" style="width: 980px;">
+	<p>Paça ao administrador do banco de dados para executar:</p>
+
+<pre style="font-size: 14px;">
+create database <?= $DBConf->default['database'] ?> character set <?= $DBConf->default['charset'] ?>;
+grant all privileges on <?= $DBConf->default['database'] ?>.* to <?= $DBConf->default['user'] ?>@<?= $DBConf->default['host'] ?> identified by '<?= $DBConf->default['password'] ?>' with grant option;
+flush privileges;
+</pre>
+	<center>Clique <a href='<?= $Site->base ?>login'>aqui</a> para tentar novamente</center>
+</div>
