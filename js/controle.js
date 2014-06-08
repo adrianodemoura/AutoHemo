@@ -47,6 +47,7 @@ function setTotalRetiradas()
 			tot += parseFloat($(this).val());
 		}
 	});
+	tot = tot.toString().replace('.',',');
 	$("#totRetirada").html(tot);
 }
 
@@ -61,19 +62,27 @@ function setTotalAplicacoes()
 			tot += parseFloat($(this).val());
 		}
 	});
+	tot = tot.toString().replace('.',',');
 	$("#totAplicado").html(tot);
 }
 
 function checkSoma()
 {
 	var totRetirada = $("#totRetirada").text();
+	totRetirada = totRetirada.replace(',','.');
+
 	var totAplicado = $("#totAplicado").text();
-	if (totAplicado>totRetirada)
+	totAplicado = totAplicado.replace(',','.');
+
+	//console.log(totRetirada+' '+totAplicado);
+	if (parseFloat(totAplicado)>parseFloat(totRetirada))
 	{
 		alert("O total aplicado não pode ser maior do que o retirado !!!");
 		//$("#btSalvar").attr("disabled","disabled");
+		//console.log('Total aplicado é maior que total retirado');
 		return false;
 	}
 	//$("#btSalvar").removeAttr("disabled");
+	//console.log('Total retirado é maior que total aplicado');
 	return true;
 }

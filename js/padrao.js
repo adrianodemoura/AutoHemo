@@ -9,3 +9,8 @@ jQuery.fn.toggleAttr = function(attr) {
         $this.attr(attr) ? $this.removeAttr(attr) : $this.attr(attr, attr);
     });
 };
+
+String.prototype.capitalize = function() 
+{
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
