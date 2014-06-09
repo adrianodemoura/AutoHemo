@@ -357,7 +357,7 @@ class Site {
 			die('erro ao tentar excluir retirada !!!');
 		} else
 		{
-			$this->sqls['Retirada'] = $this->Model->sqls;
+			$this->sqls['Retirada'] = $Retirada->sqls;
 		}
 
 		$this->setMsgFlash('Retirada limpada com sucesso !!!','msgOk');

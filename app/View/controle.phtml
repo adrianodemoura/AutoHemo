@@ -8,6 +8,13 @@
 	$locais = $Site->getLocais();
 	$ids 	= array();
 
+	//
+	$locaisRetiradas = array();
+	foreach($locais as $_l => $_arrMods)
+	{
+		if ($_arrMods['Local']['retirada']) $locaisRetiradas[$_arrMods['Local']['id']] = $_arrMods['Local']['nome'];
+	}
+
 	// helper
     include(APP.'View/Helper/Html.php');
     $Html = new Html();
@@ -47,86 +54,81 @@
 			<div>
 				<table class='tabRetiradas' border='1'>
 				<tr>
+
 				<th class="thRetiLocal">Local</th>
 				<?php foreach($Site->esquema['Retirada']['reti_qtd']['options'] as $_vlr => $_label) : ?>
 					<th><center><?= $_label ?></center></th>
 				<?php endforeach; ?>
 				</tr>
 
-				<?php 
-				foreach($locais as $_l => $_arrMods) : 
-				if ($_arrMods['Local']['retirada'])  : 
-				?>
-
+				<?php $l = 0; ?>
 				<tr>
 				<td>
-					<?= $_arrMods['Local']['nome'] ?>
+				<?php
+					$vlrId 		= 0;
+					$vlrData 	= $dataC.' '.date('H:i:s');
+					$vlrUsuario = $_SESSION['Usuario']['id'];
+					$vlrQtd 	= 0;
+					$vlrLocal 	= 0;
 
-					<?php 
-						$vlrId 		= 0;
-						$vlrData 	= $dataC.' '.date('H:i:s');
-						$vlrUsuario = $_SESSION['Usuario']['id'];
-						$vlrQtd 	= 0;
-
-						foreach($data as $_l2 => $_arrMods2)
-						{
-							if ($_arrMods2['Retirada']['local_id']==$_arrMods['Local']['id'])
-							{
-								$vlrId 		= $_arrMods2['Retirada']['id'];
-								$vlrData 	= $_arrMods2['Retirada']['data'];
-								$vlrUsuario	= $_arrMods2['Retirada']['usuario_id'];
-								$vlrQtd	 	= $_arrMods2['Retirada']['reti_qtd'];
-								if (!in_array($vlrId, $ids)) array_push($ids, $vlrId);
-							}
-						}
-					?>
+					if (!empty($data))
+					{
+						$vlrId 		= $data['0']['Retirada']['id'];
+						$vlrData 	= $data['0']['Retirada']['data'];
+						$vlrUsuario	= $data['0']['Retirada']['usuario_id'];
+						$vlrQtd	 	= $data['0']['Retirada']['reti_qtd'];
+						$vlrLocal 	= $data['0']['Retirada']['local_id'];
+						if (!in_array($vlrId, $ids)) array_push($ids, $vlrId);
+					}
+				?>
 					<!-- id -->
 					<input type='hidden' 
 						value='<?= $vlrId ?>'
-						name='data[<?= $_l ?>][Retirada][id]' 
+						name='data[<?= $l ?>][Retirada][id]' 
 						class='idRetirada'
 					/>
+
+					<select name='data[<?= $l ?>][Retirada][local_id]' class='localRetirada'>
+					<?php foreach($locaisRetiradas as $_id => $_nome) : ?>
+						<option value='<?= $_id ?>' 
+						<?php if ($_id==$vlrLocal) echo "selected='selected'"; ?>
+						>
+						<?= $_nome ?></option>
+					<?php endforeach ?>
+					</select>
 
 					<!-- data -->
 					<input type='hidden' 
 						value='<?= $vlrData ?>'
-						name='data[<?= $_l ?>][Retirada][data]' 
+						name='data[<?= $l ?>][Retirada][data]' 
 						class='dataRetirada'
 					/>
 
 					<!-- usuario -->
 					<input type='hidden' 
 						value='<?= $vlrUsuario ?>'
-						name='data[<?= $_l ?>][Retirada][usuario_id]' 
+						name='data[<?= $l ?>][Retirada][usuario_id]' 
 						class='usuarioRetirada'
 					/>
 
-					<!-- local -->
-					<input type='hidden' 
-						value='<?= $_arrMods['Local']['id'] ?>' 
-						name='data[<?= $_l ?>][Retirada][local_id]' 
-						class='localRetirada' 
-					/>
 				</td>
 				<?php
-					$c = 0;
-					foreach($Site->esquema['Retirada']['reti_qtd']['options'] as $_vlr => $_label) : 
+				$c = 0;
+				foreach($Site->esquema['Retirada']['reti_qtd']['options'] as $_vlr => $_label) : 
 				?>
-					<td align='center'>
+				<td align='center'>
 
-						<!-- quantidade retirada -->
-						<input type='radio' 
-							value='<?= $_vlr?>' 
-							name='data[<?= $_l ?>][Retirada][reti_qtd]' 
-							id='rdRetirada<?= $_l.$c ?>'
-							class='rdRetirada' <?php if ($_vlr==$vlrQtd) echo "checked='checked'" ?>
-						/>
-
-					</td>
+					<!-- quantidade retirada -->
+					<input type='radio' 
+						value='<?= $_vlr?>' 
+						name='data[<?= $l ?>][Retirada][reti_qtd]' 
+						id='rdRetirada<?= $l.$c ?>'
+						class='rdRetirada' <?php if ($_vlr==$vlrQtd) echo "checked='checked'" ?>
+					/>
+				</td>
 				<?php $c++; endforeach; ?>
 				</tr>
 
-				<?php endif; endforeach; ?>
 				</table>
 			</div>
 		</div>

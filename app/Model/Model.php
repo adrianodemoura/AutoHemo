@@ -262,7 +262,7 @@ class Model {
 	{
 	}
 
-		/**
+	/**
 	 * Exclui um registro no banco de dados
 	 *
 	 * @params array 	$params Parâmetros da exclusão, params['tabela'], params['where']
@@ -297,7 +297,11 @@ class Model {
 			$res = $this->query($_sql);
 		}
 
-		if (empty($this->erros)) return true; else return false;
+		if (empty($this->erros))
+		{
+			$this->afterExclude();
+			return true; 
+		} else return false;
 	}
 
 	/**
