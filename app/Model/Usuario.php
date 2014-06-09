@@ -64,8 +64,8 @@ class Usuario extends Model {
 	{
 		$s = md5($s.SALT);
 		$opcs = array();
-		$opcs['where']['email'] = $e;
-		$opcs['where']['senha'] = $s;
+		$opcs['where']['Usuario.email'] = $e;
+		$opcs['where']['Usuario.senha'] = $s;
 		$data = $this->find('all',$opcs);
 		return $data;
 	}

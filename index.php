@@ -77,9 +77,6 @@ $(document).ready(function()
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Ferramentas <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?= $Site->base ?>debug">SqlDump</a></li>
-                            <!--<li><a href="#">Another action</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Settings</a></li> -->
                         </ul>
                     </li>
                     </ul>
