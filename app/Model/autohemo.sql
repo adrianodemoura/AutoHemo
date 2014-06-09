@@ -33,10 +33,13 @@ CREATE  TABLE IF NOT EXISTS `retiradas` (
   `reti_qtd` DECIMAL(12,2) NOT NULL DEFAULT 0.00 ,
   `usuario_id` INT(11) NOT NULL DEFAULT 0 ,
   `local_id` INT NOT NULL ,
+  `criado` DATETIME NOT NULL DEFAULT '2014-09-06 15:13:15' ,
+  `modificado` DATETIME NOT NULL DEFAULT '2014-09-06 15:13:16' ,
   PRIMARY KEY (`id`) ,
   INDEX `i_reti_qtd` (`data` ASC) ,
   INDEX `i_usuario_id` (`usuario_id` ASC) ,
-  INDEX `fk_local_id` (`local_id` ASC) )
+  INDEX `fk_local_id` (`local_id` ASC) ,
+  INDEX `i_modificado` (`modificado` ASC) )
 ENGINE = MyISAM
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
@@ -54,11 +57,14 @@ CREATE  TABLE IF NOT EXISTS `aplicacoes` (
   `usuario_id` INT(11) NOT NULL ,
   `local_id` INT NOT NULL ,
   `retirada_id` INT NOT NULL ,
+  `criado` DATETIME NOT NULL DEFAULT '2014-09-06 15:13:15' ,
+  `modificado` DATETIME NOT NULL DEFAULT '2014-09-06 15:13:16' ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_local_id` (`local_id` ASC) ,
   INDEX `i_data` (`data` ASC) ,
   INDEX `i_usuario_id` (`usuario_id` ASC) ,
-  INDEX `fk_aplicacoes_retiradas1` (`retirada_id` ASC) )
+  INDEX `fk_aplicacoes_retiradas1` (`retirada_id` ASC) ,
+  INDEX `i_modificado` (`modificado` ASC) )
 ENGINE = MyISAM
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
