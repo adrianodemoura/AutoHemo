@@ -384,7 +384,7 @@ class Site {
 				$this->viewVars['msgOk'] = 'Instruções de recuperação de senha enviada com sucesso para '.$email;
 			} else
 			{
-				$this->viewVars['msgErro'] = 'Este e-mail não possui cadastro !!!';
+				$this->viewVars['msgErro'] = 'O e-mail '.$email.', não possui cadastro ainda !!!';
 			}
 		}
 	}
