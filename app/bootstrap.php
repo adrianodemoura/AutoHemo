@@ -22,6 +22,15 @@
 
     // jogamos o conteúdo do bloco numa variável, lá no layout ele será usado
     ob_start();
+    if (method_exists($Site, $Site->pagina))
+    {
+        $action = $Site->pagina;
+        $Site->$action();
+        if (isset($Site->viewVars))
+        {
+            foreach($Site->viewVars as $_var => $_vlr) ${$_var} = $_vlr;
+        }
+    }
     include_once(APP.'View/'.$Site->pagina.'.phtml');
     $conteudo = ob_get_contents();
     ob_end_clean();

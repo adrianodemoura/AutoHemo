@@ -1,0 +1,42 @@
+<div class='row'>
+<?php if (!isset($msgOk) && !isset($msgErro) ) : ?>
+<form name='formLembrar' method='post' action='<?= $Site->base ?>lembrar_senha'>
+<div class='col-md-8 col-md-offset-4' style="padding: 40px 0px 0px 0px; width: 400px;">
+
+	<input type='text' name='data[email]' class="form-control" id='email' 
+		value='' 
+		autofocus='autofocus'
+		placeholder='entre com seu e-mail' />
+	<br />
+	<input type='submit' name='btEnviar' value='Enviar' class='btn btn-primary' />
+	<br /><br />
+	<p>Você recebera um e-mail com a instrução para recuperar a senha.</p>
+
+</form>
+</div>
+</div>
+<?php endif ?>
+
+<?php if(isset($msgOk)) : ?>
+<div class='row'>
+<p style='margin: 0xp auto; text-align: center; color: green;'>
+<?= $msgOk ?>
+</p>
+<p style='margin: 0xp auto; text-align: center;'>
+Clique <a href="<?= $Site->base ?>login">aqui</a> para fechar
+</p>
+</div>
+<?php endif ?>
+
+<?php if(isset($msgErro)) : ?>
+<br />
+<div class='row'>
+<p style='margin: 0xp auto; text-align: center; color: red;'>
+<?= $msgErro ?>
+</p>
+<br />
+<p style='margin: 0xp auto; text-align: center;'>
+Clique <a href="<?= $Site->base ?>novo_registro">aqui</a> para se cadastrar ou <a href='<?= $Site->base ?>lembrar_senha'>aqui</a> para tentar novamente
+</p>
+</div>
+<?php endif ?>

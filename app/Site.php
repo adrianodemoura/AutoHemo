@@ -363,4 +363,29 @@ class Site {
 		$this->setMsgFlash('Retirada limpada com sucesso !!!','msgOk');
 		redirect($this->base.'controle/data:'.$dataC);
 	}
+
+	/**
+	 * Envia uma e-mail pro usuário para refazer a senha
+	 *
+	 * @param 	string 	$email 	e-mail a ter a senha relembrada
+	 * @return 	void
+	 */
+	public function lembrar_senha()
+	{
+		if (isset($_POST['data']['email']))
+		{
+			$email 		= $_POST['data']['email'];
+			require_once('Model/Usuario.php');
+			$Usuario 	= new Usuario();
+			$params['where']['Usuario.email'] = $email;
+			$data 		= $Usuario->find('first',$params);
+			if (isset($data['0']['Usuario']))
+			{
+				$this->viewVars['msgOk'] = 'Instruções de recuperação de senha enviada com sucesso para '.$email;
+			} else
+			{
+				$this->viewVars['msgErro'] = 'Este e-mail não possui cadastro !!!';
+			}
+		}
+	}
 }
