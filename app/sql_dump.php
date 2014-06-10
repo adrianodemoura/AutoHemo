@@ -28,7 +28,7 @@ if (isset($Site->sqls) && !empty($Site->sqls)) : ?>
 
 			echo "<td align='center'";
 			if ($_l%2>0) echo " class='ativa' ";
-			echo ">".$_arrProp['ts']." segs.</td>";
+			echo ">".str_replace('.', ',', $_arrProp['ts'])." segs.</td>";
 
 			echo "<td align='center'";
 			if ($_l%2==1) echo " class='ativa' ";
