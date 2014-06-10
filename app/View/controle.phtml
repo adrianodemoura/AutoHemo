@@ -1,19 +1,5 @@
 <?php
-	if (!isset($_SESSION['Usuario']))
-	{
-		$Site->setMsgFlash('Acesso permitido somente para usuários autenticados !!!','msgErro');
-		redirect($Site->base.'login');
-	} 
-	$data 	= $Site->getMinhasAplicacoes();
-	$locais = $Site->getLocais();
 	$ids 	= array();
-
-	//
-	$locaisRetiradas = array();
-	foreach($locais as $_l => $_arrMods)
-	{
-		if ($_arrMods['Local']['retirada']) $locaisRetiradas[$_arrMods['Local']['id']] = $_arrMods['Local']['nome'];
-	}
 
 	// helper
     include(APP.'View/Helper/Html.php');
@@ -83,10 +69,7 @@
 				?>
 					<!-- id -->
 					<input type='hidden' 
-						value='<?= $vlrId ?>'
-						name='data[<?= $l ?>][Retirada][id]' 
-						class='idRetirada'
-					/>
+						value='<?= $vlrId ?>' name='data[<?= $l ?>][Retirada][id]'  class='idRetirada' />
 
 					<select name='data[<?= $l ?>][Retirada][local_id]' class='localRetirada'>
 					<?php foreach($locaisRetiradas as $_id => $_nome) : ?>
@@ -99,17 +82,10 @@
 
 					<!-- data -->
 					<input type='hidden' 
-						value='<?= $vlrData ?>'
-						name='data[<?= $l ?>][Retirada][data]' 
-						class='dataRetirada'
-					/>
+						value='<?= $vlrData ?>' name='data[<?= $l ?>][Retirada][data]' class='dataRetirada' />
 
 					<!-- usuario -->
-					<input type='hidden' 
-						value='<?= $vlrUsuario ?>'
-						name='data[<?= $l ?>][Retirada][usuario_id]' 
-						class='usuarioRetirada'
-					/>
+					<input type='hidden' value='<?= $vlrUsuario ?>' name='data[<?= $l ?>][Retirada][usuario_id]'  class='usuarioRetirada' />
 
 				</td>
 				<?php
@@ -119,10 +95,7 @@
 				<td align='center'>
 
 					<!-- quantidade retirada -->
-					<input type='radio' 
-						value='<?= $_vlr?>' 
-						name='data[<?= $l ?>][Retirada][reti_qtd]' 
-						id='rdRetirada<?= $l.$c ?>'
+					<input type='radio' value='<?= $_vlr?>' name='data[<?= $l ?>][Retirada][reti_qtd]' id='rdRetirada<?= $l.$c ?>'
 						class='rdRetirada' <?php if ($_vlr==$vlrQtd) echo "checked='checked'" ?>
 					/>
 				</td>

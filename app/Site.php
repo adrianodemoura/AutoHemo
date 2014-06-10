@@ -332,6 +332,33 @@ class Site {
 	}
 
 	/**
+	 * Exibe a tela de controle
+	 *
+	 * @return 	void
+	 */
+	public function controle()
+	{
+		if (!isset($_SESSION['Usuario']))
+		{
+			$this->setMsgFlash('Acesso permitido somente para usuários autenticados !!!','msgErro');
+			redirect($Site->base.'login');
+		} 
+		$data 	= $this->getMinhasAplicacoes();
+		$locais = $this->getLocais();
+
+		// locais de retirada
+		$locaisRetiradas = array();
+		foreach($locais as $_l => $_arrMods)
+		{
+			if ($_arrMods['Local']['retirada']) $locaisRetiradas[$_arrMods['Local']['id']] = $_arrMods['Local']['nome'];
+		}
+
+		$this->viewVars['data'] 	= $data;
+		$this->viewVars['locais']	= $locais;
+		$this->viewVars['locaisRetiradas'] = $locaisRetiradas;
+	}
+
+	/**
 	 * Exclui uma retirada pela data
 	 *
 	 * @param 	string 	$data 	Data a ser excluída (vai pegar no parâmetro)
