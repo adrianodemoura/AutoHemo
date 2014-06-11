@@ -1,7 +1,7 @@
 <?php if (!isset($msgOk)) : ?>
 <div class='row'>
 <div class='col-md-8 col-md-offset-4' style="padding: 40px 0px 0px 0px; width: 400px;">
-<form name='formTrocar' method='post' action='<?= $Site->base ?>trocar_senha'>
+<form name='formTrocar' method='post' action='<?= $Site->base ?>trocar_senha' onsubmit="return validaForm();">
 	<input type='hidden' name='data[0][Usuario][id]' class="form-control" id='UsuarioId' value='<?= $id ?>' />
 	<input type='hidden' name='codigo' id='UsuarioCodigo' value='<?= $codigo ?>' />
 	<br />
