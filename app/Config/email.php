@@ -15,8 +15,8 @@ class Email_Config {
 	public $default = array
 	(
 		'smtp'		=> 'smtp.gmail.com',
-		'usuario'	=> 'adrianodemoura@gmail.com',
-		'senha'		=> 'Ta31260301',
+		'usuario'	=> '',
+		'senha'		=> '',
 		'porta'		=> 465
 	);
 
