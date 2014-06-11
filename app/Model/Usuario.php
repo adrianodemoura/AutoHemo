@@ -39,6 +39,10 @@ class Usuario extends Model {
 	 */
 	public $esquema 		= array
 	(
+		'id' 				=> array
+		(
+			'tit' 			=> 'Id',
+		),
 		'perfil_id'			=> array
 		(
 			'tit'			=> 'Perfil',
@@ -52,6 +56,11 @@ class Usuario extends Model {
 				),
 			),
 		),
+		'email' 			=> array
+		(
+			'tit' 			=> 'e-mail',
+			'upperOff' 		=> true,
+		),
 	);
 
 	/**
@@ -62,8 +71,8 @@ class Usuario extends Model {
 	 */
 	public function autentica($e='', $s='')
 	{
-		$s = md5($s.SALT);
-		$opcs = array();
+		$s 		= encripta($s);
+		$opcs 	= array();
 		$opcs['where']['Usuario.email'] = $e;
 		$opcs['where']['Usuario.senha'] = $s;
 		$data = $this->find('all',$opcs);

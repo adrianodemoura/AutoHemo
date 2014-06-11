@@ -1,0 +1,53 @@
+<?php if (!isset($msgOk)) : ?>
+<div class='row'>
+<div class='col-md-8 col-md-offset-4' style="padding: 40px 0px 0px 0px; width: 400px;">
+<form name='formTrocar' method='post' action='<?= $Site->base ?>trocar_senha'>
+	<input type='hidden' name='data[0][Usuario][id]' class="form-control" id='UsuarioId' value='<?= $id ?>' />
+	<input type='hidden' name='codigo' id='UsuarioCodigo' value='<?= $codigo ?>' />
+	<br />
+	<input type='text' name='data[0][Usuario][nome]' class="form-control" id='UsuarioNome' 
+		value='<?= $nome ?>' disabled='disabled' />
+	<br />
+	<input type='text' name='data[0][Usuario][email]' class="form-control" id='UsuarioEmail' 
+		value='<?= $email ?>' disabled='disabled' />
+	<br />
+
+	<label>Senha:</label>
+	<input type='password' name='data[0][Usuario][senha]' class="form-control" 
+		id='senha' value='' autofocus='autofocus' />
+	<br />
+	<label>Repita a Senha:</label>
+	<input type='password' name='senha2' class="form-control" id='senha2' value='' />
+	<br />
+
+	<input type='submit' name='btSalvar' value='Salvar' class='btn btn-primary' />
+	<br /><br />
+	<p>Entre com a nova senha.</p>
+
+</form>
+</div>
+</div>
+<?php endif ?>
+
+<?php if(isset($msgOk)) : ?>
+<div class='row'>
+<p style='margin: 0xp auto; text-align: center; color: green;'>
+<?= $msgOk ?>
+</p>
+<p style='margin: 0xp auto; text-align: center;'>
+Clique <a href="<?= $Site->base ?>login">aqui</a> para entrar no sistema
+</p>
+</div>
+<?php endif ?>
+
+<?php if(isset($msgErro)) : ?>
+<br />
+<div class='row'>
+<p style='margin: 0xp auto; text-align: center; color: red;'>
+<?= $msgErro ?>
+</p>
+<p style='margin: 0xp auto; text-align: center;'>
+Clique <a href="<?= $Site->base ?>login">aqui</a> para fechar
+</p>
+</div>
+<?php endif ?>

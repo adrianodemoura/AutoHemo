@@ -206,7 +206,7 @@ class Model {
 	{
 		if (!isset($this->db))
 		{
-			include_once(APP.'database.php');
+			include_once(APP.'Config/database.php');
 			$dbConfig 			= new Database_Config($this->database);
 			$banco				= $dbConfig->default;
 			$driver 			= $banco['driver'];

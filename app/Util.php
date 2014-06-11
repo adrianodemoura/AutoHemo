@@ -19,3 +19,17 @@ function redirect($url='')
 	header('Location: '.$url);
 	die();
 }
+
+/**
+ * retorna a senha super encriptada
+ *
+ * @param 	string 	$senha  	Senha a ser encriptada
+ * @return 	string 	$codifica 	Senha super encriptada
+ */
+function encripta($senha='')
+{
+	$salt 		= md5($senha.SALT);
+	$codifica 	= crypt($senha,$salt);
+ 	$codifica	= hash('sha512',$codifica);
+ 	return $codifica; 
+}

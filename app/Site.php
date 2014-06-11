@@ -408,10 +408,122 @@ class Site {
 			$data 		= $Usuario->find('first',$params);
 			if (isset($data['0']['Usuario']))
 			{
-				$this->viewVars['msgOk'] = 'Instruções de recuperação de senha enviada com sucesso para '.$email;
+				unset($data['0']['Usuario']['troca_senha']);
+				unset($data['0']['Usuario']['perfiL_id']);
+				unset($data['0']['Usuario']['tele_resi']);
+				unset($data['0']['Usuario']['celular']);
+				unset($data['0']['Usuario']['aniversario']);
+				unset($data['0']['Usuario']['cidade']);
+				unset($data['0']['Usuario']['senha']);
+				unset($data['0']['Usuario']['perfil_id']);
+				unset($data['0']['Usuario']['troc_senh']);
+				$data['0']['Usuario']['troc_senh_cod'] = encripta(date('d/m/Y H:i:s'));
+				if (!$Usuario->save($data))
+				{
+					die('Erro ao tentar salvar código de validação de nova senha !!!');
+				} else // enviando o e-mail
+				{
+					require_once(APP.'Config/email.php');
+					$Email = new Email_Config();
+
+					require_once(APP.'Vendor/PHPMailer/class.phpmailer.php');
+					$Mail = new PHPMailer();
+					$Mail->isSmtp();
+					$Mail->isHtml();
+					//$Mail->SMTPDebug 	= true;
+					$Mail->CharSet 		= "UTF-8";
+					$Mail->SMTPAuth 	= true;
+					$Mail->SMTPSecure 	= 'ssl';
+					$Mail->Host 		= $Email->default['smtp'];
+					$Mail->Port 	 	= $Email->default['porta'];
+					$Mail->Username 	= $Email->default['usuario'];
+					$Mail->Password 	= $Email->default['senha'];
+					$Mail->Subject 		= 'Mudança de senha';
+
+					$Mail->AddAddress($email);
+
+					$msg = "";
+					$msg .= "Caro Usuario ".$data['0']['Usuario']['nome'].", ";
+					$msg .= "<br /><br />";
+					$msg .= strtolower("
+					Clique aqui para alterar sua senha ".$this->base."trocar_senha/email:"
+					.$data['0']['Usuario']['email']
+					."/codigo:".$data['0']['Usuario']['troc_senh_cod']);
+					$msg .= "<br /><br />";
+
+					$Mail->Body = $msg;
+					$enviado = $Mail->Send();
+					if (!$enviado)
+					{
+						$this->viewVars['msgErro'] = 'Não foi possível enviar o e-mail de validação. '.$Mail->ErrorInfo;
+					} else
+					{
+						$this->viewVars['msgOk'] = 'As instruções foram enviadas com sucesso para o e-mail '.$email;
+					}
+				}
 			} else
 			{
 				$this->viewVars['msgErro'] = 'O e-mail '.$email.', não possui cadastro ainda !!!';
+			}
+		}
+	}
+
+	/**
+	 * Exibe a tela pra o usuário trocar a senha
+	 *
+	 * @param 	string 	$codigo 	Código de ativação que foi enviado pelo e-mail do usuário
+	 * @return 	void
+	 */
+	public function trocar_senha()
+	{
+		$codigo = isset($this->params['codigo']) ? $this->params['codigo'] : null;
+		$codigo = isset($_POST['codigo']) 
+			? $_POST['codigo'] 
+			: $codigo;
+
+		if (empty($codigo))
+		{
+			$this->setMsgFlash('Código de autenticação inválido !!!','msgErro');
+			redirect($this->base.'login');
+		}
+
+		include_once('Model/Usuario.php');
+		$Usuario = new Usuario();
+		$params['where']['Usuario.troc_senh_cod'] 	= $codigo;
+		$data = $Usuario->find('first',$params);
+		if (!count($data))
+		{
+			$this->setMsgFlash('O Código de autenticação não foi validado pelo sistema !!!','msgErro');
+			redirect($this->base.'login');
+		} else
+		{
+			$this->viewVars['id'] 		= $data['0']['Usuario']['id'];
+			$this->viewVars['nome'] 	= $data['0']['Usuario']['nome'];
+			$this->viewVars['email'] 	= $data['0']['Usuario']['email'];
+			$this->viewVars['codigo'] 	= $codigo;
+
+			if (isset($_POST['data']) && !empty($_POST['data']['0']['Usuario']['senha']))
+			{
+				unset($data['0']['Usuario']['perfil_id']);
+				unset($data['0']['Usuario']['email']);
+				unset($data['0']['Usuario']['tele_resi']);
+				unset($data['0']['Usuario']['celular']);
+				unset($data['0']['Usuario']['aniversario']);
+				unset($data['0']['Usuario']['cidade']);
+				unset($data['0']['Usuario']['troc_senh']);
+				unset($data['0']['Usuario']['troca_senha']);
+
+				$data['0']['Usuario']['senha'] = encripta($_POST['data']['0']['Usuario']['senha']);
+				$data['0']['Usuario']['troc_senh_cod'] = '';
+				if (!$Usuario->save($data))
+				{
+					die('Erro ao tentar trocar senha !!!');
+				}
+				$msg = 'A senha foi trocada com sucesso ...';
+				$this->viewVars['msgOk'] 	= $msg;
+			} elseif(isset($_POST['data']) && empty($_POST['0']['Usuario']['senha']))
+			{
+				$this->viewVars['msgErro'] = 'O Campo senha é de preenchimento obrigatório !!!';
 			}
 		}
 	}

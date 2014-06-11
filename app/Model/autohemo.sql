@@ -98,15 +98,18 @@ CREATE  TABLE IF NOT EXISTS `usuarios` (
   `celular` VARCHAR(14) NOT NULL ,
   `aniversario` VARCHAR(4) NOT NULL ,
   `cidade` VARCHAR(60) NOT NULL DEFAULT 2302 ,
-  `senha` VARCHAR(45) NOT NULL ,
-  `perfiL_id` INT NOT NULL ,
+  `senha` VARCHAR(128) NOT NULL ,
+  `troca_senha` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'trocar senha' ,
+  `troc_senh_cod` VARCHAR(128) NOT NULL DEFAULT 0 COMMENT 'código trocar senha' ,
+  `perfil_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `i_nome` (`nome` ASC) ,
   INDEX `i_email` (`email` ASC) ,
   INDEX `i_celular` (`celular` ASC) ,
   INDEX `i_aniversario` (`aniversario` ASC) ,
   INDEX `i_cidade` (`cidade` ASC) ,
-  INDEX `fk_usuarios_perfis1` (`perfiL_id` ASC) )
+  INDEX `fk_usuarios_perfis1` (`perfil_id` ASC) ,
+  INDEX `i_troca_senha` (`troca_senha` ASC) )
 ENGINE = MyISAM
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
@@ -145,6 +148,6 @@ COMMIT;
 -- Data for table `usuarios`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `tele_resi`, `celular`, `aniversario`, `cidade`, `senha`, `perfiL_id`) VALUES (1, 'ADMINISTRADOR AUTO HEMOTERAPIA', 'admin@autohemo.com.br', '31123456789', '33123456789', '0101', 'BELO HORIZONTE', 'f86faa4904c06024aec5c697a5d900ed', 1);
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `tele_resi`, `celular`, `aniversario`, `cidade`, `senha`, `troca_senha`, `troc_senh_cod`, `perfil_id`) VALUES (1, 'ADMINISTRADOR AUTO HEMOTERAPIA', 'admin@autohemo.com.br', '31123456789', '33123456789', '0101', 'BELO HORIZONTE', '58e9508c1be304e00999eb824239deb3245f46945178d4069aeb8a5b201cf77a8bf4de42a4a4a0532a0e3db60b6b88b40eef007cc3be2b698d5e143f6d2a3269', 0, '0', 1);
 
 COMMIT;
