@@ -26,6 +26,7 @@
     {
         $action = $Site->pagina;
         $Site->$action();
+        $Site->viewVars['base'] = $Site->base;
         if (isset($Site->viewVars))
         {
             foreach($Site->viewVars as $_var => $_vlr) ${$_var} = $_vlr;
