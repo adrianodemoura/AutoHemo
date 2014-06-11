@@ -1,6 +1,6 @@
 <div class='row'>
 <?php if (!isset($msgOk) && !isset($msgErro) ) : ?>
-<form name='formLembrar' method='post' action='<?= $Site->base ?>lembrar_senha'>
+<form name='formLembrar' method='post' action='<?= $Site->base ?>muda_senha'>
 <div class='col-md-8 col-md-offset-4' style="padding: 40px 0px 0px 0px; width: 400px;">
 
 	<input type='text' name='data[email]' class="form-control" id='email' 
@@ -36,7 +36,7 @@ Clique <a href="<?= $Site->base ?>login">aqui</a> para fechar
 </p>
 <br />
 <p style='margin: 0xp auto; text-align: center;'>
-Clique <a href="<?= $Site->base ?>novo_registro">aqui</a> para se cadastrar ou <a href='<?= $Site->base ?>lembrar_senha'>aqui</a> para tentar novamente
+Clique <a href='<?= $Site->base ?>muda_senha'>aqui</a> para tentar novamente
 </p>
 </div>
 <?php endif ?>

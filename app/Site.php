@@ -397,7 +397,7 @@ class Site {
 	 * @param 	string 	$email 	e-mail a ter a senha relembrada
 	 * @return 	void
 	 */
-	public function lembrar_senha()
+	public function muda_senha()
 	{
 		if (isset($_POST['data']['email']))
 		{
