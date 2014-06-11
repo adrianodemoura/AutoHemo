@@ -148,6 +148,6 @@ COMMIT;
 -- Data for table `usuarios`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `tele_resi`, `celular`, `aniversario`, `cidade`, `senha`, `troca_senha`, `troc_senh_cod`, `perfil_id`) VALUES (1, 'ADMINISTRADOR AUTO HEMOTERAPIA', 'admin@autohemo.com.br', '31123456789', '33123456789', '0101', 'BELO HORIZONTE', '58e9508c1be304e00999eb824239deb3245f46945178d4069aeb8a5b201cf77a8bf4de42a4a4a0532a0e3db60b6b88b40eef007cc3be2b698d5e143f6d2a3269', 0, '0', 1);
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `tele_resi`, `celular`, `aniversario`, `cidade`, `senha`, `troca_senha`, `troc_senh_cod`, `perfil_id`) VALUES (1, 'ADMINISTRADOR AUTO HEMOTERAPIA', 'admin@autohemo.com.br', '31123456789', '33123456789', '0101', 'BELO HORIZONTE', '9bedf7904b575f7940c08eea781bd3cc15eb58fc7999de882ded4b61ead9455de3f6355894e96de41c270c4cb004220445b45ee666f4029649cfe153e2929a1a', 0, '0', 1);
 
 COMMIT;

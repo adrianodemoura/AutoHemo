@@ -76,6 +76,7 @@ class Usuario extends Model {
 		$opcs['where']['Usuario.email'] = $e;
 		$opcs['where']['Usuario.senha'] = $s;
 		$data = $this->find('all',$opcs);
+		debug($opcs);
 		return $data;
 	}
 }
