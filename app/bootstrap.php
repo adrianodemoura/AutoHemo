@@ -17,11 +17,11 @@
     // fuso-horário
     date_default_timezone_set('America/Sao_Paulo');
 
+    // classe principal
 	include(APP.'Site.php');
 	$Site = new Site();
 
-    // jogamos o conteúdo do bloco numa variável, lá no layout ele será usado
-    ob_start();
+    // se o método existe no controller, executa-o-o
     if (method_exists($Site, $Site->pagina))
     {
         $action = $Site->pagina;
@@ -32,10 +32,12 @@
             foreach($Site->viewVars as $_var => $_vlr) ${$_var} = $_vlr;
         }
     }
+    // por segurança o model não vai pra view
+    unset($Site->Model);
+
+    // jogamos o conteúdo do bloco numa variável, lá no layout ele será usado
+    ob_start();
     include_once(APP.'View/'.$Site->pagina.'.phtml');
     $conteudo = ob_get_contents();
     ob_end_clean();
-
-    // por segurança, o Model não vai pra view
-    unset($Site->Model);
 ?>

@@ -95,6 +95,9 @@ class Site {
 
 	/**
 	 * Retorna o nome da página corrente
+	 *
+	 * @param 	string 	Página a ser exibida
+	 * @return 	string 	Nome da página a ser renderizada
 	 */
 	public function getPagina()
 	{
@@ -171,7 +174,9 @@ class Site {
 	}
 
 	/**
-	 * Executa logo
+	 * Executa logout
+	 *
+	 * @return void
 	 */
 	public function sair()
 	{
@@ -180,9 +185,11 @@ class Site {
 	}
 
 	/**
-	 * Salva uma mensagem flash
+	 * Salva a mensage Flash na sessão
 	 *
-	 * @return void
+	 * @param 	string 	$texto 	Texto a ser salvo
+	 * @param 	string 	$class 	Classe a ser usada na exibição da mensagem
+	 * @return 	void
 	 */
 	public function setMsgFlash($texto='', $class='msgOk')
 	{
@@ -195,6 +202,7 @@ class Site {
 	 *
 	 * @param 	integer 	$pag 	Página
 	 * @param 	integer 	Id do usuário logado
+	 * @param 	array 		$data 	Matriz contendo minhas aplicações
 	 */
 	public function getMinhasAplicacoes()
 	{
@@ -333,6 +341,7 @@ class Site {
 
 	/**
 	 * Exibe a tela de controle
+	 * - A tesla só deve ser exibida para usuário logados
 	 *
 	 * @return 	void
 	 */

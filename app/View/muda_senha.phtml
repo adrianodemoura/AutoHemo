@@ -8,8 +8,12 @@
 		autofocus='autofocus'
 		placeholder='entre com seu e-mail' />
 	<br />
+
 	<input type='submit' name='btEnviar' value='Enviar' class='btn btn-primary' />
+	<input type='button' name='btFechar' value='Fechar' class='btn btn-danger' 
+		onclick="document.location.href='<?= $Site->base ?>login'" />
 	<br /><br />
+
 	<p>Você receberá um e-mail com as instruções para resetar a senha.</p>
 
 </form>
