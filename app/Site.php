@@ -626,7 +626,7 @@ class Site {
 						$this->viewVars['msgErro'] = 'Não foi possível enviar o e-mail de validação. '.$Mail->ErrorInfo;
 					} else
 					{
-						$this->viewVars['msgOk'] = 'As instruções para ativação da conta, foi enviada com sucesso para seu o '.$email;
+						$this->viewVars['msgOk'] = 'As instruções para ativação da conta, foi enviada com sucesso para o e-mail '.$email;
 					}
 				}
 			}
