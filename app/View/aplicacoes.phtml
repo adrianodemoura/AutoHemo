@@ -24,10 +24,15 @@
 		<?php 
 			foreach($Site->ultimas as $_l => $_data) : 
 			$_data = str_replace('/', '-', $_data);
-			if ($_data!=$dataC) : 
 		?>
+		
+		<?php if ($_data!=$dataC) : ?>
 		<p><a href='<?= $Site->base.'aplicacoes/data:'.$_data ?>'><?= $_data ?></a></p>
-		<?php endif; endforeach ?>
+		<?php else : ?>
+		<p><?= $dataC ?>
+		<?php endif ?>
+		
+		<?php endforeach ?>
 	</div>
 	</div>
 
