@@ -64,7 +64,7 @@ $(document).ready(function()
                     
                     <?php if (isset($_SESSION['Usuario'])) : ?>
                     <li class="page-scroll">
-                        <a href="<?= $Site->base ?>controle">Controle</a>
+                        <a href="<?= $Site->base ?>aplicacoes">Aplicações</a>
                     </li>
                     <?php endif ?>
 

@@ -26,12 +26,12 @@
 			$_data = str_replace('/', '-', $_data);
 			if ($_data!=$dataC) : 
 		?>
-		<p><a href='<?= $Site->base.'controle/data:'.$_data ?>'><?= $_data ?></a></p>
+		<p><a href='<?= $Site->base.'aplicacoes/data:'.$_data ?>'><?= $_data ?></a></p>
 		<?php endif; endforeach ?>
 	</div>
 	</div>
 
-<form name='formControle' id='formControle' method="post" action="<?= $Site->base ?>salvar_retirada">
+<form name='formAplicacoes' id='formAplicacoes' method="post" action="<?= $Site->base ?>salvar_retirada">
 
 	<div class='col-md-10'><!-- direita -->
 		<div>

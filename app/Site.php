@@ -169,7 +169,7 @@ class Site {
 		$_SESSION['Usuario']['email'] 	= $data['0']['Usuario']['email'];
 		$_SESSION['Usuario']['perfilId']= $data['0']['Perfil']['id'];
 		$_SESSION['Usuario']['perfil'] 	= $data['0']['Perfil']['nome'];
-		redirect($this->base.'controle');
+		redirect($this->base.'aplicacoes');
 		return true;
 	}
 
@@ -335,17 +335,17 @@ class Site {
 			$this->sqls['Retirada'] = $Retirada->sqls;
 
 			$this->setMsgFlash($msg,$class);
-			redirect($this->base.'controle/data:'.str_replace('/','-',substr($dataC,0,10)));
+			redirect($this->base.'aplicacoes/data:'.str_replace('/','-',substr($dataC,0,10)));
 		}
 	}
 
 	/**
-	 * Exibe a tela de controle
-	 * - A tesla só deve ser exibida para usuário logados
+	 * Exibe a tela de Aplicações
+	 * - A tela só deve ser exibida para usuário logados
 	 *
 	 * @return 	void
 	 */
-	public function controle()
+	public function aplicacoes()
 	{
 		if (!isset($_SESSION['Usuario']))
 		{
@@ -397,7 +397,7 @@ class Site {
 		}
 
 		$this->setMsgFlash('Retirada limpada com sucesso !!!','msgOk');
-		redirect($this->base.'controle/data:'.$dataC);
+		redirect($this->base.'aplicacoes/data:'.$dataC);
 	}
 
 	/**
