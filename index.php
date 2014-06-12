@@ -55,7 +55,7 @@ $(document).ready(function()
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header page-scroll">
-                <a class="navbar-brand" href="<?= $Site->base ?>"><?= $Site->sistema ?></a>
+                <a class="navbar-brand" href="<?= $Site->base ?>"><?= $Site->sistema ?> (Desenvolvimento)</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -116,13 +116,13 @@ $(document).ready(function()
     <?php if (isset($_SESSION['debug'])) : ?>
     <section>
         <div class='container erros'>
-            <?php include_once(APP.'sql_erros.php') ?>
+            <?php include_once(APP.'View/Elements/sql_erros.php') ?>
         </div>
     </section>
 
     <section>
         <div class='container sqls'>
-            <?php include_once(APP.'sql_dump.php') ?>
+            <?php include_once(APP.'View/Elements/sql_dump.php') ?>
         </div>
     </section>
     <?php endif ?>

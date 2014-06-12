@@ -259,7 +259,7 @@ class Site {
 	}
 
 	/**
-	 * Configura o debug
+	 * Liga ou desliga o modo debug
 	 *
 	 * @return void
 	 */
@@ -515,6 +515,7 @@ class Site {
 
 				$data['0']['Usuario']['senha'] = encripta($_POST['data']['0']['Usuario']['senha']);
 				$data['0']['Usuario']['troc_senh_cod'] = '';
+				$data['0']['Usuario']['ativo'] = 1;
 				if (!$Usuario->save($data))
 				{
 					die('Erro ao tentar trocar senha !!!');
@@ -525,6 +526,102 @@ class Site {
 			{
 				$this->viewVars['msgErro'] = 'O Campo senha é de preenchimento obrigatório !!!';
 			}
+		}
+	}
+
+	/**
+	 * Cria um novo registro do sistema
+	 *
+	 * @param string $nome Nome do usuário
+	 * @param string $email e-mail do usuário
+	 * @return void
+	 */
+	public function novo_registro()
+	{
+		$nome = isset($_POST['data']['0']['Usuario']['nome']) 
+			? $_POST['data']['0']['Usuario']['nome']
+			: null;
+		$email = isset($_POST['data']['0']['Usuario']['email']) 
+			? $_POST['data']['0']['Usuario']['email']
+			: null;
+		$this->viewVars['nome'] 	= $nome;
+		$this->viewVars['email'] 	= $email;
+
+		if (!empty($nome) && !empty($email))
+		{
+			// verifica se o e-mail já foi cadastrado
+			require_once(APP.'Model/Usuario.php');
+			$Usuario = new Usuario();
+			$params['where']['Usuario.email'] = $email;
+			$data = $Usuario->find('first',$params);
+			$this->sqls['Usuario'] = $Usuario->sqls;
+			if (count($data))
+			{
+				$this->viewVars['msgErro'] = 'Este e-mail já se encontra cadastrado !!!';
+			} else // se não, cria o registro mas com status inativo
+			{
+				$data = $_POST['data'];
+				$data['0']['Usuario']['ativo'] 			= 0;
+				$data['0']['Usuario']['perfil_id'] 		= 3;
+				$data['0']['Usuario']['senha'] 			= encripta('123mudar');
+				$data['0']['Usuario']['troc_senh_cod'] 	= encripta(date('d/m/Y H:i:s'));
+				if (!$Usuario->save($data))
+				{
+					$this->viewVars['msgErro'] = 'Não foi possível salvar o novo registro ';
+				} else
+				{
+					require_once(APP.'Config/email.php');
+					$Email = new Email_Config();
+
+					require_once(APP.'Vendor/PHPMailer/class.phpmailer.php');
+					$Mail = new PHPMailer();
+					$Mail->isSmtp();
+					$Mail->isHtml();
+					$Mail->CharSet 		= "UTF-8";
+					$Mail->SMTPAuth 	= true;
+					$Mail->SMTPSecure 	= 'ssl';
+
+					// remetente
+					$Mail->From 		= "nao_responda@site.com.br";
+					$Mail->Sender 		= $Email->default['usuario'];
+					$Mail->FromName 	= $Email->default['nome'];
+
+					// conta de e-mail 
+					$Mail->Host 		= $Email->default['smtp'];
+					$Mail->Port 	 	= $Email->default['porta'];
+					$Mail->Username 	= $Email->default['usuario'];
+					$Mail->Password 	= $Email->default['senha'];
+					$Mail->Subject 		= "Novo Cadastro";
+
+					$Mail->AddAddress($email);
+
+					$msg = "";
+					$msg .= "Caro ".$data['0']['Usuario']['nome'].", ";
+					$msg .= "<br /><br />";
+					$msg .= "No dia ".date('d/m/Y')." aproximadamente as ".date('H')." horas e ".date('i')." minutos, 
+					foi feita uma solicitação de conta no nosso site, caso não reconheça este pedido, 
+					favor desconsiderar este e-mail, o pedido será cancelado em até uma semana.<br /><br />
+					Do contrário, clique no link abaixo para ativar sua conta.<br /><br />";
+					$msg .= strtolower($this->base."trocar_senha/email:"
+					.$data['0']['Usuario']['email']
+					."/codigo:".$data['0']['Usuario']['troc_senh_cod']);
+					$msg .= "<br /><br />
+
+					att.<br />
+					Administrador AutoHemo";
+
+					$Mail->Body = $msg;
+					$enviado = $Mail->Send();
+					if (!$enviado)
+					{
+						$this->viewVars['msgErro'] = 'Não foi possível enviar o e-mail de validação. '.$Mail->ErrorInfo;
+					} else
+					{
+						$this->viewVars['msgOk'] = 'As instruções para ativação da conta, foi enviada com sucesso para seu o '.$email;
+					}
+				}
+			}
+
 		}
 	}
 }

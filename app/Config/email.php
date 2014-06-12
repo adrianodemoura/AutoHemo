@@ -14,6 +14,7 @@ class Email_Config {
 	 */
 	public $default = array
 	(
+		'nome' 		=> 'Administrador Autohemo',
 		'smtp'		=> 'smtp.gmail.com',
 		'usuario'	=> '',
 		'senha'		=> '',

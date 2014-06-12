@@ -1,6 +1,53 @@
-<div class='row'>
+<?php 
+	$nome  = isset($nome)  ? $nome : '';
+	$email = isset($email) ? $email : '';
 
-<div>
-Clique <a href="<?= $Site->base ?>/login">aqui</a> para fechar
+	if (!isset($msgOk)) : 
+?>
+<div class='row'>
+<div class='col-md-8 col-md-offset-4' style="padding: 40px 0px 0px 0px; width: 400px;">
+<form name='formTrocar' method='post' action='<?= $Site->base ?>novo_registro' onsubmit="return validaForm();">
+	<br />
+	<label>* Nome: </label>
+	<input type='text' name='data[0][Usuario][nome]' class="form-control" 
+		id='UsuarioNome' autofocus='autofocus' placeholder='nome' value='<?= $nome ?>' />
+	<br />
+	<label>* email: </label>
+	<input type='text' name='data[0][Usuario][email]' class="form-control" 
+		id='UsuarioEmail' placeholder='email' value='<?= $email ?>' />
+	<br />
+
+	<input type='submit' name='btSalvar' value='Salvar' class='btn btn-primary' />
+	<input type='button' name='btFechar' value='Fechar' class='btn btn-danger' 
+		onclick="document.location.href='<?= $Site->base ?>login'" />
+
+	<div style="padding-top: 20px;">
+	<p>
+		Informe o seu nome e seu e-mail, o link de ativação será enviado ao seu e-mail.
+	</p>
+	</div>
+
+</form>
 </div>
 </div>
+<?php endif ?>
+
+<?php if(isset($msgOk)) : ?>
+<div class='row'>
+<p style='margin: 0xp auto; text-align: center; color: green;'>
+<?= $msgOk ?>
+</p>
+<p style='margin: 0xp auto; text-align: center;'>
+<a href="<?= $Site->base ?>login">Fechar</a>
+</p>
+</div>
+<?php endif ?>
+
+<?php if(isset($msgErro)) : ?>
+<br />
+<div class='row'>
+<p style='margin: 0xp auto; text-align: center; color: red;'>
+<?= $msgErro ?>
+</p>
+</div>
+<?php endif ?>

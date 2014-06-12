@@ -97,10 +97,11 @@ CREATE  TABLE IF NOT EXISTS `usuarios` (
   `tele_resi` VARCHAR(14) NOT NULL ,
   `celular` VARCHAR(14) NOT NULL ,
   `aniversario` VARCHAR(4) NOT NULL ,
-  `cidade` VARCHAR(60) NOT NULL DEFAULT 2302 ,
+  `cidade` VARCHAR(60) NOT NULL DEFAULT 'BELO HORIZONTE/MG' ,
   `senha` VARCHAR(128) NOT NULL ,
   `troca_senha` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'trocar senha' ,
   `troc_senh_cod` VARCHAR(128) NOT NULL DEFAULT 0 COMMENT 'código trocar senha' ,
+  `ativo` INT NOT NULL DEFAULT 1 ,
   `perfil_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `i_nome` (`nome` ASC) ,
@@ -148,6 +149,6 @@ COMMIT;
 -- Data for table `usuarios`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `tele_resi`, `celular`, `aniversario`, `cidade`, `senha`, `troca_senha`, `troc_senh_cod`, `perfil_id`) VALUES (1, 'ADMINISTRADOR AUTO HEMOTERAPIA', 'admin@autohemo.com.br', '31123456789', '33123456789', '0101', 'BELO HORIZONTE', '9bedf7904b575f7940c08eea781bd3cc15eb58fc7999de882ded4b61ead9455de3f6355894e96de41c270c4cb004220445b45ee666f4029649cfe153e2929a1a', 0, '0', 1);
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `tele_resi`, `celular`, `aniversario`, `cidade`, `senha`, `troca_senha`, `troc_senh_cod`, `ativo`, `perfil_id`) VALUES (1, 'ADMINISTRADOR AUTO HEMOTERAPIA', 'admin@autohemo.com.br', '31123456789', '33123456789', '0101', 'BELO HORIZONTE', '9bedf7904b575f7940c08eea781bd3cc15eb58fc7999de882ded4b61ead9455de3f6355894e96de41c270c4cb004220445b45ee666f4029649cfe153e2929a1a', 0, '0', 1, 1);
 
 COMMIT;
