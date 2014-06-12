@@ -1,6 +1,6 @@
 # ignorar configurações do banco
-Config/database.php
+app/Config/database.php
 
 # ignorar configuração de email
-Config/email.php
+app/Config/email.php
 
