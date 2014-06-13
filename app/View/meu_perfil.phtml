@@ -1,0 +1,86 @@
+<?php
+	$Site->setHead('js','jquery.maskedinput.min');
+?>
+<div class='row'>
+<form name='formUsuario' id='formUsuario' method='post' action='<?= $Site->base ?>meu_perfil' onsubmit="return validaForm(); ">
+<input type='hidden' name='data[0][Usuario][id]' id='UsuarioId' value="<?= $data['0']['Usuario']['id'] ?>" />
+
+	<div>
+	<label>Nome: </label>
+	<input type='text' name='data[0][Usuario][nome]' id='UsuarioNome' 
+		value="<?= $data['0']['Usuario']['nome'] ?>" />
+	</div>
+
+	<div>
+	<label>e-mail: </label>
+	<input type='text' name='data[0][Usuario][email]' id='UsuarioEmail' 
+		value="<?= $data['0']['Usuario']['email'] ?>" />
+	</div>
+
+	<div>
+	<label>Telefone </label>
+	<input type='text' name='data[0][Usuario][tele_resi]' id='UsuarioTeleResi' 
+		value="<?= $data['0']['Usuario']['tele_resi'] ?>" />
+	</div>
+	<?php array_push($Site->onRead,'$("#UsuarioTeleResi").mask("(99)9999-9999");') ?>
+
+	<div>
+	<label>Celular: </label>
+	<input type='text' name='data[0][Usuario][celular]' id='UsuarioCelular' 
+		value="<?= $data['0']['Usuario']['celular'] ?>" />
+	</div>
+	<?php array_push($Site->onRead,'$("#UsuarioCelular").mask("(99)9999-9999");') ?>
+	
+	<div>
+	<label>Aniversário: </label>
+	<input type='text' name='data[0][Usuario][aniversario]' id='UsuarioAniversario' 
+		value="<?= $data['0']['Usuario']['aniversario'] ?>" />
+	</div>
+	<?php array_push($Site->onRead,'$("#UsuarioAniversario").mask("99/99");') ?>
+
+	<div>
+	<label>Senha: </label>
+	<input type='password' name='data[0][Usuario][senha]' id='UsuarioSenha' 
+		value="" />
+	<span>Repita a senha: </span><input type='password' name='senha2' id='UsuarioSenha2'  value="" />
+	</div>
+
+	<div>
+	<label>Aplicador: </label>
+	<select name='data[0][Usuario][aplicador]' id='UsuarioAplicador'>
+		<option value='0' <?php if ($data['0']['Usuario']['aplicador']=='0') echo " selected='selected' " ?> >Não</option>
+		<option value='1' <?php if ($data['0']['Usuario']['aplicador']=='1') echo " selected='selected' " ?> >Sim</option>
+	</select>
+	&nbsp;&nbsp; Se concordar em ser um aplicador, seu nome e contato será exibido na página de aplicadores.
+	</div>
+
+	<div>
+	<label>Cidade: </label>
+	<input type='hidden' name='data[0][Usuario][cidade_id]' id='UsuarioCidadeId' 
+		value="<?= $data['0']['Usuario']['cidade_id'] ?>" />
+	<input type='text' name='cidade' id='UsuarioCidade' 
+		value="<?= $data['0']['Cidade']['nome'].'/'.$data['0']['Cidade']['uf'] ?>" />
+	<div id="UsuarioCidadeRes" class="resBelTo"></div>
+	</div>
+
+	<hr>
+	<div>
+		<label>Perfil: <?= $data['0']['Perfil']['nome'] ?></label>
+		<label>
+			Ativo: <?= $esquema['Usuario']['ativo']['options'][$data['0']['Usuario']['ativo']] ?>
+		</label>
+	</div>
+	<hr>
+	<div>
+		<strong>Cadastro realizado em:</strong> <?= $data['0']['Usuario']['criado'] ?>
+		&nbsp;&nbsp;
+		<strong>Última modificação no perfil em:</strong> <?= $data['0']['Usuario']['modificado'] ?>
+	</div>
+	<br />
+	<div>
+		<input type='submit' name='btSalvar' value='Salvar' class='btn btn-primary' />
+		<input type='button' name='btFechar' value='Fechar' class='btn btn-danger' 
+			onclick="document.location.href='<?= $Site->base ?>aplicacoes'" />
+	</div>
+</form>
+</div>

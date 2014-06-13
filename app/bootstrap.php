@@ -7,10 +7,6 @@
     session_name(md5('seg'.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'])); 
     session_start();
 
-	// constantes locais
-	define('APP','./app/');
-	define('WWW','');
-
     // salt
     define('SALT','J1a537Me8LãO0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
 

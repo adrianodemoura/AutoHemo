@@ -1,0 +1,16 @@
+<?php
+ foreach($data as $_l => $_arrMods)
+ {
+ 	foreach($_arrMods as $_mod => $_arrCmps)
+ 	{
+ 		$c = 0;
+ 		foreach($_arrCmps as $_cmp => $_vlr)
+ 		{
+ 			if ($c) echo ',';
+ 			echo $_vlr;
+ 			$c++;
+ 		}
+ 		echo ";";
+ 	}
+ }
+?>

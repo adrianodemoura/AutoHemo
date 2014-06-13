@@ -56,6 +56,33 @@ class Usuario extends Model {
 				),
 			),
 		),
+		'cidade_id'			=> array
+		(
+			'tit'			=> 'Cidade',
+			'belongsTo' 	=> array
+			(
+				'Cidade'	=> array
+				(
+					'key'	=> 'id',
+					'fields'=> array('id','nome','uf'),
+					'order'	=> array('nome'),
+					'where' => array('Cidade.uf'=>'{uf}')
+				),
+			),
+		),
+		'aniversario'		=> array
+		(
+			'tit'			=> 'Aniversário',
+			'mascara'		=> '99/99',
+		),
+		'ativo' 			=> array
+		(	'tit' 			=> 'Ativo',
+			'options'		=> array('0'=>'Não', '1'=>'Sim'),
+		),
+		'aplicador' 		=> array
+		(	'tit' 			=> 'Aplicador',
+			'options'		=> array('0'=>'Não', '1'=>'Sim'),
+		),
 		'email' 			=> array
 		(
 			'tit' 			=> 'e-mail',
@@ -77,5 +104,22 @@ class Usuario extends Model {
 		$opcs['where']['Usuario.senha'] = $s;
 		$data = $this->find('all',$opcs);
 		return $data;
+	}
+
+	/**
+	 * Executa código antes do método save
+	 *
+	 * return boolean 	Veradeiro se pode continuar
+	 */
+	public function beforeSave()
+	{
+		foreach($this->data as $_l => $_arrMods)
+		{
+			if (isset($_arrMods['Usuario']['senha']) && !empty(($_arrMods['Usuario']['senha'])))
+			{
+				$this->data[$_l]['Usuario']['senha'] = encripta($_arrMods['Usuario']['senha']);
+			}
+		}
+		return parent::beforeSave();
 	}
 }

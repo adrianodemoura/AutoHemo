@@ -1,6 +1,6 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 
 -- -----------------------------------------------------
@@ -86,6 +86,23 @@ COLLATE = utf8_general_ci;
 
 
 -- -----------------------------------------------------
+-- Table `cidades`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `cidades` ;
+
+CREATE  TABLE IF NOT EXISTS `cidades` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `nome` VARCHAR(60) NOT NULL ,
+  `uf` VARCHAR(2) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `i_nome` (`nome` ASC) ,
+  INDEX `i_uf` (`uf` ASC) )
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+
+-- -----------------------------------------------------
 -- Table `usuarios`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `usuarios` ;
@@ -97,20 +114,24 @@ CREATE  TABLE IF NOT EXISTS `usuarios` (
   `tele_resi` VARCHAR(14) NOT NULL ,
   `celular` VARCHAR(14) NOT NULL ,
   `aniversario` VARCHAR(4) NOT NULL ,
-  `cidade` VARCHAR(60) NOT NULL DEFAULT 'BELO HORIZONTE/MG' ,
   `senha` VARCHAR(128) NOT NULL ,
   `troca_senha` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'trocar senha' ,
   `troc_senh_cod` VARCHAR(128) NOT NULL DEFAULT 0 COMMENT 'código trocar senha' ,
+  `aplicador` INT NOT NULL DEFAULT 0 ,
   `ativo` INT NOT NULL DEFAULT 1 ,
-  `perfil_id` INT NOT NULL ,
+  `perfil_id` INT NOT NULL DEFAULT 3 ,
+  `cidade_id` INT NOT NULL DEFAULT 2302 ,
+  `criado` DATETIME NOT NULL DEFAULT '2014-01-01 12:20:30' ,
+  `modificado` DATETIME NOT NULL DEFAULT '2014-01-01 12:20:31' ,
   PRIMARY KEY (`id`) ,
   INDEX `i_nome` (`nome` ASC) ,
   INDEX `i_email` (`email` ASC) ,
   INDEX `i_celular` (`celular` ASC) ,
   INDEX `i_aniversario` (`aniversario` ASC) ,
-  INDEX `i_cidade` (`cidade` ASC) ,
-  INDEX `fk_usuarios_perfis1` (`perfil_id` ASC) ,
-  INDEX `i_troca_senha` (`troca_senha` ASC) )
+  INDEX `fk_perfil_id` (`perfil_id` ASC) ,
+  INDEX `i_troca_senha` (`troca_senha` ASC) ,
+  INDEX `i_aplicador` (`aplicador` ASC) ,
+  INDEX `fk_cidades_id` (`cidade_id` ASC) )
 ENGINE = MyISAM
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
@@ -149,6 +170,6 @@ COMMIT;
 -- Data for table `usuarios`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `tele_resi`, `celular`, `aniversario`, `cidade`, `senha`, `troca_senha`, `troc_senh_cod`, `ativo`, `perfil_id`) VALUES (1, 'ADMINISTRADOR AUTO HEMOTERAPIA', 'admin@autohemo.com.br', '31123456789', '33123456789', '0101', 'BELO HORIZONTE', '9bedf7904b575f7940c08eea781bd3cc15eb58fc7999de882ded4b61ead9455de3f6355894e96de41c270c4cb004220445b45ee666f4029649cfe153e2929a1a', 0, '0', 1, 1);
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `tele_resi`, `celular`, `aniversario`, `senha`, `troca_senha`, `troc_senh_cod`, `aplicador`, `ativo`, `perfil_id`, `cidade_id`, `criado`, `modificado`) VALUES (1, 'ADMINISTRADOR AUTO HEMOTERAPIA', 'admin@autohemo.com.br', '31123456789', '33123456789', '0101', '9bedf7904b575f7940c08eea781bd3cc15eb58fc7999de882ded4b61ead9455de3f6355894e96de41c270c4cb004220445b45ee666f4029649cfe153e2929a1a', 0, '0', 0, 1, 1, 2302, '2014-06-12 12:20:30', '2014-06-12 12:20:30');
 
 COMMIT;

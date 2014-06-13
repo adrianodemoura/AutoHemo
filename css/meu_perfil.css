@@ -1,0 +1,32 @@
+#formUsuario div
+{
+	min-height: 30px;
+}
+#formUsuario label
+{
+	display: block;
+	float: left;
+	min-width: 200px;
+	text-align: right;
+	margin: 0px 3px 0px 0px;
+	line-height: 24px;
+}
+
+#formUsuario #UsuarioNome,
+#formUsuario #UsuarioEmail
+{
+	width: 500px;
+}
+
+#formUsuario #UsuarioTeleResi,
+#formUsuario #UsuarioCelular
+{
+	width: 110px;
+	text-align: center;
+}
+
+#formUsuario #UsuarioAniversario
+{
+	width: 50px;
+	text-align: center;
+}

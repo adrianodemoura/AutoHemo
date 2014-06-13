@@ -1,0 +1,18 @@
+<?php 
+	header('Content-Type: text/html; charset=utf-8'); 
+?>
+<?= $conteudo ?>
+
+<?php if (isset($_SESSION['debug'])) : ?>
+<section>
+    <div class='container erros'>
+        <?php include_once(APP.'View/Elements/sql_erros.php') ?>
+    </div>
+</section>
+
+<section>
+    <div class='container sqls'>
+        <?php include_once(APP.'View/Elements/sql_dump.php') ?>
+    </div>
+</section>
+<?php endif ?>

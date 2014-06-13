@@ -23,6 +23,14 @@ class Site {
 	public $charset		= 'utf-8';
 
 	/**
+	 * Layout 
+	 *
+	 * @var 	string
+	 * @access 	public
+	 */
+	public $layout		= 'padrao';
+
+	/**
 	 * Título da página
 	 *
 	 * @var 	string
@@ -55,6 +63,24 @@ class Site {
 	 *
 	 */
 	public $sqls 		= array();
+
+	/**
+	 * Script jQuery incrementados no layout
+	 *
+	 */
+	public $onRead 		= array();
+
+	/**
+	 * Arquivos JS incrementados no layout
+	 *
+	 */
+	public $headJs 		= array();
+
+	/**
+	 * Arquivos CSS incrementados no layout
+	 *
+	 */
+	public $headCss 		= array();
 
 	/**
 	 * Método start da classe
@@ -123,6 +149,26 @@ class Site {
 		}
 		$this->pagina = $pagina;
 		return $pagina;
+	}
+
+	/**
+	 * Incrementa arquivos Js e CSS no layout padrão
+	 *
+	 * @param 	string 	$tipo 	Tipo do arquivo JS ou CSS
+	 * @param 	string 	$arq 	Nome do arquivo
+	 * @return 	void
+	 */
+	public function setHead($tipo='', $arq='')
+	{
+		switch($tipo)
+		{
+			case 'js':
+				array_push($this->headJs,$arq);
+				break;
+			case 'css':
+				array_push($this->headCss,$arq);
+				break;
+		}
 	}
 
 	/**
@@ -632,5 +678,125 @@ class Site {
 			}
 
 		}
+	}
+
+	/**
+	 * Executa a instalação do sistema básico
+	 *
+	 * @return 	void
+	 */
+	public function instala_tabelas()
+	{
+		include_once(APP.'Model/Util.php');
+		$Util = new Util();
+		$sql = 'SELECT id from usuarios where id=1';
+		$data = $Util->query($sql);
+		if (count($data))
+		{
+			$this->setMsgFlash('O Sistema básico já foi instalado !!!','msgFlashErro');
+			redirect($this->base);
+		} else
+		{
+			$Util->erros = array();
+			$arq = APP.'Model/autohemo.sql';
+			if (file_exists($arq))
+			{
+				$handle  = fopen($arq,"r");
+				$texto   = fread($handle, filesize($arq));
+				$sqls	 = explode(";",$texto);
+				fclose($handle);
+
+				// executando sql a sql
+				foreach($sqls as $sql)
+				{
+					if (trim($sql))
+					{
+						$res = $Util->query($sql);
+						if (!empty($Util->erros))
+						{
+							echo $sql.'<br />';
+							die(debug($Util->erros));
+						}
+					}
+				}
+				
+				// importando csv
+				$tabs = array('cidades');
+				foreach($tabs as $_l => $_tabela)
+				{
+					$arq = APP.'Model/'.$_tabela.'.csv';
+					if (file_exists($arq))
+					{
+						if (!$Util->setPopulaTabela($arq,$_tabela)) die('erro ao importar '.$_tabela);
+					}
+				}
+				$this->setMsgFlash('Sistema básico instalado com sucesso ...','msgOk');
+				redirect($this->base.'login');
+			} else
+			{
+				die('O arquivo '.$arq.', n&aacute;o foi localizado ...');
+			}
+		}
+	}
+
+	/**
+	 * Exibe a tela de perfil do usuário logado e ainda salva seus dados no banco de dados
+	 * 
+	 * - somente para usuários logados
+	 *
+	 * @return void
+	 */
+	public function meu_perfil()
+	{
+		if (!isset($_SESSION['Usuario']))
+		{
+			$this->setMsgFlash('Somente para usuário autenticados','msgErro');
+			redirect($this->base.'login');
+		}
+
+		require_once(APP.'Model/Usuario.php');
+		$Usuario = new Usuario();
+
+		if (isset($_POST['data']))
+		{
+			if (empty($_POST['data']['0']['Usuario']['senha'])) unset($_POST['data']['0']['Usuario']['senha']);
+			if (!$Usuario->save($_POST['data']))
+			{
+				debug($Usuario->erros);
+				die('Erro ao tentar salvar perfil do usuário ');
+			} else
+			{
+				$this->setMsgFlash('Perfil atualizado com sucesso ...','msgOk');
+				//redirect($this->base.'meu_perfil');
+			}
+		}
+		
+		$params['where']['Usuario.id'] = $_SESSION['Usuario']['id'];
+		$this->viewVars['data'] = $Usuario->find('all',$params);
+		$this->viewVars['esquema']['Usuario'] = $Usuario->esquema;
+		$this->sqls['Usuario'] = $Usuario->sqls;
+	}
+
+	/**
+	 * Retorna uma lista para o get_options de uma campo do model corrente
+	 * exemplo:
+	 * http://localhost/autohemo/get_options/model:cidade/texto:belo/campo:nome/fields:id,nome,uf
+	 *
+	 * @return void
+	 */
+	public function get_options()
+	{
+		$this->layout = 'ajax';
+		$model = ucfirst(strtolower($this->params['model']));
+		$texto = isset($this->params['texto']) ? rawurldecode($this->params['texto']) : '';
+		$campo = isset($this->params['campo']) ? $this->params['campo'] : 'nome';
+		$fields= isset($this->params['fields']) ? $this->params['fields'] : null;
+
+		require_once(APP.'Model/'.$model.'.php');
+		$Model = new $model();
+		$params['where'][$model.'.'.$campo.' LIKE'] = $texto;
+		if (!empty($fields)) $params['fields'] = explode(',',$fields);
+		$this->viewVars['data'] = $Model->find('list',$params);
+		$this->sqls['Usuario'] = $Model->sqls;
 	}
 }
