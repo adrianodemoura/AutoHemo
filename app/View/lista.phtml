@@ -1,0 +1,54 @@
+<?php
+	$Site->setHead('js','jquery.maskedinput.min');
+	array_push($Site->onRead,'$("#0FiltroDataFim").mask("99/99/9999");');
+	array_push($Site->onRead,'$("#0FiltroDataIni").mask("99/99/9999");');
+
+	// helper
+    include(APP.'View/Helper/Html.php');
+    $Html = new Html();
+?>
+
+<div class='row-fluid'>
+
+	<div class='col-md-2' style="min-height: 500px;"><!-- esquerda -->
+	<ul>
+		<li>
+			<a href="<?= $Site->base ?>lista/nome:rel001">Análítico por Data e Local</a>
+		</li>
+	</ul>
+	</div>
+
+	<div class='cold-md-10'><!-- direita -->
+
+		<div class='barra'><!-- barra -->
+			<form name='formFiltro' id='formFiltro' method='post' action='<?= $Site->base ?>lista'>
+			
+			<label>Usuário: </label>
+			<?= $Html->getInputText('0.Filtro.usuario_id', $filtros['usuario_id']);	?>
+
+			<label>Data Inicial: </label>
+			<?= $Html->getInputData('0.Filtro.data_ini', $filtros['data_ini']);	?>
+		
+			<label>Data Final: </label>
+			<?= $Html->getInputData('0.Filtro.data_fim', $filtros['data_fim']); ?>
+		
+			<label>Local Retirada: </label>
+			<?= $Html->getInputText('0.Filtro.retirada_id', $filtros['retirada_id']); ?>
+
+			<label>Local Aplicação: </label>
+			<?= $Html->getInputText('0.Filtro.local_id', $filtros['local_id']); ?>
+
+			<div>
+				<input type='submit' name='btEnviar' id='btEnviar' value='Enviar' class='btn btn-primary' />
+				<input type='button' name='btFechar' value='Fechar' class='btn btn-danger' 
+					onclick="document.location.href='<?= $Site->base ?>aplicacoes'" />
+			</div>
+			</form>
+		</div><!-- fim barra -->
+
+		<div class='lista'><!-- lista -->
+		<?= debug($data); ?>
+		</div><!-- fim lista -->
+
+	</div>
+</div>

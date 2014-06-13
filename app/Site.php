@@ -810,4 +810,136 @@ class Site {
 		$this->viewVars['data'] = $Model->find('list',$params);
 		$this->sqls['Usuario'] = $Model->sqls;
 	}
+
+	/**
+	 * Lista
+	 * Exibe as aplicações dos usuários num dbGrid
+	 *
+	 * - Acesso permitido apenas para usuários autenticados
+	 * - rel001 Relatório analítico com filtros por usuários, data[inicio|fim] e locais de retirada e aplicação
+	 * - O Relatório dever paginar o resultado.
+	 * - Usuário administrador pode escolher um usuário ou todos, do contrário o filtro é obrigatório.
+	 * - Os Relatórios devem possuir ferramenta para exportação em CSV
+	 *
+	 * @param 	string 	$nome 	Nome do relatório
+	 * @return 	void
+	 */
+	public function lista()
+	{
+		if (!isset($_SESSION['Usuario']))
+		{
+			$this->setMsgFlash('Somente para usuário autenticados','msgErro');
+			redirect($this->base.'login');
+		}
+
+		// variáveis locais
+		$nome 	= isset($this->params['nome']) ? $this->params['nome'] : 'rel001';
+		$pag 	= isset($this->params['pag']) ? $this->params['pag'] : 1;
+		$data 	= array();
+		$params = array();
+		$filtros= array();
+
+		// filtro padrão
+		$filtros['data_ini']['value'] = date('d/m').'/'.(date('Y')-1);
+		$filtros['data_fim']['value'] = date('d/m/Y');
+
+		$filtros['usuario_id']['value'] = $_SESSION['Usuario']['id'];
+		$filtros['usuario_id']['options']['0'] = '-- Todos os Usuários --';
+
+		$filtros['local_id']['value'] = 0;
+		$filtros['local_id']['options']['0'] = '-- Todos os Locais --';
+
+		$filtros['retirada_id']['value'] = 0;
+		$filtros['retirada_id']['options']['0'] = '-- Todos os Locais --';
+
+		// buscando os locais para popular as opçoes da retirada e aplicacao
+		require_once('Model/Local.php');
+		$Local = new Local();
+		$params['fields']= array('Local.nome','Local.retirada','Local.aplicacao');
+		$params['order'] = array('Local.nome');
+		$locais = $Local->find('all',$params);
+		foreach($locais as $_l => $_arrMods)
+		{
+			foreach($_arrMods as $_mod => $_arrCmps)
+			{
+				if ($_arrCmps['retirada']==1)
+				{
+					$filtros['retirada_id']['options'][$_arrCmps['id']] = $_arrCmps['nome'];
+				}
+				if ($_arrCmps['aplicacao']==1)
+				{
+					$filtros['local_id']['options'][$_arrCmps['id']] = $_arrCmps['nome'];
+				}
+			}
+		}
+		$this->sqls['Local'] = $Local->sqls;
+
+		// definindo o layout
+		$this->layout = isset($this->params['lay']) ? $this->params['lay'] : 'padrao';
+
+		// opções de buca do relatório
+		$params 	= array();
+		$params['order'] = array('Usuario.nome','Aplicacao.data');
+
+		// definindo o layout
+		if ($this->layout=='padrao') $params['pag'] = $pag;
+
+		// incrementando o filtro com base no filtr opostado
+		if (isset($_POST['data']))
+		{
+			foreach($_POST['data'] as $_l => $_arrMods)
+			{
+				foreach($_arrMods['Filtro'] as $_cmp => $_vlr)
+				{
+					switch($_cmp)
+					{
+						case 'data_fim':
+						case 'data_ini':
+							$dataIni = $_POST['data'][$_l]['Filtro']['data_ini'];
+							$dataFim = $_POST['data'][$_l]['Filtro']['data_fim'];
+							if (!empty($dataIni) && !empty($dataFim))
+							{
+								//$params['where']['Aplicacao.data BETWEEN'] = array($dataIni, $dataFim);
+							}
+							$filtros[$_cmp]['value'] = $_vlr['dia'].'/'.$_vlr['mes'].'/'.$_vlr['ano'];
+							break;
+						default:
+							if (!empty($_vlr))
+							{
+								$params['where']['Aplicacao.'.$_cmp] = $_vlr;
+							}
+							$filtros[$_cmp]['value'] = $_vlr;
+							break;
+					}
+				}
+			}
+		}
+
+		// opções especifica de cada relatório
+		switch($nome)
+		{
+			case 'rel001':
+				$this->viewVars['campos'] = array('Usuario.nome','Aplicacao.data','Aplicacao.apli_qtd','Retirada.nome','Local.nome');
+				break;
+		}
+
+		// instanciando obejto de aplicação
+		require_once(APP.'Model/Aplicacao.php');
+		$Aplicacao 	= new Aplicacao();
+
+		// recuperando os dados
+		$data = $Aplicacao->find('all',$params);
+
+		// implementando usuários
+		$filtros['usuario_id']['options'] = $Aplicacao->esquema['usuario_id']['options'];
+		array_unshift($filtros['usuario_id']['options'], '-- Todos os Usuários --');
+		if ($_SESSION['Usuario']['id']>1) $filtros['usuario_id']['input']['disabled'] = 'disabled';
+
+		// atualizando a view
+		$this->sqls['Aplicacao'] 	= $Aplicacao->sqls;
+		$this->viewVars['data']  	= $data;
+		$this->viewVars['esquema'] 	= $Aplicacao->esquema;
+		$this->viewVars['paginacao']= $Aplicacao->pag;
+		$this->viewVars['filtros'] 	= $filtros;
+	}
 }

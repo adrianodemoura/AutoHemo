@@ -15,10 +15,11 @@ class Html {
 	 */
 	public function getInputData($cmp='', $prop=array())
 	{
-		$input 			= '<div class="divData">';
+		$input 			= '<div class="divReg divData">';
 		$ano 			= isset($prop['ano']) ? $prop['ano'] : date('Y');
 		$intervaloAno 	= isset($prop['intervaloAno']) ? $prop['intervaloAno'] : 2;
 		$valor 			= isset($prop['value']) ? $prop['value'] : null;
+
 		if (!$valor && isset($prop['default']))
 		{
 			$valor 		= isset($prop['default']) ? $prop['default'] : null;
@@ -65,4 +66,68 @@ class Html {
 
 		return $input;
 	}
+
+	/**
+	 * Retorna o input form
+	 *
+	 * @param 	string 	$cmp 	Nome do campo no formado linha.model.campo
+	 * @param 	array 	$prop 	Matriz com as propriedades do campo
+	 * @return 	string 	$input
+	 */
+	public function getInputText($cmp='', $prop=array())
+	{
+		$valor 			= isset($prop['value']) ? $prop['value'] : null;
+		$a 				= explode('.',$cmp);
+		$tipo 			= isset($prop['type']) ? $prop['type'] : 'text';
+		$tagInput		= isset($prop['input']) ? $prop['input'] : array();
+
+		// valor padrão
+		if (!$valor && isset($prop['default']))
+		{
+			$valor 		= isset($prop['default']) ? $prop['default'] : null;
+		}
+
+		// se tem options vira um select
+		if (isset($prop['options']))
+		{
+			$tipo = 'select';
+
+		}
+
+		$input 	= '<div id="div'.$a['0'].$a['1'].$a['2'].'" class="divReg div'.ucfirst($a['1']).ucfirst($a['2']).'">';
+		switch ($tipo) 
+		{
+			case 'select':
+				$input .= "<select 
+					name='data[".$a['0']."][".$a['1']."][".$a['2']."]' 
+					id='".$a['0'].ucfirst($a['1']).ucfirst($a['2'])."'
+					class='se".ucfirst($a['1']).ucfirst($a['2'])."' ";
+				foreach ($tagInput as $_tag => $_vlr) $input .= "$_tag='$_vlr' ";
+				$input .= ">";
+				foreach($prop['options'] as $_id => $_vlr)
+				{
+					$s = "";
+					if ($_id==$valor) $s = " selected='selected' ";
+					$input .= "<option $s value='".$_id."'>$_vlr</option>";
+				}
+				$input .= "</select>";
+				break;
+
+			default:
+				$input .= "<input type='text' 
+				name='data[".$a['0']."][".$a['1']."][".$a['2']."]'
+				id='".$a['0'].ucfirst($a['1']).ucfirst($a['2'])."'
+				value='".$valor."' ";
+				foreach ($tagInput as $_tag => $_vlr) $input .= "$_tag='$_vlr' ";
+				$input .= "/>";
+				break;
+		};
+		
+
+		$input .= '</div>';
+
+		return $input;
+	}
+
+
 }

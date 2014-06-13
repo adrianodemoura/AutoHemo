@@ -90,8 +90,8 @@ class Aplicacao extends Model {
 				'Retirada'	=> array
 				(
 					'key'	=> 'id',
-					'fields'=> array('id','nome'),
-					'order'	=> array('nome')
+					'fields'=> array('id','data'),
+					'order'	=> array('data')
 				),
 			),
 		),

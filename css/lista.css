@@ -1,0 +1,9 @@
+#formFiltro .divReg,
+{
+	float: left;
+}
+#formFiltro label
+{
+	display: inline-block;
+}
+
