@@ -693,8 +693,8 @@ class Site {
 		$data = $Util->query($sql);
 		if (count($data))
 		{
-			$this->setMsgFlash('O Sistema básico já foi instalado !!!','msgFlashErro');
-			redirect($this->base);
+			$this->setMsgFlash('O Sistema básico já foi instalado com sucesso !!!','msgOk');
+			redirect($this->base.'login');
 		} else
 		{
 			$Util->erros = array();
