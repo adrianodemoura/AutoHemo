@@ -484,6 +484,8 @@ class Site {
 
 					require_once(APP.'Vendor/PHPMailer/class.phpmailer.php');
 					$Mail = new PHPMailer();
+
+					// configuração do objeto email
 					$Mail->isSmtp();
 					$Mail->isHtml();
 					//$Mail->SMTPDebug 	= true;
@@ -496,8 +498,14 @@ class Site {
 					$Mail->Password 	= $Email->default['senha'];
 					$Mail->Subject 		= 'Mudança de senha';
 
+					// remetente
+					$Mail->Sender 		= $Email->default['usuario'];
+					$Mail->FromName 	= $Email->default['nome'];
+
+					// destinatário
 					$Mail->AddAddress($email);
 
+					// mensagen
 					$msg = "";
 					$msg .= "Caro Usuario ".$data['0']['Usuario']['nome'].", ";
 					$msg .= "<br /><br />";
@@ -506,8 +514,9 @@ class Site {
 					.$data['0']['Usuario']['email']
 					."/codigo:".$data['0']['Usuario']['troc_senh_cod']);
 					$msg .= "<br /><br />";
-
 					$Mail->Body = $msg;
+
+					// enviando
 					$enviado = $Mail->Send();
 					if (!$enviado)
 					{
@@ -639,7 +648,6 @@ class Site {
 					$Mail->SMTPSecure 	= 'ssl';
 
 					// remetente
-					$Mail->From 		= "nao_responda@site.com.br";
 					$Mail->Sender 		= $Email->default['usuario'];
 					$Mail->FromName 	= $Email->default['nome'];
 
@@ -650,6 +658,7 @@ class Site {
 					$Mail->Password 	= $Email->default['senha'];
 					$Mail->Subject 		= "Novo Cadastro";
 
+					// destinatário
 					$Mail->AddAddress($email);
 
 					$msg = "";
