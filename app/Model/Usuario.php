@@ -115,7 +115,7 @@ class Usuario extends Model {
 	{
 		foreach($this->data as $_l => $_arrMods)
 		{
-			if (isset($_arrMods['Usuario']['senha']) && !empty(($_arrMods['Usuario']['senha'])))
+			if (isset($_arrMods['Usuario']['senha']) && !empty($_arrMods['Usuario']['senha']))
 			{
 				$this->data[$_l]['Usuario']['senha'] = encripta($_arrMods['Usuario']['senha']);
 			}
