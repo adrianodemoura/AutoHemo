@@ -88,6 +88,11 @@ class Usuario extends Model {
 			'tit' 			=> 'e-mail',
 			'upperOff' 		=> true,
 		),
+		'senha' 			=> array
+		(
+			'tit' 			=> 'Senha',
+			'upperOff'		=> true,
+		),
 	);
 
 	/**
@@ -98,10 +103,9 @@ class Usuario extends Model {
 	 */
 	public function autentica($e='', $s='')
 	{
-		$s 		= encripta($s);
 		$opcs 	= array();
 		$opcs['where']['Usuario.email'] = $e;
-		$opcs['where']['Usuario.senha'] = $s;
+		$opcs['where']['Usuario.senha'] = encripta($s);
 		$data = $this->find('all',$opcs);
 		return $data;
 	}

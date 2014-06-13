@@ -207,6 +207,7 @@ class Site {
 					}
 				}
 			}
+			$this->sqls['Usuario'] = $this->Model->sqls;
 			return false;
 		}
 
@@ -568,7 +569,7 @@ class Site {
 				unset($data['0']['Usuario']['troc_senh']);
 				unset($data['0']['Usuario']['troca_senha']);
 
-				$data['0']['Usuario']['senha'] = encripta($_POST['data']['0']['Usuario']['senha']);
+				$data['0']['Usuario']['senha'] = $_POST['data']['0']['Usuario']['senha'];
 				$data['0']['Usuario']['troc_senh_cod'] = '';
 				$data['0']['Usuario']['ativo'] = 1;
 				if (!$Usuario->save($data))
@@ -577,6 +578,7 @@ class Site {
 				}
 				$msg = 'A senha foi trocada com sucesso ...';
 				$this->viewVars['msgOk'] 	= $msg;
+				$this->sqls['Usuario'] = $Usuario->sqls;
 			} elseif(isset($_POST['data']) && empty($_POST['0']['Usuario']['senha']))
 			{
 				$this->viewVars['msgErro'] = 'O Campo senha é de preenchimento obrigatório !!!';
