@@ -888,6 +888,7 @@ class Site {
 		// opções de buca do relatório
 		$params 	= array();
 		$params['order'] = array('Usuario.nome','Aplicacao.data');
+		$params['where']['Aplicacao.usuario_id'] = $_SESSION['Usuario']['id'];
 
 		// definindo o layout
 		if ($this->layout=='padrao') $params['pag'] = $pag;
@@ -936,7 +937,6 @@ class Site {
 		$Aplicacao 	= new Aplicacao();
 
 		// recuperando os dados
-		$params['where']['Aplicacao.usuario_id'] = $_SESSION['Usuario']['id'];
 		$data = $Aplicacao->find('all',$params);
 		foreach($data as $_l => $_arrMods)
 		{
@@ -944,7 +944,6 @@ class Site {
 		}
 
 		// implementando usuários
-		$filtros['usuario_id']['tit'] = 'Usuário';
 		$filtros['usuario_id']['options'] = $Aplicacao->esquema['usuario_id']['options'];
 		array_unshift($filtros['usuario_id']['options'], '-- Todos os Usuários --');
 		if ($_SESSION['Usuario']['perfilId']>1) $filtros['usuario_id']['input']['disabled'] = 'disabled';
