@@ -915,6 +915,13 @@ class Site {
 							}
 							$filtros[$_cmp]['value'] = $_vlr['dia'].'/'.$_vlr['mes'].'/'.$_vlr['ano'];
 							break;
+						case 'retirada_id':
+							if (!empty($_vlr))
+							{
+								$params['where']['Retirada.local_id'] = $_vlr;
+							}
+							$filtros[$_cmp]['value'] = $_vlr;
+							break;
 						default:
 							if (!empty($_vlr))
 							{

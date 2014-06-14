@@ -568,7 +568,11 @@ class Model {
 		// join
 		if (!empty($join))
 		{
-			foreach($join as $_l => $j) $sql .= ' '.$j;
+			foreach($join as $_l => $j)
+			{
+				$sql .= ' '.$j;
+				$sqlC .= ' '.$j;
+			}
 		}
 
 		// where
