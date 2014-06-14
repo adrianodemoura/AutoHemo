@@ -888,7 +888,7 @@ class Site {
 		// opções de buca do relatório
 		$params 	= array();
 		$params['order'] = array('Usuario.nome','Aplicacao.data');
-		if (!isset($_POST['data']))
+		if (!isset($_POST['data']) || $_SESSION['Usuario']['perfilId']>1)
 		{
 			$params['where']['Aplicacao.usuario_id'] = $_SESSION['Usuario']['id'];
 		}
