@@ -650,7 +650,7 @@ class Model {
 				$l = 0;
 				foreach($order as $_cmp)
 				{
-					if ($l) $sql .= ' AND ';
+					if ($l) $sql .= ', ';
 					$a = explode('_', $_cmp);
 					if (count($a)>2)
 					{
