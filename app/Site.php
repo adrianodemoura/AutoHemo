@@ -927,7 +927,7 @@ class Site {
 		switch($nome)
 		{
 			case 'rel001':
-				$this->viewVars['campos'] = array('Usuario.nome','Aplicacao.data','Aplicacao.apli_qtd','Retirada.nome','Local.nome');
+				$this->viewVars['campos'] 	= array('Usuario.nome','Aplicacao.data','Retirada.nome','Retirada.reti_qtd','Local.nome','Aplicacao.apli_qtd');
 				break;
 		}
 
@@ -936,6 +936,7 @@ class Site {
 		$Aplicacao 	= new Aplicacao();
 
 		// recuperando os dados
+		$params['where']['Aplicacao.usuario_id'] = $_SESSION['Usuario']['id'];
 		$data = $Aplicacao->find('all',$params);
 		foreach($data as $_l => $_arrMods)
 		{
@@ -946,7 +947,7 @@ class Site {
 		$filtros['usuario_id']['tit'] = 'Usuário';
 		$filtros['usuario_id']['options'] = $Aplicacao->esquema['usuario_id']['options'];
 		array_unshift($filtros['usuario_id']['options'], '-- Todos os Usuários --');
-		if ($_SESSION['Usuario']['id']>1) $filtros['usuario_id']['input']['disabled'] = 'disabled';
+		if ($_SESSION['Usuario']['perfilId']>1) $filtros['usuario_id']['input']['disabled'] = 'disabled';
 
 		// atualizando a view
 		$this->sqls['Aplicacao'] 	= $Aplicacao->sqls;
@@ -954,6 +955,5 @@ class Site {
 		$this->viewVars['esquema'] 	= $Aplicacao->esquema;
 		$this->viewVars['paginacao']= $Aplicacao->pag;
 		$this->viewVars['filtros'] 	= $filtros;
-		$this->viewVars['campos'] 	= array('Usuario.nome','Aplicacao.data','Retirada.nome','Retirada.reti_qtd','Local.nome','Aplicacao.apli_qtd');
 	}
 }
