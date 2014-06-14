@@ -10,7 +10,7 @@
 
 <div class='row-fluid'>
 
-	<div class='col-md-2' style="min-height: 500px;"><!-- esquerda -->
+	<div class='menuLista col-md-2' style="min-height: 300px;"><!-- esquerda -->
 	<ul>
 		<li>
 			<a href="<?= $Site->base ?>lista/nome:rel001">Análítico por Data e Local</a>
@@ -22,22 +22,21 @@
 
 		<div class='barra'><!-- barra -->
 			<form name='formFiltro' id='formFiltro' method='post' action='<?= $Site->base ?>lista'>
-			
-			<label>Usuário: </label>
-			<?= $Html->getInputText('0.Filtro.usuario_id', $filtros['usuario_id']);	?>
+			<?php if ($_SESSION['Usuario']['perfilId']==1) : ?>
+			<?= $Html->getInput('0.Filtro.usuario_id', $filtros['usuario_id']);	?>
+			<br /><br />
+			<?php endif ?>
 
-			<label>Data Inicial: </label>
 			<?= $Html->getInputData('0.Filtro.data_ini', $filtros['data_ini']);	?>
 		
-			<label>Data Final: </label>
 			<?= $Html->getInputData('0.Filtro.data_fim', $filtros['data_fim']); ?>
+			<br /><br />
 		
-			<label>Local Retirada: </label>
-			<?= $Html->getInputText('0.Filtro.retirada_id', $filtros['retirada_id']); ?>
+			<?= $Html->getInput('0.Filtro.retirada_id', $filtros['retirada_id']); ?>
 
-			<label>Local Aplicação: </label>
-			<?= $Html->getInputText('0.Filtro.local_id', $filtros['local_id']); ?>
+			<?= $Html->getInput('0.Filtro.local_id', $filtros['local_id']); ?>
 
+			<br /><br />
 			<div>
 				<input type='submit' name='btEnviar' id='btEnviar' value='Enviar' class='btn btn-primary' />
 				<input type='button' name='btFechar' value='Fechar' class='btn btn-danger' 
@@ -47,7 +46,28 @@
 		</div><!-- fim barra -->
 
 		<div class='lista'><!-- lista -->
-		<?= debug($data); ?>
+		<table border='1px'>
+		<tr>
+			<th>Usuário</th>
+			<th>Data</th>
+			<th>Local Retirada</th>
+			<th>Qtd. Retirada</th>
+			<th>Local Aplicado</th>
+			<th>Qtd. Aplicada</th>
+		</tr>
+		<?php foreach($data as $_l => $_arrMods) : ?>
+			<tr>	
+			<?php
+				foreach($campos as $_l => $_cmp) : 
+				$c = explode('.', $_cmp);
+			?>
+			<td class='td<?= ucfirst($c['0']).ucfirst($c['1']) ?>'>
+				<?= $_arrMods[$c['0']][$c['1']] ?>
+			</td>
+			<?php endforeach; ?>
+			</tr>
+		<?php endforeach ?>
+		</table>
 		</div><!-- fim lista -->
 
 	</div>

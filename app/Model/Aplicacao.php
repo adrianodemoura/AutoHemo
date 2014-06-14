@@ -90,7 +90,7 @@ class Aplicacao extends Model {
 				'Retirada'	=> array
 				(
 					'key'	=> 'id',
-					'fields'=> array('id','data'),
+					'fields'=> array('id','data','local_id','reti_qtd'),
 					'order'	=> array('data')
 				),
 			),

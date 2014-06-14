@@ -33,6 +33,8 @@ class Html {
 		$name 	= $c['0']."][".$c['1']."][".$c['2'];
 		$id 	= $c['0'].$c['1'].$c['2'];
 
+		if (isset($prop['tit'])) $input .= "<label class='".ucfirst($c['1']).ucfirst($c['2'])."'>".$prop['tit'].":&nbsp;&nbsp;</label>";
+
 		$inDia = "<select name='data[".$name."][dia]' id='".$id."Dia'>";
 		for($i=1; $i<32; $i++)
 		{
@@ -74,7 +76,7 @@ class Html {
 	 * @param 	array 	$prop 	Matriz com as propriedades do campo
 	 * @return 	string 	$input
 	 */
-	public function getInputText($cmp='', $prop=array())
+	public function getInput($cmp='', $prop=array())
 	{
 		$valor 			= isset($prop['value']) ? $prop['value'] : null;
 		$a 				= explode('.',$cmp);
@@ -95,6 +97,7 @@ class Html {
 		}
 
 		$input 	= '<div id="div'.$a['0'].$a['1'].$a['2'].'" class="divReg div'.ucfirst($a['1']).ucfirst($a['2']).'">';
+		if (isset($prop['tit'])) $input .= "<label>".$prop['tit'].":&nbsp;&nbsp;</label>";
 		switch ($tipo) 
 		{
 			case 'select':

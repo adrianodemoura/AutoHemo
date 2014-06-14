@@ -840,16 +840,22 @@ class Site {
 		$filtros= array();
 
 		// filtro padrão
-		$filtros['data_ini']['value'] = date('d/m').'/'.(date('Y')-1);
-		$filtros['data_fim']['value'] = date('d/m/Y');
+		$filtros['data_ini']['tit'] 	= 'Data Inicial';
+		$filtros['data_ini']['value'] 	= date('d/m').'/'.(date('Y')-1);
 
+		$filtros['data_fim']['tit'] 	= 'Data Final';
+		$filtros['data_fim']['value'] 	= date('d/m/Y');
+
+		$filtros['usuario_id']['tit'] 	= 'Usuário';
 		$filtros['usuario_id']['value'] = $_SESSION['Usuario']['id'];
 		$filtros['usuario_id']['options']['0'] = '-- Todos os Usuários --';
 
-		$filtros['local_id']['value'] = 0;
+		$filtros['local_id']['tit'] 	= 'Local da Aplicação';
+		$filtros['local_id']['value'] 	= 0;
 		$filtros['local_id']['options']['0'] = '-- Todos os Locais --';
 
-		$filtros['retirada_id']['value'] = 0;
+		$filtros['retirada_id']['tit'] 	= 'Local da Retirada';
+		$filtros['retirada_id']['value']= 0;
 		$filtros['retirada_id']['options']['0'] = '-- Todos os Locais --';
 
 		// buscando os locais para popular as opçoes da retirada e aplicacao
@@ -858,8 +864,10 @@ class Site {
 		$params['fields']= array('Local.nome','Local.retirada','Local.aplicacao');
 		$params['order'] = array('Local.nome');
 		$locais = $Local->find('all',$params);
+		$arrLocais = array();
 		foreach($locais as $_l => $_arrMods)
 		{
+			$arrLocais[$_arrMods['Local']['id']] = $_arrMods['Local']['nome'];
 			foreach($_arrMods as $_mod => $_arrCmps)
 			{
 				if ($_arrCmps['retirada']==1)
@@ -929,8 +937,13 @@ class Site {
 
 		// recuperando os dados
 		$data = $Aplicacao->find('all',$params);
+		foreach($data as $_l => $_arrMods)
+		{
+			$data[$_l]['Retirada']['nome'] = $arrLocais[$_arrMods['Retirada']['local_id']];
+		}
 
 		// implementando usuários
+		$filtros['usuario_id']['tit'] = 'Usuário';
 		$filtros['usuario_id']['options'] = $Aplicacao->esquema['usuario_id']['options'];
 		array_unshift($filtros['usuario_id']['options'], '-- Todos os Usuários --');
 		if ($_SESSION['Usuario']['id']>1) $filtros['usuario_id']['input']['disabled'] = 'disabled';
@@ -941,5 +954,6 @@ class Site {
 		$this->viewVars['esquema'] 	= $Aplicacao->esquema;
 		$this->viewVars['paginacao']= $Aplicacao->pag;
 		$this->viewVars['filtros'] 	= $filtros;
+		$this->viewVars['campos'] 	= array('Usuario.nome','Aplicacao.data','Retirada.nome','Retirada.reti_qtd','Local.nome','Aplicacao.apli_qtd');
 	}
 }

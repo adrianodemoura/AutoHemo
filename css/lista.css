@@ -1,9 +1,49 @@
-#formFiltro .divReg,
+.menuLista
+{
+
+}
+.menuLista ul
+{
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+}
+#formFiltro .divReg
 {
 	float: left;
-}
-#formFiltro label
-{
-	display: inline-block;
+	line-height: 24px;
 }
 
+#formFiltro .divReg label
+{
+	display: block-inline;
+	min-width: 140px;
+	text-align: right;
+	margin: 0px 3px 0px 0px;
+}
+#formFiltro .divReg .FiltroData_fim
+{
+	width: 152px;
+}
+.barra
+{
+}
+.lista
+{
+	margin: 10px 0px 0px 0px;
+}
+.lista table tr th
+{
+	text-align: center;
+	background-color: #eee;
+	padding: 0px 5px 0px 5px;
+}
+.lista table tr td
+{
+	padding: 0px 5px 0px 5px;
+}
+.lista .tdRetiradaReti_qtd,
+.lista .tdAplicacaoApli_qtd
+{
+	text-align: center;
+}
