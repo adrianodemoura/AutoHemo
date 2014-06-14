@@ -888,7 +888,10 @@ class Site {
 		// opções de buca do relatório
 		$params 	= array();
 		$params['order'] = array('Usuario.nome','Aplicacao.data');
-		$params['where']['Aplicacao.usuario_id'] = $_SESSION['Usuario']['id'];
+		if (!isset($_POST['data']))
+		{
+			$params['where']['Aplicacao.usuario_id'] = $_SESSION['Usuario']['id'];
+		}
 
 		// definindo o layout
 		if ($this->layout=='padrao') $params['pag'] = $pag;
