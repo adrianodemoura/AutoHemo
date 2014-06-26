@@ -71,13 +71,10 @@ $(document).ready(function()
                     
                     <?php if (isset($_SESSION['Usuario'])) : ?>
                     <li class="page-scroll">
-                        <a href="<?= $Site->base ?>aplicacoes">Minhas Aplicações</a>
+                        <a href="<?= $Site->base ?>aplicacoes">Controle</a>
                     </li>
                     <li class="page-scroll">
-                    <a href="<?= $Site->base ?>meu_perfil">Meu Perfil</a>
-                    </li>
-                    <li class="page-scroll">
-                    <a href="<?= $Site->base ?>lista">Listagem</a>
+                    <a href="<?= $Site->base ?>lista">Minhas Aplicações</a>
                     </li>
                     <?php endif ?>
 
@@ -95,6 +92,10 @@ $(document).ready(function()
                     </ul>
                     </li>
                     <?php endif ?>
+
+                    <li class="page-scroll">
+                    <a href="<?= $Site->base ?>meu_perfil">Meu Perfil</a>
+                    </li>
 
                     <li class="page-scroll">
                         <a href="<?= $Site->base ?>sair">sair</a>
