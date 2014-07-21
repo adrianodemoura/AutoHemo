@@ -3,7 +3,7 @@
 ?>
 <?= $conteudo ?>
 
-<?php if (isset($_SESSION['debug'])) : ?>
+<?php if (isset($debug)) : ?>
 <section>
     <div class='container erros'>
         <?php include_once(APP.'View/Elements/sql_erros.php') ?>

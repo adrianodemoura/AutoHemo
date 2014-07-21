@@ -32,19 +32,19 @@ class Cidade extends Model {
 	 * @var		array
 	 * @acess	public
 	 */
-	public $esquema = array
+	public $esquema 	= array
 	(
-		'id'		=> array
+		'id'			=> array
 		(
-			'tit'	=> 'Id',
+			'tit'		=> 'Id',
 		),
-		'nome'		=> array
+		'nome'			=> array
 		(
 			'tit'		=> 'Nome',
 			'edicaoOff'	=> true,
 			'pesquisar'	=> '&',
 		),
-		'uf'		=> array
+		'uf'			=> array
 		(
 			'tit'		=> 'Uf',
 			'filtro'	=> true,

@@ -1,0 +1,18 @@
+<?php
+$s = isset($s) ? $s : ' - ';
+foreach($lista as $_l => $_arrMods)
+{
+	foreach($_arrMods as $_model => $_arrCmps)
+	{
+		$c = 0;
+		foreach($_arrCmps as $_cmp => $_vlr)
+		{
+			if ($c) echo $s;
+			echo $_vlr;
+			$c++;
+		}
+		echo ";";
+		//echo "<br />\n";
+	}
+}
+?>

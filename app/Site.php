@@ -965,4 +965,44 @@ class Site {
 		$this->viewVars['paginacao']= $Aplicacao->pag;
 		$this->viewVars['filtros'] 	= $filtros;
 	}
+
+	/**
+	 * Exibe a lista de uma pesquisa para o layout ajax
+	 * 
+	 * Exemplo para buscar todas as cidades com nome que contenha BELO e uf MG
+	 * http://localhost/autohemo/lista_ajax/model:Cidade/campos:id,nome,uf/ordem:Cidade.nome/filtro:Cidade.nome=BELO,Cidade.uf=MG
+	 * 
+	 * @return	string
+	 */
+	public function lista_ajax()
+	{
+		$this->layout = 'ajax';
+		$modelClass 	= isset($this->params['model']) ? $this->params['model'] : null;
+		$campos		 	= isset($this->params['campos']) ? $this->params['campos'] : '';
+		$ordem		 	= isset($this->params['ordem']) ? $this->params['ordem'] : '';
+		$filtro		 	= isset($this->params['filtro']) ? $this->params['filtro'] : '';
+		$separador		= isset($this->params['separador']) ? $this->params['separador'] : '-';
+		$pagina 		= isset($this->params['pag']) ? $this->params['pag'] : 1;
+
+		require_once('Model/'.$modelClass.'.php');
+		$Model = new $modelClass();
+		$params['fields']		= !empty($campos) 	? explode(',',$campos) 	: null;
+		$params['order'] 		= !empty($ordem) 	? explode(',',$ordem) 	: null;
+		$params['pag']			= $pagina;
+		
+		if (!empty($filtro))
+		{
+			$_filtro = explode(',',$filtro);
+			foreach($_filtro as $_l => $_string)
+			{
+				$s = explode('=',$_string);
+				$params['where'][$s['0'].' LIKE'] = rawurldecode($s['1']);
+			}
+		}
+		$lista = $Model->find('all',$params);
+		$this->sqls[$modelClass] 	= $Model->sqls;
+		$this->viewVars['lista']	= $lista;
+		$this->viewVars['s']		= $separador;
+		$this->viewVars['debug']	= true;
+	}
 }

@@ -41,9 +41,44 @@ function validaForm()
 
 $(document).ready(function()
 {
-	$("#UsuarioCidade").keypress(function()
+	$("#UsuarioCidade").keyup(function()
 	{
 		var texto = $(this).val();
-		
+		var url = base+'lista_ajax/model:Cidade/campos:id,nome,uf/ordem:Cidade.nome/filtro:Cidade.nome='+texto;
+		var pag = 1;
+		var url = url + '/pag:'+pag;
+console.log(url);
+		$('#ajaxResp').load(url, function(resposta, status, xhr)
+		{
+			if (status=='success')
+			{
+				/*$("#ajaxResp").html("");
+				//console.log(resposta);
+				var jArrResposta 	= resposta.split('*');
+				var table			= '<table border="1px" id="ajaxTab">'+"\n";
+				$.each(jArrResposta, function(i, linha)
+				{
+					var jArrLinha = linha.split(';');
+					if (jArrLinha[0].length>0)
+					{
+						table += "<tr class='ajaxTr' id='"+i+"ajaxTr'>\n";
+						var tds = [];
+						$.each(jArrLinha, function(o, vlr)
+						{
+							if (vlr)
+							{
+								table += "\t<td class='ajaxTd' ";
+								if (o==0) table += "style='display: none;' ";
+								table += "onclick='setItemAjax("+i+"); showLista();'>"+vlr+"</td>\n";
+								tem = 1;
+							}
+						});
+						table += "</tr>\n";
+					}
+				});
+				table += "</table>\n";
+				$("#ajaxResp").html(table);*/
+			}
+		});
 	});
 });
