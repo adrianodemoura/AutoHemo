@@ -43,6 +43,11 @@ class Usuario extends Model {
 		(
 			'tit' 			=> 'Id',
 		),
+		'nome' 				=> array
+		(
+			'tit' 			=> 'Nome',
+			'upperOff' 		=> true,
+		),
 		'perfil_id'			=> array
 		(
 			'tit'			=> 'Perfil',
