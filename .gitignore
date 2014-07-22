@@ -7,3 +7,5 @@ app/Config/email.php
 access.log
 error.log
 
+# ignorar todos os diretório e arquivos temporários
+tmp/**/*
