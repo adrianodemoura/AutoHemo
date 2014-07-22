@@ -128,15 +128,13 @@ class Site {
 	public function getPagina()
 	{
 		$pagina 		= $_SERVER['REQUEST_URI'];
-		$aqui 			= explode('/', $_SERVER['PHP_SELF']);
-		foreach($aqui as $_l => $_tag) $pagina = str_replace($_tag, '', $pagina);
-
 		$pagina 		= str_replace('//', '', $pagina);
-		if ($pagina=='/') $pagina = '';
-		$pagina 		= empty($pagina) ? 'principal' : $pagina;
-		if (strpos($pagina, '/'))
+
+		// se possui parâmetros
+		if (strpos($pagina, ':'))
 		{
-			$params = substr($pagina, strpos($pagina, '/'), strlen($pagina));
+			$uri 	= $_SERVER['REQUEST_URI'];
+			$params = substr($uri, strpos($uri, '/'), strlen($uri));
 			if (!empty($params))
 			{
 				$arr = explode('/', $params);
@@ -146,8 +144,13 @@ class Site {
 					if (isset($arrTag['1'])) $this->params[$arrTag['0']] = $arrTag['1'];
 				}
 			}
-			$pagina = substr($pagina, 0, strpos($pagina, '/'));
+			
+			// pegando a página na url com parâmetros
+			$arrPag = explode('/',$_SERVER['REQUEST_URI']);
+			$pagina = $arrPag['1'];
 		}
+		$pagina 		= str_replace('/', '', $pagina);
+		$pagina 		= empty($pagina) ? 'principal' : $pagina;
 		$this->pagina = $pagina;
 		return $pagina;
 	}
