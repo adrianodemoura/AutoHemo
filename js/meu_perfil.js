@@ -62,6 +62,7 @@ $(document).ready(function()
 			{
 				if (status=='success')
 				{
+					$('#ajaxRespCidade').fadeIn();
 				}
 			});
 		}

@@ -981,7 +981,7 @@ class Site {
 		$campos		 	= isset($this->params['campos']) 	? $this->params['campos'] 	: '';
 		$ordem		 	= isset($this->params['ordem']) 	? $this->params['ordem'] 	: '';
 		$filtro		 	= isset($this->params['filtro']) 	? $this->params['filtro'] 	: '';
-		$separador		= isset($this->params['separador']) ? $this->params['separador']: '-';
+		$separador		= isset($this->params['separador']) ? $this->params['separador']: '/';
 		$pagina 		= isset($this->params['pag']) 		? $this->params['pag'] 		: 1;
 		$inputId 		= isset($this->params['inputId']) 	? $this->params['inputId'] 	: null;
 
@@ -1004,7 +1004,7 @@ class Site {
 		$this->sqls[$modelClass] 	= $Model->sqls;
 		$this->viewVars['lista']	= $lista;
 		$this->viewVars['s']		= $separador;
-		$this->viewVars['debug']	= true;
+		//$this->viewVars['debug']	= true;
 		$this->viewVars['inputId'] 	= $inputId;
 	}
 }

@@ -35,3 +35,14 @@
 {
 	min-width: 350px;
 }
+
+#formUsuario #ajaxRespCidade
+{
+	position: absolute;
+	left: 337px;
+	background-color: #fff;
+	padding: 2px;
+	border: 1px solid #ccc;
+	min-width: 350px;
+	display: none;
+}
