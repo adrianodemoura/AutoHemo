@@ -56,3 +56,14 @@ body
 	color: #fff;
 	font-weight: bold;
 }
+
+.ulOptions 
+{
+	list-style: none;
+}
+
+.ulOptions li:hover
+{
+	cursor: pointer;
+	background-color: #ddd;
+}

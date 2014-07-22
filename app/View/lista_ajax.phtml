@@ -1,18 +1,28 @@
+<ul class='ulOptions'>
 <?php
 $s = isset($s) ? $s : ' - ';
+
 foreach($lista as $_l => $_arrMods)
 {
 	foreach($_arrMods as $_model => $_arrCmps)
 	{
 		$c = 0;
+		echo "<li";
 		foreach($_arrCmps as $_cmp => $_vlr)
 		{
-			if ($c) echo $s;
-			echo $_vlr;
+			if ($c)
+			{
+				if ($c>1) echo $s;
+				echo $_vlr;
+			} else
+			{
+				echo " onclick=setInputVlr('".trim($inputId)."',".$_vlr.",".'$(this).text()'.")>";
+			}
 			$c++;
 		}
-		echo ";";
+		echo "</li>";
 		//echo "<br />\n";
 	}
 }
 ?>
+</ul>

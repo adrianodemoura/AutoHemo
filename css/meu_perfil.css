@@ -30,3 +30,8 @@
 	width: 50px;
 	text-align: center;
 }
+
+#formUsuario #UsuarioCidade
+{
+	min-width: 350px;
+}

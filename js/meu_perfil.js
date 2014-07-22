@@ -41,44 +41,30 @@ function validaForm()
 
 $(document).ready(function()
 {
+	$('#ajaxRespCidade').click(function()
+	{
+		$(this).fadeOut();
+	});
+
 	$("#UsuarioCidade").keyup(function()
 	{
-		var texto = $(this).val();
-		var url = base+'lista_ajax/model:Cidade/campos:id,nome,uf/ordem:Cidade.nome/filtro:Cidade.nome='+texto;
-		var pag = 1;
-		var url = url + '/pag:'+pag;
-console.log(url);
-		$('#ajaxResp').load(url, function(resposta, status, xhr)
+		var texto 		= $(this).val();
+		var anteriorId	= $(this).prev().attr('id');
+		var url 		= base+'lista_ajax/model:Cidade/campos:id,nome,uf/ordem:Cidade.nome/inputId:'+anteriorId+'/filtro:Cidade.nome='+texto;
+		url 			= url.replaceAll(' ','%20');
+		var pag 		= 1;
+		var url 		= url + '/pag:'+pag;
+
+		// se tem texto pra pesquisa
+		if (texto.length>0)
 		{
-			if (status=='success')
+			$('#ajaxRespCidade').load(url, function(resposta, status, xhr)
 			{
-				/*$("#ajaxResp").html("");
-				//console.log(resposta);
-				var jArrResposta 	= resposta.split('*');
-				var table			= '<table border="1px" id="ajaxTab">'+"\n";
-				$.each(jArrResposta, function(i, linha)
+				if (status=='success')
 				{
-					var jArrLinha = linha.split(';');
-					if (jArrLinha[0].length>0)
-					{
-						table += "<tr class='ajaxTr' id='"+i+"ajaxTr'>\n";
-						var tds = [];
-						$.each(jArrLinha, function(o, vlr)
-						{
-							if (vlr)
-							{
-								table += "\t<td class='ajaxTd' ";
-								if (o==0) table += "style='display: none;' ";
-								table += "onclick='setItemAjax("+i+"); showLista();'>"+vlr+"</td>\n";
-								tem = 1;
-							}
-						});
-						table += "</tr>\n";
-					}
-				});
-				table += "</table>\n";
-				$("#ajaxResp").html(table);*/
-			}
-		});
+				}
+			});
+		}
+
 	});
 });

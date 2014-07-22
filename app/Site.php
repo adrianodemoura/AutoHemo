@@ -977,19 +977,20 @@ class Site {
 	public function lista_ajax()
 	{
 		$this->layout = 'ajax';
-		$modelClass 	= isset($this->params['model']) ? $this->params['model'] : null;
-		$campos		 	= isset($this->params['campos']) ? $this->params['campos'] : '';
-		$ordem		 	= isset($this->params['ordem']) ? $this->params['ordem'] : '';
-		$filtro		 	= isset($this->params['filtro']) ? $this->params['filtro'] : '';
-		$separador		= isset($this->params['separador']) ? $this->params['separador'] : '-';
-		$pagina 		= isset($this->params['pag']) ? $this->params['pag'] : 1;
+		$modelClass 	= isset($this->params['model']) 	? $this->params['model'] 	: null;
+		$campos		 	= isset($this->params['campos']) 	? $this->params['campos'] 	: '';
+		$ordem		 	= isset($this->params['ordem']) 	? $this->params['ordem'] 	: '';
+		$filtro		 	= isset($this->params['filtro']) 	? $this->params['filtro'] 	: '';
+		$separador		= isset($this->params['separador']) ? $this->params['separador']: '-';
+		$pagina 		= isset($this->params['pag']) 		? $this->params['pag'] 		: 1;
+		$inputId 		= isset($this->params['inputId']) 	? $this->params['inputId'] 	: null;
 
 		require_once('Model/'.$modelClass.'.php');
 		$Model = new $modelClass();
 		$params['fields']		= !empty($campos) 	? explode(',',$campos) 	: null;
 		$params['order'] 		= !empty($ordem) 	? explode(',',$ordem) 	: null;
 		$params['pag']			= $pagina;
-		
+
 		if (!empty($filtro))
 		{
 			$_filtro = explode(',',$filtro);
@@ -1004,5 +1005,6 @@ class Site {
 		$this->viewVars['lista']	= $lista;
 		$this->viewVars['s']		= $separador;
 		$this->viewVars['debug']	= true;
+		$this->viewVars['inputId'] 	= $inputId;
 	}
 }
