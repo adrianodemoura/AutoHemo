@@ -132,7 +132,7 @@ class Site {
 		foreach($aqui as $_l => $_tag) $pagina = str_replace($_tag, '', $pagina);
 
 		$pagina 		= str_replace('//', '', $pagina);
-		$pagina 		= str_replace('/', '', $pagina);
+		if ($pagina=='/') $pagina = '';
 		$pagina 		= empty($pagina) ? 'principal' : $pagina;
 		if (strpos($pagina, '/'))
 		{
