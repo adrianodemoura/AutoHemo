@@ -55,14 +55,27 @@
 			<th>Local Aplicado</th>
 			<th>Qtd. Aplicada</th>
 		</tr>
-		<?php foreach($data as $_l => $_arrMods) : ?>
+		<?php 
+			$corr = array();
+			foreach($data as $_l => $_arrMods) :
+		?>
 			<tr>	
 			<?php
 				foreach($campos as $_l => $_cmp) : 
-				$c = explode('.', $_cmp);
+				$c 		= explode('.', $_cmp);
+				$vlr 	= '-';
+				$vlr = $_arrMods[$c['0']][$c['1']];
+
+				if (!isset($corr[$_cmp])) $corr[$_cmp] = $_arrMods[$c['0']][$c['1']];
+
+				if ($vlr!=$corr[$_cmp])
+				{
+					
+				}
+
 			?>
 			<td class='td<?= ucfirst($c['0']).ucfirst($c['1']) ?>'>
-				<?= $_arrMods[$c['0']][$c['1']] ?>
+				<?= $vlr ?>
 			</td>
 			<?php endforeach; ?>
 			</tr>

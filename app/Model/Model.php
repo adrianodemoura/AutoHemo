@@ -592,17 +592,20 @@ class Model {
 				$b['1'] = isset($b['1']) ? $b['1'] : null;
 				$c = explode('.', $b['0']);
 				$tipoCmp = isset($this->esquema[$c['1']]['type']) ? $this->esquema[$c['1']]['type'] : 'text';
-				switch ($tipoCmp) {
+				switch ($tipoCmp) 
+				{
 					case 'datetime':
 					case 'date':
-						$delim 	= strpos($_vlr, '-') ? '-' : null;
-						$delim 	= strpos($_vlr, '/') ? '/' : $delim;
-						$d1 	= explode($delim, $_vlr);
-
-						$vlr['dia'] = $d1['0'];
-						$vlr['mes'] = $d1['1'];
-						$vlr['ano'] = $d1['2'];
-						$_vlr = $vlr['ano'].'-'.$vlr['mes'].'-'.$vlr['dia'];
+						if (is_string($_vlr))
+						{
+							$delim 	= strpos($_vlr, '-') ? '-' : null;
+							$delim 	= strpos($_vlr, '/') ? '/' : $delim;
+							$d1 	= explode($delim, $_vlr);
+							$vlr['dia'] = $d1['0'];
+							$vlr['mes'] = $d1['1'];
+							$vlr['ano'] = $d1['2'];
+							$_vlr = $vlr['ano'].'-'.$vlr['mes'].'-'.$vlr['dia'];
+						}
 						break;
 				}
 				switch(strtoupper($b['1']))
@@ -616,8 +619,18 @@ class Model {
 						$sql .= $_cmp." IN ('".implode("','",$_vlr)."') ";
 						break;
 					case 'BETWEEN':
+						$d1 = $_vlr['0'];
+						$d2 = $_vlr['1'];
 						$_cmp = trim(str_replace('BETWEEN','',$_cmp));
-						$sql .= $_cmp.' BETWEEN ('.$_vlr.')';
+
+						$sql  .= $_cmp." BETWEEN '";
+						$sql  .= $d1['ano'].'-'.$d1['mes'].'-'.$d1['dia']."'";
+						$sql  .= " AND '".$d2['ano'].'-'.$d2['mes'].'-'.$d2['dia']."'";
+
+						$sqlC .= $_cmp." BETWEEN '";
+						$sqlC .= $d1['ano'].'-'.$d1['mes'].'-'.$d1['dia']."'";
+						$sqlC .= " AND '".$d2['ano'].'-'.$d2['mes'].'-'.$d2['dia']."'";
+
 						break;
 					case 'NOT':
 						$_cmp = trim(str_replace('NOT IN','',$_cmp));

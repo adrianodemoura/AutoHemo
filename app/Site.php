@@ -778,7 +778,7 @@ class Site {
 			} else
 			{
 				$this->setMsgFlash('Perfil atualizado com sucesso ...','msgOk');
-				//redirect($this->base.'meu_perfil');
+				redirect($this->base.'meu_perfil');
 			}
 		}
 		
@@ -911,7 +911,7 @@ class Site {
 							$dataFim = $_POST['data'][$_l]['Filtro']['data_fim'];
 							if (!empty($dataIni) && !empty($dataFim))
 							{
-								//$params['where']['Aplicacao.data BETWEEN'] = array($dataIni, $dataFim);
+								$params['where']['Aplicacao.data BETWEEN'] = array($dataIni, $dataFim);
 							}
 							$filtros[$_cmp]['value'] = $_vlr['dia'].'/'.$_vlr['mes'].'/'.$_vlr['ano'];
 							break;

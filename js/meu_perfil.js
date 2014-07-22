@@ -41,6 +41,8 @@ function validaForm()
 
 $(document).ready(function()
 {
+	//$("#UsuarioNome").select();
+
 	$('#ajaxRespCidade').click(function()
 	{
 		$(this).fadeOut();
