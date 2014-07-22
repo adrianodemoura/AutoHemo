@@ -841,10 +841,8 @@ class Site {
 
 		// filtro padrão
 		$filtros['data_ini']['tit'] 	= 'Data Inicial';
-		$filtros['data_ini']['value'] 	= date('d/m').'/'.(date('Y')-1);
 
 		$filtros['data_fim']['tit'] 	= 'Data Final';
-		$filtros['data_fim']['value'] 	= date('d/m/Y');
 
 		$filtros['usuario_id']['tit'] 	= 'Usuário';
 		$filtros['usuario_id']['value'] = $_SESSION['Usuario']['id'];
@@ -863,6 +861,7 @@ class Site {
 		$Local = new Local();
 		$params['fields']= array('Local.nome','Local.retirada','Local.aplicacao');
 		$params['order'] = array('Local.nome');
+
 		$locais = $Local->find('all',$params);
 		$arrLocais = array();
 		foreach($locais as $_l => $_arrMods)
@@ -886,8 +885,18 @@ class Site {
 		$this->layout = isset($this->params['lay']) ? $this->params['lay'] : 'padrao';
 
 		// opções de buca do relatório
+		$dataIni['dia'] = '01';
+		$dataIni['mes'] = date('m');
+		$dataIni['ano'] = date('Y');
+		$dataFim['dia'] = date('t');
+		$dataFim['mes'] = date('m');
+		$dataFim['ano'] = date('Y');
+		$filtros['data_ini']['value'] 	= '01'.'/'.date('m').'/'.date('Y');
+		$filtros['data_fim']['value'] 	= date('t/m/Y');
 		$params 	= array();
 		$params['order'] = array('Usuario.nome','Aplicacao.data');
+		$params['where']['Aplicacao.data BETWEEN'] = array($dataIni, $dataFim);
+
 		if (!isset($_POST['data']) || $_SESSION['Usuario']['perfilId']>1)
 		{
 			$params['where']['Aplicacao.usuario_id'] = $_SESSION['Usuario']['id'];

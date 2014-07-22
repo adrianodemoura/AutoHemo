@@ -22,11 +22,11 @@ class Html {
 
 		if (!$valor && isset($prop['default']))
 		{
-			$valor 		= isset($prop['default']) ? $prop['default'] : null;
+			$valor 	= isset($prop['default']) ? $prop['default'] : null;
 		}
 		if ($valor)
 		{
-			$valor = str_replace('-', '/', $valor);
+			$valor 	= str_replace('-', '/', $valor);
 			$arrVlr = explode('/', $valor);
 		}
 		$c 		= explode('.', $cmp);
