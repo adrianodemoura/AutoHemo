@@ -4,3 +4,6 @@ app/Config/database.php
 # ignorar configuração de email
 app/Config/email.php
 
+access.log
+error.log
+
