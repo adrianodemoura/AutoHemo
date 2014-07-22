@@ -3,7 +3,7 @@ AutoHemo
 
 Auto Hemoterapia
 
-Demonstrativo: http://deskfacil.com/autohemo
+http://autohemo.org
 
 Este aplicativo tem objetio de ser um contrle de Hemoterapia, aonde o usuário poderá controlar as aplicações diárias.
 
