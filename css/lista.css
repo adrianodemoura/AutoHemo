@@ -79,3 +79,8 @@
 {
 	text-align: center;
 }
+
+.lista .btLista:hover
+{
+	cursor: pointer;
+}

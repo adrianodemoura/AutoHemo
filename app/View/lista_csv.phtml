@@ -1,0 +1,15 @@
+<?php
+$separadorCampo 	= isset($separadorCampo) ? $separadorCampo : ';';
+$separadorLinha 	= isset($separadorLinha) ? $separadorLinha : "\n";
+
+echo "Usuário;Data;Local Retirada;Qtd.Retirada;Local Aplicado;Qtd.Aplicada".$separadorLinha;
+foreach($data as $_l => $_arrMods)
+{
+	echo $_arrMods['Usuario']['nome'].$separadorCampo;
+	echo $_arrMods['Aplicacao']['data'].$separadorCampo;
+	echo $_arrMods['Retirada']['nome'].$separadorCampo;
+	echo $_arrMods['Retirada']['reti_qtd'].$separadorCampo;
+	echo $_arrMods['Local']['nome'].$separadorCampo;
+	echo $_arrMods['Aplicacao']['apli_qtd'].$separadorCampo;
+	echo $separadorLinha;
+}

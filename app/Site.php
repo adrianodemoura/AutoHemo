@@ -982,6 +982,13 @@ class Site {
 		$this->viewVars['esquema'] 	= $Aplicacao->esquema;
 		$this->viewVars['paginacao']= $Aplicacao->pag;
 		$this->viewVars['filtros'] 	= $filtros;
+
+		// se foi pedida uma exportação para CSV
+		if (isset($_POST['btExportar']))
+		{
+			$this->layout = 'csv';
+			$this->pagina = 'lista_csv';
+		}
 	}
 
 	/**

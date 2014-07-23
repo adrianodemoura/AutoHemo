@@ -41,6 +41,9 @@
 				<input type='button' name='btNovo' 	 id='btNovo' 	value='Nova Aplicação' class='btn btn-success' 
 					onclick="document.location.href='<?= $Site->base ?>aplicacoes'" />
 				<input type='submit' name='btEnviar' id='btEnviar' value='Enviar' class='btn btn-primary' />
+
+				<input type='submit' name='btExportar' id='btExportar' value='ExportarCSV' class='btn btn-info' />
+
 			</div>
 			</form>
 		</div><!-- fim barra -->
@@ -48,6 +51,7 @@
 		<div class='lista'><!-- lista -->
 		<table>
 		<tr>
+			<th colspan='1'>#</th>
 			<th>Usuário</th>
 			<th>Data</th>
 			<th>Local Retirada</th>
@@ -58,8 +62,18 @@
 		<?php 
 			$corr = array();
 			foreach($data as $_l => $_arrMods) :
+			$dtCont = $_arrMods['Aplicacao']['data'];
+			$dtCont = str_replace('/','-',substr($dtCont, 0,10));
+			$linkEditCont = $Site->base.'aplicacoes/data:'.$dtCont;
 		?>
 			<tr <?php if($_l%2==0) : ?> class='liAtiva' <?php endif; ?>>
+			<td><!-- editar -->
+				<a href='<?= $linkEditCont ?>'>
+				<img class='btLista' id='bt<?= $_l ?>' src='<?= $Site->base ?>/img/bt_editar.png' border='0px' 
+					title='Clique aqui para editar esta aplicação ...'
+				/>
+				</a>
+			</td>
 			<?php
 				foreach($campos as $_l => $_cmp) : 
 				$c 		= explode('.', $_cmp);

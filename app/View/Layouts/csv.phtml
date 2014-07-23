@@ -1,0 +1,11 @@
+<?php
+	// layout para saída CSV
+
+	// nome do arquivo
+	$arqCsv = isset($arqCsv) ? $arqCsv : 'arquivo';
+
+	header('Content-Type: text/html; charset=utf-8'); 
+	header('Content-Disposition: attachment; filename="'.$arqCsv.'.csv"');
+
+	echo $conteudo;
+?>

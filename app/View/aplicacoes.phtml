@@ -223,6 +223,11 @@
 				onclick="if (window.confirm('Confirmar exclusão deste registro ?')) document.location.href='<?= $Site->base ?>
 					excluir_retirada/data:<?= str_replace('/','-',$dataC) ?>/ids:<?= implode(',',$ids) ?>'" />
 			<?php endif ?>
+
+			<input type='button' name='btVoltar' id='btVoltar' value='Minhas Aplicações' class="btn btn-primary" 
+				onclick='document.location.href="<?= $Site->base ?>lista"' 
+				/>
+
 		</div>
 
 	</div>
