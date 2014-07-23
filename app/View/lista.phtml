@@ -38,6 +38,8 @@
 
 			<br /><br />
 			<div>
+				<input type='submit' name='btNovo' 	 id='btNovo' 	value='Nova Aplicação' class='btn btn-success' 
+					onclick="document.location.href='<?= $Site->base ?>controle'" />
 				<input type='submit' name='btEnviar' id='btEnviar' value='Enviar' class='btn btn-primary' />
 				<input type='button' name='btFechar' value='Fechar' class='btn btn-danger' 
 					onclick="document.location.href='<?= $Site->base ?>aplicacoes'" />
@@ -46,7 +48,7 @@
 		</div><!-- fim barra -->
 
 		<div class='lista'><!-- lista -->
-		<table border='1px'>
+		<table>
 		<tr>
 			<th>Usuário</th>
 			<th>Data</th>
@@ -59,7 +61,7 @@
 			$corr = array();
 			foreach($data as $_l => $_arrMods) :
 		?>
-			<tr>	
+			<tr <?php if($_l%2==0) : ?> class='liAtiva' <?php endif; ?>>
 			<?php
 				foreach($campos as $_l => $_cmp) : 
 				$c 		= explode('.', $_cmp);
@@ -81,6 +83,9 @@
 			</tr>
 		<?php endforeach ?>
 		</table>
+		<div class='listaRod'>
+		Total de Aplicações: <?= $paginacao['tot']; ?>
+		</div>
 		</div><!-- fim lista -->
 
 	</div>

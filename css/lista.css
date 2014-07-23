@@ -35,15 +35,40 @@
 .lista table tr th
 {
 	text-align: center;
-	background-color: #eee;
-	padding: 0px 5px 0px 5px;
+	background-color: #bab4b4;
 }
-.lista table tr td
+
+.lista .liAtiva
 {
-	padding: 0px 5px 0px 5px;
+	background-color: #eee;
 }
+
 .lista .tdRetiradaReti_qtd,
 .lista .tdAplicacaoApli_qtd
+{
+	text-align: center;
+}
+
+.lista table
+{
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+}
+
+.lista table tr th,
+.lista table tr td
+{
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.lista table tr th,
+.lista table tr td
+{
+	padding: 3px;
+}
+
+.listaRod
 {
 	text-align: center;
 }

@@ -43,7 +43,7 @@
 			<h3><span>Retirada:<span><span id='totRetirada' class='soma'></span> ml</h3>
 			<span>Escolha o local que foi retirado o sangue e a quantidade retirada.</span>
 			<div>
-				<table class='tabRetiradas' border='1'>
+				<table class='tabRetiradas'>
 				<tr>
 
 				<th class="thRetiLocal">Local</th>
@@ -115,7 +115,7 @@
 		<div>
 			<h3><span>Aplicação:<span><span id='totAplicado' class='soma'></span> ml</h3>
 			<span>Escolha aonde será aplicado.</span>
-			<table class='tabAplicacoes' border='1'>
+			<table class='tabAplicacoes'>
 				<tr>
 				<th class="thApliLocal">Local</th>
 				<?php foreach($Site->esquema['Aplicacao']['apli_qtd']['options'] as $_vlr => $_label) : ?>

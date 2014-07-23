@@ -1,6 +1,29 @@
+.tabAplicacoes,
+.tabRetiradas
+{
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+}
+.tabAplicacoes th th,
 .tabRetiradas tr th
 {
 	min-width: 110px;
+}
+.tabAplicacoes tr td,
+.tabAplicacoes tr th,
+.tabRetiradas tr td,
+.tabRetiradas tr th
+{
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.tabAplicacoes tr td,
+.tabAplicacoes tr th,
+.tabRetiradas tr td,
+.tabRetiradas tr th
+{
+	padding: 3px;
 }
 
 .tabAplicacoes tr th
