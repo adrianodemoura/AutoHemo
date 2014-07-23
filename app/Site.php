@@ -490,10 +490,17 @@ class Site {
 					// configuração do objeto email
 					$Mail->isSmtp();
 					$Mail->isHtml();
-					//$Mail->SMTPDebug 	= true;
+					$Mail->SMTPDebug 	= 2;
 					$Mail->CharSet 		= "UTF-8";
 					$Mail->SMTPAuth 	= true;
-					$Mail->SMTPSecure 	= 'ssl';
+					switch($Email->default['porta'])
+					{
+						case 587:
+							$Mail->SMTPSecure = 'tsl';
+							break;
+						default:
+							$Mail->SMTPSecure = 'ssl';
+					}
 					$Mail->Host 		= $Email->default['smtp'];
 					$Mail->Port 	 	= $Email->default['porta'];
 					$Mail->Username 	= $Email->default['usuario'];
