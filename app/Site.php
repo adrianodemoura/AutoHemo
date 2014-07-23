@@ -218,7 +218,7 @@ class Site {
 		$_SESSION['Usuario']['email'] 	= $data['0']['Usuario']['email'];
 		$_SESSION['Usuario']['perfilId']= $data['0']['Perfil']['id'];
 		$_SESSION['Usuario']['perfil'] 	= $data['0']['Perfil']['nome'];
-		redirect($this->base.'aplicacoes');
+		redirect($this->base.'lista');
 		return true;
 	}
 

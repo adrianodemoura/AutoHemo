@@ -10,7 +10,7 @@
 		if ($Site->autentica($_POST['data']['email'], $_POST['data']['senha']))
 		{
 			$Site->setMsgFlash('Usuário autenticado com sucesso ...','msgOk');
-			redirect($Site->base);
+			redirect($Site->base.'/lista');
 		}
 	}
 

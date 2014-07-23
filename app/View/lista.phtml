@@ -38,11 +38,9 @@
 
 			<br /><br />
 			<div>
-				<input type='submit' name='btNovo' 	 id='btNovo' 	value='Nova Aplicação' class='btn btn-success' 
-					onclick="document.location.href='<?= $Site->base ?>controle'" />
-				<input type='submit' name='btEnviar' id='btEnviar' value='Enviar' class='btn btn-primary' />
-				<input type='button' name='btFechar' value='Fechar' class='btn btn-danger' 
+				<input type='button' name='btNovo' 	 id='btNovo' 	value='Nova Aplicação' class='btn btn-success' 
 					onclick="document.location.href='<?= $Site->base ?>aplicacoes'" />
+				<input type='submit' name='btEnviar' id='btEnviar' value='Enviar' class='btn btn-primary' />
 			</div>
 			</form>
 		</div><!-- fim barra -->
@@ -84,7 +82,22 @@
 		<?php endforeach ?>
 		</table>
 		<div class='listaRod'>
-		Total de Aplicações: <?= $paginacao['tot']; ?>
+			<span>Total de Aplicações: <?= $paginacao['tot']; ?></span>
+			<?php 
+				if ($paginacao['tot']>20) : 
+				$pagA = $paginacao['pag']-1;
+				$pagA = ($pagA<1) ? 1 : $pagA;
+
+				$pagP = $paginacao['pag']+1;
+				$pagP = ($pagP>$paginacao['pagU']) ? $paginacao['pagU'] : $pagP;
+			?>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<span>
+				<a href='<?= $Site->base ?>lista/pag:<?= $pagA ?>' title='página anterior'> << </a>
+				&nbsp;&nbsp;
+				<a href='<?= $Site->base ?>lista/pag:<?= $pagP ?>' title='primeira página'> >> </a>
+			</span>
+		<?php endif ?>
 		</div>
 		</div><!-- fim lista -->
 
