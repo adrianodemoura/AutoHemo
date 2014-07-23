@@ -120,18 +120,22 @@ class Site {
 	}
 
 	/**
-	 * Retorna o nome da página corrente
+	 * Retorna o nome da página corrente e configura os parâmetros depois da página
 	 *
 	 * @param 	string 	Página a ser exibida
 	 * @return 	string 	Nome da página a ser renderizada
 	 */
 	public function getPagina()
 	{
-		$pagina 		= $_SERVER['REQUEST_URI'];
-		$pagina 		= str_replace('//', '', $pagina);
+		$arrSel = explode('/',$_SERVER['PHP_SELF']);
+		$arrPag = explode('/',$_SERVER['REQUEST_URI']);
+		unset($arrPag['0']);
+		$pagina = (count($arrSel)==2) ? $arrPag['1'] : $arrPag['2'];
+		$pagina = empty($pagina) ? 'principal' : $pagina;
+		$this->pagina = $pagina;
 
 		// se possui parâmetros
-		if (strpos($pagina, ':'))
+		if (strpos($_SERVER['REQUEST_URI'], ':'))
 		{
 			$uri 	= $_SERVER['REQUEST_URI'];
 			$params = substr($uri, strpos($uri, '/'), strlen($uri));
@@ -144,14 +148,8 @@ class Site {
 					if (isset($arrTag['1'])) $this->params[$arrTag['0']] = $arrTag['1'];
 				}
 			}
-			
-			// pegando a página na url com parâmetros
-			$arrPag = explode('/',$_SERVER['REQUEST_URI']);
-			$pagina = $arrPag['1'];
 		}
-		$pagina 		= str_replace('/', '', $pagina);
-		$pagina 		= empty($pagina) ? 'principal' : $pagina;
-		$this->pagina = $pagina;
+
 		return $pagina;
 	}
 
