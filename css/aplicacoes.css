@@ -1,3 +1,13 @@
+.divReg select,
+.localRetirada
+{
+	padding: 3px;
+	background-color: transparent;
+	border: none;
+	/*border: 1px solid #ccc;
+	border-radius: 10px;*/
+}
+
 .tabAplicacoes,
 .tabRetiradas
 {

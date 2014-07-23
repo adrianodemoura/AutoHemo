@@ -25,6 +25,13 @@
 {
 	width: 152px;
 }
+#formFiltro select
+{
+	border: 1px solid #ccc;
+	padding: 3px;
+	background-color: transparent;
+	border-radius: 10px;
+}
 .barra
 {
 }

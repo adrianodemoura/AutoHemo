@@ -104,7 +104,9 @@ class Html {
 				$input .= "<select 
 					name='data[".$a['0']."][".$a['1']."][".$a['2']."]' 
 					id='".$a['0'].ucfirst($a['1']).ucfirst($a['2'])."'
-					class='se".ucfirst($a['1']).ucfirst($a['2'])."' ";
+					class='se".ucfirst($a['1']).ucfirst($a['2']);
+					if (isset($tagInput['class'])) $input .= ' '.$tagInput['class'];
+				$input .= "' ";
 				foreach ($tagInput as $_tag => $_vlr) $input .= "$_tag='$_vlr' ";
 				$input .= ">";
 				foreach($prop['options'] as $_id => $_vlr)
