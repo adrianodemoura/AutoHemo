@@ -490,7 +490,7 @@ class Site {
 					// configuração do objeto email
 					$Mail->isSmtp();
 					$Mail->isHtml();
-					$Mail->SMTPDebug 	= 2;
+					//$Mail->SMTPDebug 	= 2;
 					$Mail->CharSet 		= "UTF-8";
 					$Mail->SMTPAuth 	= true;
 					switch($Email->default['porta'])
