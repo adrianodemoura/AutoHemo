@@ -10,7 +10,7 @@
 
 <div class='row-fluid'>
 
-	<div class='menuLista col-md-2' style="min-height: 300px;"><!-- esquerda -->
+	<div class='menuLista col-md-2' style="border: 0px solid #ccc; min-height: 770px;"><!-- esquerda -->
 	<ul>
 		<li>
 			<a href="<?= $Site->base ?>lista/nome:rel001">Análítico por Data e Local</a>
@@ -50,6 +50,7 @@
 
 		<div class='lista'><!-- lista -->
 		<table>
+		<?php if (count($data)) : ?>
 		<tr>
 			<th colspan='1'>#</th>
 			<th>Usuário</th>
@@ -59,6 +60,7 @@
 			<th>Local Aplicado</th>
 			<th>Qtd. Aplicada</th>
 		</tr>
+		<?php endif ?>
 		<?php 
 			$corr = array();
 			foreach($data as $_l => $_arrMods) :
@@ -96,7 +98,11 @@
 		<?php endforeach ?>
 		</table>
 		<div class='listaRod'>
+			<?php if (count($data)) : ?>
 			<span>Total de Aplicações: <?= $paginacao['tot']; ?></span>
+			<?php else : ?>
+			<span>A pesquisa retornou vazio</span>
+			<?php endif ?>
 			<?php 
 				if ($paginacao['tot']>20) : 
 				$pagA = $paginacao['pag']-1;

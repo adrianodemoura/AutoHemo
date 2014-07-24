@@ -13,30 +13,33 @@
 <div class='row-fluid'>
 
 	<div class='col-md-2'><!-- esquerda -->
-	<div style="text-align: center;"><!-- data -->
-		<label>Data: </label>
-		<?php 
-			$dataC = (!empty($Site->params['data'])) ? $Site->params['data'] : date('d-m-Y');
-			echo $Html->getInputData('0.Retirada.data', array('value'=>$dataC)); 
-		?>
-	</div>
-	<div style="margin-top: 20px; text-align: center;">
-		<?php 
-			foreach($Site->ultimas as $_l => $_data) : 
-			$_data = str_replace('/', '-', $_data);
-		?>
-		
-		<?php if ($_data!=$dataC) : ?>
-		<p><a href='<?= $Site->base.'aplicacoes/data:'.$_data ?>'><?= $_data ?></a></p>
-		<?php else : ?>
-		<p><?= $dataC ?>
-		<?php endif ?>
-		
-		<?php endforeach ?>
-	</div>
+		<div style="min-height: 75px; border: 1px solid #fff;">
+		</div>
+		<div style="text-align: left;"><!-- data -->
+			<label>Data: </label>
+			<?php 
+				$dataC = (!empty($Site->params['data'])) ? $Site->params['data'] : date('d-m-Y');
+				echo $Html->getInputData('0.Retirada.data', array('value'=>$dataC)); 
+			?>
+		</div>
+		<div style="margin-top: 20px;">
+			<?php 
+				foreach($Site->ultimas as $_l => $_data) : 
+				$_data = str_replace('/', '-', $_data);
+			?>
+			
+			<?php if ($_data!=$dataC) : ?>
+			<p class='pDatApli'>
+				<a class='linkDatApli' href='<?= $Site->base.'aplicacoes/data:'.$_data ?>'><?= $_data ?></a></p>
+			<?php else : ?>
+			<p class='pDatApli' style='padding: 4px 0px 4px 0px;'><?= $dataC ?>
+			<?php endif ?>
+			
+			<?php endforeach ?>
+		</div>
 	</div>
 
-<form name='formAplicacoes' id='formAplicacoes' method="post" action="<?= $Site->base ?>salvar_retirada">
+	<form name='formAplicacoes' id='formAplicacoes' method="post" action="<?= $Site->base ?>salvar_retirada">
 
 	<div class='col-md-10'><!-- direita -->
 		<div>

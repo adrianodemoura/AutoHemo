@@ -365,7 +365,7 @@ class Site {
 					$Aplicacao = new Aplicacao();
 					if ($Aplicacao->save($aplicacoes))
 					{
-						$msg = 'A Retirada e as aplicações foram salvas com sucesso !!!';
+						$msg = 'A Retirada e as Aplicações foram salvas com sucesso !!!';
 					} else
 					{
 						$msg 	= 'A Retirada foi salva com sucesso, mas nenhuma aplicação foi criada ...';

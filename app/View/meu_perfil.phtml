@@ -39,13 +39,6 @@
 	<?php array_push($Site->onRead,'$("#UsuarioAniversario").mask("99/99");') ?>
 
 	<div>
-	<label>Senha: </label>
-	<input type='password' name='data[0][Usuario][senha]' id='UsuarioSenha' 
-		value="" />
-	<span>Repita a senha: </span><input type='password' name='senha2' id='UsuarioSenha2'  value="" />
-	</div>
-
-	<div>
 	<label>Aplicador: </label>
 	<select name='data[0][Usuario][aplicador]' id='UsuarioAplicador'>
 		<option value='0' <?php if ($data['0']['Usuario']['aplicador']=='0') echo " selected='selected' " ?> >Não</option>
@@ -55,27 +48,35 @@
 	</div>
 
 	<div>
-	<label>Cidade: </label>
-	<input type='hidden' name='data[0][Usuario][cidade_id]' id='UsuarioCidadeId'
-		value="<?= $data['0']['Usuario']['cidade_id'] ?>" style="width: 50px; text-align: center;" />
-	<input type='text' name='cidade' id='UsuarioCidade' autocomplete="off"
-		value="<?= $data['0']['Cidade']['nome'].'/'.$data['0']['Cidade']['uf'] ?>" />
-	<span style="font-size: 12px; margin: 0px 0px 0px 3px;">Digite a sua cidade aqui</span>
-	
-	<div id="ajaxRespCidade" class="resBelTo">
-	</div>
+		<label>Cidade: </label>
+		<input type='hidden' name='data[0][Usuario][cidade_id]' id='UsuarioCidadeId'
+			value="<?= $data['0']['Usuario']['cidade_id'] ?>" style="width: 50px; text-align: center;" />
+		<input type='text' name='cidade' id='UsuarioCidade' autocomplete="off"
+			value="<?= $data['0']['Cidade']['nome'].'/'.$data['0']['Cidade']['uf'] ?>" />
+		<span style="font-size: 12px; margin: 0px 0px 0px 3px;">Digite a sua cidade aqui</span>
+		
+		<div id="ajaxRespCidade" class="resBelTo"></div>
 
 	</div>
 
 	<hr>
-	<div>
-		<label>Perfil: <?= $data['0']['Perfil']['nome'] ?></label>
-		<label>
-			Ativo: <?= $esquema['Usuario']['ativo']['options'][$data['0']['Usuario']['ativo']] ?>
-		</label>
+	<div style="margin: 0px 0px 14px 0px;">
+		<p style='margin: 10px 0px 0px 205px;'>
+			Mantenha estes dois campos em branco para não alterar a senha.
+		</p>
+		<label>Senha: </label>
+		<input type='password' name='data[0][Usuario][senha]' id='UsuarioSenha' 
+			value="" />
+		<span>Repita a senha: </span><input type='password' name='senha2' id='UsuarioSenha2'  value="" />
 	</div>
+
 	<hr>
 	<div>
+		<label>Perfil: </label><span style='float: left'><?= $data['0']['Perfil']['nome'] ?></span>
+		<label>Ativo: </label><span style='float: left'><?= $esquema['Usuario']['ativo']['options'][$data['0']['Usuario']['ativo']] ?></span>
+	</div>
+	<hr>
+	<div style='text-align: center;'>
 		<strong>Cadastro realizado em:</strong> <?= $data['0']['Usuario']['criado'] ?>
 		&nbsp;&nbsp;
 		<strong>Última modificação no perfil em:</strong> <?= $data['0']['Usuario']['modificado'] ?>

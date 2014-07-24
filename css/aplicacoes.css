@@ -51,3 +51,19 @@
 {
 	margin: 0px 0px 0px 10px;
 }
+.pDatApli
+{
+	width: 120px;
+	text-align: center;
+}
+.linkDatApli
+{
+	display: block;
+	padding: 4px 0px 4px 0px;
+}
+.linkDatApli:hover
+{
+	background-color: #89caff;
+	text-decoration: none;
+	border-radius: 10px;
+}

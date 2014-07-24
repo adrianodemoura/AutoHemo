@@ -1,6 +1,6 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 
 -- -----------------------------------------------------
@@ -170,6 +170,6 @@ COMMIT;
 -- Data for table `usuarios`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `tele_resi`, `celular`, `aniversario`, `senha`, `troca_senha`, `troc_senh_cod`, `aplicador`, `ativo`, `perfil_id`, `cidade_id`, `criado`, `modificado`) VALUES (1, 'ADMINISTRADOR AUTO HEMOTERAPIA', 'admin@autohemo.com.br', '31123456789', '33123456789', '0101', '9bedf7904b575f7940c08eea781bd3cc15eb58fc7999de882ded4b61ead9455de3f6355894e96de41c270c4cb004220445b45ee666f4029649cfe153e2929a1a', 0, '0', 0, 1, 1, 2302, '2014-06-12 12:20:30', '2014-06-12 12:20:30');
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `tele_resi`, `celular`, `aniversario`, `senha`, `troca_senha`, `troc_senh_cod`, `aplicador`, `ativo`, `perfil_id`, `cidade_id`, `criado`, `modificado`) VALUES (1, 'ADMINISTRADOR AUTO HEMOTERAPIA', 'admin@autohemo.org', '31123456789', '33123456789', '0101', '9bedf7904b575f7940c08eea781bd3cc15eb58fc7999de882ded4b61ead9455de3f6355894e96de41c270c4cb004220445b45ee666f4029649cfe153e2929a1a', 0, '0', 0, 1, 1, 2302, '2014-06-12 12:20:30', '2014-06-12 12:20:30');
 
 COMMIT;
