@@ -155,7 +155,7 @@
 				if ($_arrMods['Local']['aplicacao'])  : 
 				?>
 
-				<tr>
+				<tr <?php if($_l%2==0) : ?> class='liAtiva' <?php endif; ?>>
 				<td>
 					<?= $_arrMods['Local']['nome'] ?>
 
