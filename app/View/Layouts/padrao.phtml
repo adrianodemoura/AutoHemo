@@ -62,7 +62,7 @@ $(document).ready(function()
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header page-scroll">
-                <a class="navbar-brand" href="<?= $Site->base ?>"><?= $Site->sistema ?> (Desenvolvimento)</a>
+                <a class="navbar-brand" href="<?= $Site->base ?>"><?= $Site->sistema.' - '.$Site->titPagina ?></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -71,7 +71,7 @@ $(document).ready(function()
                     
                     <?php if (isset($_SESSION['Usuario'])) : ?>
                     <li class="page-scroll">
-                        <a href="<?= $Site->base ?>aplicacoes">Controle</a>
+                        <a href="<?= $Site->base ?>controle">Controle</a>
                     </li>
                     <li class="page-scroll">
                     <a href="<?= $Site->base ?>lista">Minhas Aplicações</a>

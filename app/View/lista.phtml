@@ -1,4 +1,7 @@
 <?php
+	$Site->titulo 		= 'AutoHemo - Minhas Aplicações';
+	$Site->titPagina 	= 'Minhas Aplicações';
+
 	$Site->setHead('js','jquery.maskedinput.min');
 	array_push($Site->onRead,'$("#0FiltroDataFim").mask("99/99/9999");');
 	array_push($Site->onRead,'$("#0FiltroDataIni").mask("99/99/9999");');
@@ -9,7 +12,6 @@
 ?>
 
 <div class='row-fluid'>
-
 	<div class='menuLista col-md-2' style="border: 0px solid #ccc; min-height: 770px;"><!-- esquerda -->
 	<ul>
 		<li>
@@ -39,7 +41,7 @@
 			<br /><br />
 			<div>
 				<input type='button' name='btNovo' 	 id='btNovo' 	value='Novo' class='btn btn-success' 
-					onclick="document.location.href='<?= $Site->base ?>aplicacoes'" />
+					onclick="document.location.href='<?= $Site->base ?>controle'" />
 				<input type='submit' name='btEnviar' id='btEnviar' value='Enviar' class='btn btn-primary' />
 
 				<input type='submit' name='btExportar' id='btExportar' value='ExportarCSV' class='btn btn-info' />
@@ -66,7 +68,7 @@
 			foreach($data as $_l => $_arrMods) :
 			$dtCont = $_arrMods['Aplicacao']['data'];
 			$dtCont = str_replace('/','-',substr($dtCont, 0,10));
-			$linkEditCont = $Site->base.'aplicacoes/data:'.$dtCont;
+			$linkEditCont = $Site->base.'controle/data:'.$dtCont;
 		?>
 			<tr <?php if($_l%2==0) : ?> class='liAtiva' <?php endif; ?>>
 			<td><!-- editar -->

@@ -1,22 +1,17 @@
 <?php
+	$Site->titulo 		= 'AutoHemo - Controle';
+	$Site->titPagina 	= 'Controle';
+
 	$ids 	= array();
 
 	// helper
     include(APP.'View/Helper/Html.php');
     $Html = new Html();
 ?>
-<div class='container'>
-<p>Este formulário tem o intuito de controlar as aplicações para Autohemoterapia, especificando a dosagem aplicada, assim como o braço que foi retirado o sangue, o que foi aplicado o sangue e a data de realização do procedimento.</p>
-
-</div>
-
 <div class='row-fluid'>
-
 	<div class='col-md-2'><!-- esquerda -->
-		<div style="min-height: 75px; border: 1px solid #fff;">
-		</div>
-		<div style="text-align: left;"><!-- data -->
-			<label>Data: </label>
+		<div style="text-align: center;"><!-- data -->
+			<label>Data:</label>
 			<?php 
 				$dataC = (!empty($Site->params['data'])) ? $Site->params['data'] : date('d-m-Y');
 				echo $Html->getInputData('0.Retirada.data', array('value'=>$dataC)); 
@@ -30,7 +25,7 @@
 			
 			<?php if ($_data!=$dataC) : ?>
 			<p class='pDatApli'>
-				<a class='linkDatApli' href='<?= $Site->base.'aplicacoes/data:'.$_data ?>'><?= $_data ?></a></p>
+				<a class='linkDatApli' href='<?= $Site->base.'controle/data:'.$_data ?>'><?= $_data ?></a></p>
 			<?php else : ?>
 			<p class='pDatApli' style='padding: 4px 0px 4px 0px;'><?= $dataC ?>
 			<?php endif ?>
@@ -42,6 +37,26 @@
 	<form name='formAplicacoes' id='formAplicacoes' method="post" action="<?= $Site->base ?>salvar_retirada">
 
 	<div class='col-md-10'><!-- direita -->
+
+		<div>
+		<p>Este formulário tem o intuito de controlar as aplicações para Autohemoterapia, especificando a dosagem aplicada, assim como o braço que foi retirado o sangue, o que foi aplicado o sangue e a data de realização do procedimento.</p>
+		</div>
+
+		<div>
+			<input type='submit' name='btSalvar' id='btSalvar' value='Salvar' class="btn btn-success" />
+
+			<?php if (!empty($ids)) : ?>
+			<input type='button' name='btExcluir' id='btExcluir' value='Apagar' class="btn btn-danger" 
+				onclick="if (window.confirm('Confirmar exclusão deste registro ?')) document.location.href='<?= $Site->base ?>
+					excluir_retirada/data:<?= str_replace('/','-',$dataC) ?>/ids:<?= implode(',',$ids) ?>'" />
+			<?php endif ?>
+
+			<input type='button' name='btVoltar' id='btVoltar' value='Minhas Aplicações' class="btn btn-primary" 
+				onclick='document.location.href="<?= $Site->base ?>lista"' 
+				/>
+
+		</div>
+
 		<div>
 			<h3><span>Retirada:<span><span id='totRetirada' class='soma'></span> ml</h3>
 			<span>Escolha o local que foi retirado o sangue e a quantidade retirada.</span>
@@ -217,21 +232,6 @@
 			</table><!-- fim tabela Aplicações -->
 		</div>
 		<?php endif ?>
-
-		<div class="container" style="margin-top: 50px;">
-			<input type='submit' name='btSalvar' id='btSalvar' value='Salvar' class="btn btn-success" />
-
-			<?php if (!empty($ids)) : ?>
-			<input type='button' name='btExcluir' id='btExcluir' value='Apagar' class="btn btn-danger" 
-				onclick="if (window.confirm('Confirmar exclusão deste registro ?')) document.location.href='<?= $Site->base ?>
-					excluir_retirada/data:<?= str_replace('/','-',$dataC) ?>/ids:<?= implode(',',$ids) ?>'" />
-			<?php endif ?>
-
-			<input type='button' name='btVoltar' id='btVoltar' value='Minhas Aplicações' class="btn btn-primary" 
-				onclick='document.location.href="<?= $Site->base ?>lista"' 
-				/>
-
-		</div>
 
 	</div>
 

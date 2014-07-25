@@ -91,6 +91,7 @@ class Site {
 	{
 		$this->base 	= $this->getBase();
 		$this->pagina 	= $this->getPagina();
+		$this->titPagina = $this->pagina;
 	}
 
 	/**
@@ -384,7 +385,7 @@ class Site {
 			$this->sqls['Retirada'] = $Retirada->sqls;
 
 			$this->setMsgFlash($msg,$class);
-			redirect($this->base.'aplicacoes/data:'.str_replace('/','-',substr($dataC,0,10)));
+			redirect($this->base.'controle/data:'.str_replace('/','-',substr($dataC,0,10)));
 		}
 	}
 
@@ -394,7 +395,7 @@ class Site {
 	 *
 	 * @return 	void
 	 */
-	public function aplicacoes()
+	public function controle()
 	{
 		if (!isset($_SESSION['Usuario']))
 		{
@@ -446,7 +447,7 @@ class Site {
 		}
 
 		$this->setMsgFlash('Retirada limpada com sucesso !!!','msgOk');
-		redirect($this->base.'aplicacoes/data:'.$dataC);
+		redirect($this->base.'controle/data:'.$dataC);
 	}
 
 	/**

@@ -1,7 +1,16 @@
 <?php
+	$Site->titulo 		= 'AutoHemo - Meu Perfil';
+	$Site->titPagina 	= 'Meu Perfil';
 	$Site->setHead('js','jquery.maskedinput.min');
 ?>
 <div class='row'>
+<div class='col-md-2'></div>
+<div class='col-md-10' style="margin: 0px 0px 20px 0px;">
+	<input type='submit' name='btSalvar' value='Salvar' class='btn btn-primary' />
+	<input type='button' name='btFechar' value='Minhas Aplicações' class='btn btn-primary' 
+			onclick="document.location.href='<?= $Site->base ?>lista'" />
+</div>
+
 <form name='formUsuario' id='formUsuario' method='post' action='<?= $Site->base ?>meu_perfil' onsubmit="return validaForm(); ">
 <input type='hidden' name='data[0][Usuario][id]' id='UsuarioId' value="<?= $data['0']['Usuario']['id'] ?>" />
 
@@ -81,11 +90,6 @@
 		&nbsp;&nbsp;
 		<strong>Última modificação no perfil em:</strong> <?= $data['0']['Usuario']['modificado'] ?>
 	</div>
-	<br />
-	<div>
-		<input type='submit' name='btSalvar' value='Salvar' class='btn btn-primary' />
-		<input type='button' name='btFechar' value='Fechar' class='btn btn-danger' 
-			onclick="document.location.href='<?= $Site->base ?>aplicacoes'" />
-	</div>
+
 </form>
 </div>
