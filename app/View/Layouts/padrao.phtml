@@ -38,7 +38,7 @@ $(document).ready(function()
     <?php endif ?>
 
     <?php if (isset($_SESSION['msgFlash'])) : ?>
-    $("#msgFlash").fadeOut(10000);
+    $("#msgFlash").delay(10000).fadeOut(1000);
     <?php endif ?>
 
     <?php if (!empty($Site->onRead)) : foreach($Site->onRead as $_l => $_script) : ?>

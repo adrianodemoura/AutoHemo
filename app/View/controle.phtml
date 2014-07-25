@@ -48,19 +48,16 @@
 		</div>
 
 		<div>
-			<?php if (!empty($ids)) : ?>
-
-			<input type='button' name='btNovo' 	 id='btNovo' 	value='Nova Aplicação' class='btn btn-success' 
-					onclick="document.location.href='<?= $Site->base ?>novo'" />
-			<?php endif ?>
-
 			<input type='submit' name='btSalvar' id='btSalvar' value='Salvar' class="btn btn-success" />
 
 			<?php if (!empty($ids)) : ?>
-
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type='button' name='btExcluir' id='btExcluir' value='Apagar' class="btn btn-danger" 
 				onclick="if (window.confirm('Confirmar exclusão deste registro ?')) document.location.href='<?= $Site->base ?>
 					excluir_retirada/data:<?= str_replace('/','-',$dataC) ?>/ids:<?= implode(',',$ids) ?>'" />
+			<input type='button' name='btNovo' 	 id='btNovo' 	value='Nova Aplicação' class='btn btn-success' 
+					onclick="document.location.href='<?= $Site->base ?>novo'" />
+
 			<?php endif ?>
 
 			<input type='button' name='btVoltar' id='btVoltar' value='Minhas Aplicações' class="btn btn-primary" 
