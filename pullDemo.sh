@@ -8,5 +8,5 @@
 # uma vez que o diretório "/var/www/autohemo" é o diretório aonde está o projeto.
 #
 
-ssh root@deskfacil.com /root/autoHemoPull.sh
+ssh tales@autohemo.org /home/tales/autoHemoPull.sh
 
