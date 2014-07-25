@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400);
 body
 {
-	 /*background-image: url("../img/bg.png");*/
+	 /*background-image: url("../img/bt_editar.png");*/
 	 font-family: "Ubuntu", arial, times;
 	 background-color: #ddd;
 }
@@ -50,7 +50,7 @@ body
 	position: absolute;
 	text-align: left;
 	line-height: 50px;
-	width: 500px;
+	width: 550px;
 	top: 0px;
 	left: 140px;
 	z-index: 9000;
@@ -69,7 +69,7 @@ body
 	/*background-color: red;*/
 	color: red;
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .ulOptions 
@@ -88,4 +88,57 @@ body
 .liAtiva
 {
 	background-color: #eee;
+}
+.botao
+{
+	min-width: 90px;
+	height: 40px;
+	line-height: 40px;
+	border: 0px;
+	/*border: 1px solid #ccc;*/
+	border-radius: 5px;
+	background-color: transparent;
+	font-size: 16px;
+	padding: 0px 15px 0px 20px;
+	color: #5E5E5E;
+	background-position: 10px center;
+    background-repeat: no-repeat;
+    padding-left: 30px;
+}
+.botao:hover
+{
+	background-color: #89CAFF;
+	color: #fff;
+}
+#btSalvar
+{
+	background-image: url("../img/bt_salvar.png");
+}
+#btExcluir
+{
+	background-image: url("../img/bt_excluir.png");
+}
+#btFechar
+{
+	background-image: url("../img/bt_fechar.png");
+}
+#btNovo
+{
+	background-image: url("../img/bt_novo.png");
+}
+#btAplicacoes
+{
+	background-image: url("../img/bt_aplicacoes.png");
+}
+#btEnviar
+{
+	background-image: url("../img/bt_enviar.png");
+}
+#btExportar
+{
+	background-image: url("../img/bt_exportar.png");
+}
+#btCancelar
+{
+	background-image: url("../img/bt_cancelar.png");
 }

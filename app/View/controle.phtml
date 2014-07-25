@@ -48,19 +48,20 @@
 		</div>
 
 		<div>
-			<input type='submit' name='btSalvar' id='btSalvar' value='Salvar' class="btn btn-success" />
+			<input class='botao' type='submit' name='btSalvar' id='btSalvar' value='Salvar' />
 
 			<?php if (!empty($ids)) : ?>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type='button' name='btExcluir' id='btExcluir' value='Apagar' class="btn btn-danger" 
+			<input class='botao' type='button' name='btExcluir' id='btExcluir' value='Apagar' 
 				onclick="if (window.confirm('Confirmar exclusão deste registro ?')) document.location.href='<?= $Site->base ?>
 					excluir_retirada/data:<?= str_replace('/','-',$dataC) ?>/ids:<?= implode(',',$ids) ?>'" />
-			<input type='button' name='btNovo' 	 id='btNovo' 	value='Nova Aplicação' class='btn btn-success' 
+
+			<input class='botao' type='button' name='btNovo' id='btNovo' value='Nova Aplicação' 
 					onclick="document.location.href='<?= $Site->base ?>novo'" />
 
 			<?php endif ?>
 
-			<input type='button' name='btVoltar' id='btVoltar' value='Minhas Aplicações' class="btn btn-primary" 
+			<input class='botao' type='button' name='btAplicacoes' id='btAplicacoes' value='Minhas Aplicações' 
 				onclick='document.location.href="<?= $Site->base ?>lista"' 
 				/>
 

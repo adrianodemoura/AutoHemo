@@ -40,12 +40,12 @@
 
 			<br /><br />
 			<div>
-				<input type='button' name='btNovo' 	 id='btNovo' 	value='Nova Aplicação' class='btn btn-success' 
+				<input class='botao' type='button' name='btNovo' 	 id='btNovo' 	value='Nova Aplicação'
 					onclick="document.location.href='<?= $Site->base ?>novo'" />
 
-				<input type='submit' name='btEnviar' id='btEnviar' value='Enviar' class='btn btn-primary' />
+				<input class='botao' type='submit' name='btEnviar' id='btEnviar' value='Enviar' />
 
-				<input type='submit' name='btExportar' id='btExportar' value='ExportarCSV' class='btn btn-info' />
+				<input class='botao' type='submit' name='btExportar' id='btExportar' value='ExportarCSV' />
 
 				<?php if (count($data)) : ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Total de Aplicações: <?= $paginacao['tot']; ?></span>
