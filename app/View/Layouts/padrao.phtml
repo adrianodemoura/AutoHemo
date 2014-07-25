@@ -67,7 +67,7 @@ $(document).ready(function()
                 <a class="navbar-brand" href="<?= $Site->base ?>"><?= $Site->sistema ?></a>
                 </div>
                 <div style="margin: 17px 0px 0px 0px; float: left;">
-                    <?php if (!empty($Site->titPagina)) echo ':: '.$Site->titPagina ?>
+                    <?php if (!empty($Site->titPagina)) echo '<span class="titPagina">:: '.$Site->titPagina.'</span>' ?>
                 </div>
                 </div>
             </div>
@@ -78,10 +78,16 @@ $(document).ready(function()
                     
                     <?php if (isset($_SESSION['Usuario'])) : ?>
                     <li class="page-scroll">
-                        <a href="<?= $Site->base ?>controle">Controle</a>
+                        <a href="<?= $Site->base ?>controle">
+                        <img src="<?= $Site->base ?>img/bt_controle.png" />
+                        ontrole
+                        </a>
                     </li>
                     <li class="page-scroll">
-                    <a href="<?= $Site->base ?>lista">Minhas Aplicações</a>
+                    <a href="<?= $Site->base ?>lista">
+                        <img src="<?= $Site->base ?>img/bt_lista.png" />
+                        Minhas Aplicações
+                        </a>
                     </li>
                     <?php endif ?>
 
@@ -91,7 +97,10 @@ $(document).ready(function()
                     <li>
                     <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Ferramentas <b class="caret"></b></a>
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                        <img src="<?= $Site->base ?>img/bt_ferramentas.png" />
+                        Ferramentas <b class="caret"></b>
+                        </a>
                         <ul class="dropdown-menu">
                             <li><a href="<?= $Site->base ?>debug">SqlDump</a></li>
                         </ul>
@@ -101,11 +110,17 @@ $(document).ready(function()
                     <?php endif ?>
 
                     <li class="page-scroll">
-                    <a href="<?= $Site->base ?>meu_perfil">Meu Perfil</a>
+                    <a href="<?= $Site->base ?>meu_perfil">
+                        <img src="<?= $Site->base ?>img/bt_profile.png" />
+                        Meu Perfil
+                    </a>
                     </li>
 
                     <li class="page-scroll">
-                        <a href="<?= $Site->base ?>sair">sair</a>
+                        <a href="<?= $Site->base ?>sair">
+                            <img src="<?= $Site->base ?>img/bt_poweroff.png" />
+                            sair
+                        </a>
                     </li>
                     <?php else : ?>
                     <li class="page-scroll">

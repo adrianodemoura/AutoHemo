@@ -46,7 +46,29 @@
 
 				<input type='submit' name='btExportar' id='btExportar' value='ExportarCSV' class='btn btn-info' />
 
+				<?php if (count($data)) : ?>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Total de Aplicações: <?= $paginacao['tot']; ?></span>
+				<?php else : ?>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>A pesquisa retornou vazio</span>
+				<?php endif ?>
+				<?php 
+					if ($paginacao['tot']>20) : 
+					$pagA = $paginacao['pag']-1;
+					$pagA = ($pagA<1) ? 1 : $pagA;
+
+					$pagP = $paginacao['pag']+1;
+					$pagP = ($pagP>$paginacao['pagU']) ? $paginacao['pagU'] : $pagP;
+				?>
+				<span>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href='<?= $Site->base ?>lista/pag:<?= $pagA ?>' title='página anterior'> << </a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href='<?= $Site->base ?>lista/pag:<?= $pagP ?>' title='primeira página'> >> </a>
+				</span>
+				<?php endif ?>
+
 			</div>
+
 			</form>
 		</div><!-- fim barra -->
 
@@ -99,28 +121,6 @@
 			</tr>
 		<?php endforeach ?>
 		</table>
-		<div class='listaRod'>
-			<?php if (count($data)) : ?>
-			<span>Total de Aplicações: <?= $paginacao['tot']; ?></span>
-			<?php else : ?>
-			<span>A pesquisa retornou vazio</span>
-			<?php endif ?>
-			<?php 
-				if ($paginacao['tot']>20) : 
-				$pagA = $paginacao['pag']-1;
-				$pagA = ($pagA<1) ? 1 : $pagA;
-
-				$pagP = $paginacao['pag']+1;
-				$pagP = ($pagP>$paginacao['pagU']) ? $paginacao['pagU'] : $pagP;
-			?>
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<span>
-				<a href='<?= $Site->base ?>lista/pag:<?= $pagA ?>' title='página anterior'> << </a>
-				&nbsp;&nbsp;
-				<a href='<?= $Site->base ?>lista/pag:<?= $pagP ?>' title='primeira página'> >> </a>
-			</span>
-		<?php endif ?>
-		</div>
 		</div><!-- fim lista -->
 
 	</div>

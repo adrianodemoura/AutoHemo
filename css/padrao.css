@@ -9,7 +9,10 @@ body
 {
 	margin-top: 63px;
 }
-
+.titPagina
+{
+	color: #5E5E5E;
+}
 .erros
 {
 	color: red;
@@ -38,13 +41,13 @@ body
 #msgFlash
 {
 	position: absolute;
-	text-align: center;
+	text-align: left;
 	line-height: 50px;
 	width: 500px;
 	top: 0px;
-	left: 50%;
-	margin-left: -250px;
+	left: 150px;
 	z-index: 9000;
+	background-color: #f8f8f8;
 }
 .msgOk
 {
