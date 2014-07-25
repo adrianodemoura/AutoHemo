@@ -40,22 +40,26 @@ body
 	position: absolute;
 	text-align: center;
 	line-height: 50px;
-	width: 100%;
+	width: 500px;
 	top: 0px;
+	left: 50%;
+	margin-left: -250px;
 	z-index: 9000;
 }
 .msgOk
 {
-	background-color: green;
-	color: #fff;
+	/*background-color: green;*/
+	color: green;
 	font-weight: bold;
+	font-size: 16px;
 }
 
 .msgErro
 {
-	background-color: red;
-	color: #fff;
+	/*background-color: red;*/
+	color: red;
 	font-weight: bold;
+	font-size: 16px;
 }
 
 .ulOptions 

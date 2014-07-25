@@ -1,5 +1,7 @@
 <?php
 	$Site->titulo = 'AutoHemo - Login';
+	$Site->titPagina = '';
+
 	if (isset($_SESSION['Usuario']))
 	{
 		$Site->setMsgFlash('O Usuário já foi autenticado !!!','msgErro');
