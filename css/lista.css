@@ -50,7 +50,13 @@
 {
 	text-align: center;
 }
-
+#div0Filtrolocal_id label
+{
+	/*background-color: #ddd;*/
+	display: block;
+	float: left;
+	width: 158px;
+}
 .lista table
 {
 	border-right: 1px solid #ccc;
