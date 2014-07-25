@@ -5,13 +5,15 @@
 ?>
 <div class='row'>
 <div class='col-md-2'></div>
+
+<form name='formUsuario' id='formUsuario' method='post' action='<?= $Site->base ?>meu_perfil' onsubmit="return validaForm(); ">
+
 <div class='col-md-10' style="margin: 0px 0px 20px 0px;">
 	<input class='botao' type='submit' id='btSalvar' name='btSalvar' value='Salvar'  />
 	<input class='botao' type='button' id='btAplicacoes' name='btAplicacoes' value='Minhas Aplicações'  
 			onclick="document.location.href='<?= $Site->base ?>lista'" />
 </div>
 
-<form name='formUsuario' id='formUsuario' method='post' action='<?= $Site->base ?>meu_perfil' onsubmit="return validaForm(); ">
 <input type='hidden' name='data[0][Usuario][id]' id='UsuarioId' value="<?= $data['0']['Usuario']['id'] ?>" />
 
 	<div>
