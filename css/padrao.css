@@ -3,11 +3,18 @@ body
 {
 	 /*background-image: url("../img/bg.png");*/
 	 font-family: "Ubuntu", arial, times;
+	 background-color: #ddd;
 }
-
+.navbar
+{
+	border-bottom: 3px solid #aaa;
+}
 .pagina
 {
-	margin-top: 63px;
+	margin-top: 50px;
+	padding: 15px 0px 0px 0px;
+	background-color: #fff;
+	min-height: 1000px;
 }
 .titPagina
 {
@@ -17,7 +24,6 @@ body
 {
 	color: red;
 	padding: 0px 0px 10px 0px;
-	margin-top: 50px;
 }
 
 .erros table td,
@@ -26,6 +32,7 @@ body
 	padding: 5px;
 	font-size: 10px;
 	font-family: verdana;
+	background-color: #fff;
 }
 .ativa
 {
