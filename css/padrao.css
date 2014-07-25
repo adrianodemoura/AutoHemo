@@ -41,6 +41,8 @@ body
 	text-align: center;
 	line-height: 50px;
 	width: 100%;
+	top: 0px;
+	z-index: 9000;
 }
 .msgOk
 {
