@@ -1,0 +1,25 @@
+<?php
+	// helper
+    include(APP.'View/Helper/Html.php');
+    $Html = new Html();
+?>
+<div id='novo' class='row-fluid'>
+	<p>
+	Escolha uma data para uma nova apliação.
+	</p>
+
+	<div>
+
+	<?php 
+		$dataC = (!empty($Site->params['data'])) ? $Site->params['data'] : date('d-m-Y');
+		echo $Html->getInputData('0.Retirada.data', array('value'=>$dataC)); 
+	?>
+	<br />
+
+	<input type='button' name='btFechar' id='btFechar' value='Cancelar'
+		class='btn btn-cancel' onclick="document.location.href='<?= $Site->base ?>lista'" />
+	</div>
+
+	<br />
+	<div id='ajaxResp'></div>
+</div>

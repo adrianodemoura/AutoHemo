@@ -7,7 +7,7 @@ $(document).ready(function()
 		var dia = $("#0RetiradadataDia").val();
 		var mes = $("#0RetiradadataMes").val();
 		var ano = $("#0RetiradadataAno").val();
-		var url = base+'aplicacoes/data:'+dia+'-'+mes+'-'+ano;
+		var url = base+'controle/data:'+dia+'-'+mes+'-'+ano;
 		document.location.href = url;	
 	});
 

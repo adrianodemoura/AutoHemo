@@ -1033,4 +1033,41 @@ class Site {
 		//$this->viewVars['debug']	= true;
 		$this->viewVars['inputId'] 	= $inputId;
 	}
+
+	/**
+	 * Exibe a tela para iniciar uma nova apliação
+	 * 
+	 */
+	public function novo()
+	{
+
+	}
+
+	/**
+	 * checa se uma data já foi lançada
+	 *
+	 * @param 	string 	$data 	Data a ser pesquisada
+	 * @return void
+	 */
+	public function checa()
+	{
+		$this->layout = 'ajax';
+		$data = $this->params['data']; // 25-07-2014
+		$dia 	= substr($data, 0, 2);
+		$mes 	= substr($data, 3, 2);
+		$ano 	= substr($data, 6, 4);
+
+		$params = array();
+		$params['where']['Aplicacao.data LIKE'] = $dia.'/'.$mes.'/'.$ano;
+		require_once('Model/Aplicacao.php');
+		$Aplicacao = new Aplicacao();
+		$lista = $Aplicacao->find('list',$params);
+		if (empty($lista)) $data = null;
+
+		$this->viewVars['data']  	= $data;
+		//$this->viewVars['debug']  	= true;
+		$this->sqls['Aplicacao'] 	= $Aplicacao->sqls;
+	}
+
+
 }

@@ -3,6 +3,11 @@
 	$Site->titPagina 	= 'Controle';
 
 	$ids 	= array();
+	if (!empty($data))
+	{
+		$vlrId = $data['0']['Retirada']['id'];
+		if (!in_array($vlrId, $ids)) array_push($ids, $vlrId);
+	}
 
 	// helper
     include(APP.'View/Helper/Html.php');
@@ -43,9 +48,16 @@
 		</div>
 
 		<div>
+			<?php if (!empty($ids)) : ?>
+
+			<input type='button' name='btNovo' 	 id='btNovo' 	value='Nova Aplicação' class='btn btn-success' 
+					onclick="document.location.href='<?= $Site->base ?>novo'" />
+			<?php endif ?>
+
 			<input type='submit' name='btSalvar' id='btSalvar' value='Salvar' class="btn btn-success" />
 
 			<?php if (!empty($ids)) : ?>
+
 			<input type='button' name='btExcluir' id='btExcluir' value='Apagar' class="btn btn-danger" 
 				onclick="if (window.confirm('Confirmar exclusão deste registro ?')) document.location.href='<?= $Site->base ?>
 					excluir_retirada/data:<?= str_replace('/','-',$dataC) ?>/ids:<?= implode(',',$ids) ?>'" />
