@@ -95,39 +95,48 @@
 		<?php 
 			$idRetC = 0;
 			$ocultar= false;
+			$v 		= false;
+			
 			foreach($data as $_l => $_arrMods) :
 			$dtCont = $_arrMods['Aplicacao']['data'];
 			$dtCont = str_replace('/','-',substr($dtCont, 0,10));
+			$idRet	= $_arrMods['Retirada']['id'];
 			$linkEditCont = $Site->base.'controle/data:'.$dtCont;
-			//if (!$_l) $idRetC = $_arrMods['Retirada']['id'];
+			$v = false;
 		?>
-			<tr <?php if($_l%2==0) : ?> class='liAtiva' <?php endif; ?>>
+			<?php if($_l && $idRet!=$idRetC) : ?>
+			<tr><td colspan='10'>&nbsp;</td></tr>
+			<?php endif ?>
+			<tr <?php if($idRet!=$idRetC) : ?> class='liAtiva' <?php endif; ?>>
 			<td><!-- editar -->
+				<?php if($idRet!=$idRetC) : ?>
 				<a href='<?= $linkEditCont ?>'>
 				<img class='btLista' id='bt<?= $_l ?>' src='<?= $Site->base ?>/img/bt_editar.png' border='0px' 
 					title='Clique aqui para editar esta aplicação ...'
 				/>
 				</a>
+				<?php endif ?>
 			</td>
 			<?php
 				foreach($campos as $_l => $_cmp) : 
-				$c 		= explode('.', $_cmp);
-				$vlr 	= '-';
-				$vlr 	= $_arrMods[$c['0']][$c['1']];
-				$idRet	= $_arrMods['Retirada']['id'];
-				//if ($_cmp=='Usuario.nome') $vlr = $idRet.' '.$vlr;
-				
-				if ($_cmp=='Aplicacao.apli_qtd' && $idRet!=$idRetC) $idRetC = $idRet;
+					$c 		= explode('.', $_cmp);
+					$vlr 	= '-';
+					$vlr 	= $_arrMods[$c['0']][$c['1']];
 
-				if ($idRetC==$idRet && in_array($_cmp,array('Usuario.nome','Aplicacao.data','Retirada.nome','Retirada.reti_qtd')))
-				{
-					$vlr = '<center>&nbsp;</center>';
-				}
+					if ($_cmp=='Aplicacao.apli_qtd') $idRetC = $idRet;
+
+					if ($idRetC==$idRet && in_array($_cmp,array('Usuario.nome','Aplicacao.data','Retirada.nome','Retirada.reti_qtd')))
+					{
+						$vlr = '<center>&nbsp;</center>';
+					}
 			?>
-			<td class='td<?= ucfirst($c['0']).ucfirst($c['1']) ?>'>
-				<?= $vlr ?>
-			</td>
-			<?php endforeach; ?>
+				<td class='td<?php echo ucfirst($c['0']).ucfirst($c['1']); 
+					if ($vlr!='<center>&nbsp;</center>') echo " liAtiva";
+					?>'
+				>
+					<?= $vlr ?>
+				</td>
+			<?php endforeach;  if ($idRet!=$idRetC) $idRetC = $idRet; ?>
 			</tr>
 		<?php endforeach ?>
 		</table>

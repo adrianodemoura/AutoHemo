@@ -39,6 +39,10 @@
 {
 	margin: 10px 0px 0px 0px;
 }
+.lista .liAtiva
+{
+	border: 1px solid #333;
+}
 .lista table tr th
 {
 	text-align: center;
@@ -59,15 +63,13 @@
 }
 .lista table
 {
-	border-right: 1px solid #ccc;
+	/*border-right: 1px solid #ccc;*/
 	border-top: 1px solid #ccc;
 }
 
-.lista table tr th,
-.lista table tr td
+.lista table tr th
 {
-	border-left: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
+	border: 1px solid #333;
 }
 
 .lista table tr th,
@@ -85,3 +87,10 @@
 {
 	cursor: pointer;
 }
+
+.lista .tdBranco
+{
+	/*ckground-color: red;*/
+	border: none;
+}
+
