@@ -904,7 +904,7 @@ class Site {
 		$filtros['data_ini']['value'] 	= '01'.'/'.date('m').'/'.date('Y');
 		$filtros['data_fim']['value'] 	= date('t/m/Y');
 		$params 	= array();
-		$params['order'] = array('Usuario.nome','Aplicacao.data');
+		$params['order'] = array('Usuario.nome','Aplicacao.data','Retirada.id');
 		$params['where']['Aplicacao.data BETWEEN'] = array($dataIni, $dataFim);
 
 		if (!isset($_POST['data']) || $_SESSION['Usuario']['perfilId']>1)
