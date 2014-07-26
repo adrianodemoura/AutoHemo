@@ -1070,6 +1070,7 @@ class Site {
 		$ano 	= substr($data, 6, 4);
 
 		$params = array();
+		$params['where']['Aplicacao.usuario_id'] = $_SESSION['Usuario']['id'];
 		$params['where']['Aplicacao.data LIKE'] = $dia.'/'.$mes.'/'.$ano;
 		require_once('Model/Aplicacao.php');
 		$Aplicacao = new Aplicacao();
