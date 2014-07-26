@@ -109,13 +109,17 @@
 			<?php endif ?>
 			<tr <?php if($idRet!=$idRetC) : ?> class='liAtiva' <?php endif; ?>>
 			<td><!-- editar -->
-				<?php if ($_SESSION['Usuario']['id']==$_arrMods['Usuario']['id']) : if($idRet!=$idRetC) : ?>
-				<a href='<?= $linkEditCont ?>'>
-				<img class='btLista' id='bt<?= $_l ?>' src='<?= $Site->base ?>/img/bt_editar.png' border='0px' 
-					title='Clique aqui para editar esta aplicação ...'
-				/>
-				</a>
-				<?php endif; endif ?>
+				<?php if ($_SESSION['Usuario']['id']==$_arrMods['Usuario']['id']) : ?>
+					<?php if($idRet!=$idRetC) : ?>
+					<a href='<?= $linkEditCont ?>'>
+					<img class='btLista' id='bt<?= $_l ?>' src='<?= $Site->base ?>/img/bt_editar.png' border='0px' 
+						title='Clique aqui para editar esta aplicação ...'
+					/>
+					</a>
+					<?php endif; ?>
+				<?php else : ?>
+				<center>-</center>
+				<?php endif ?>
 			</td>
 			<?php
 				foreach($campos as $_l => $_cmp) : 

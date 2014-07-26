@@ -1110,7 +1110,7 @@ class Site {
 
 		// globais
 		$totUsu	 	= isset($this->params['totUsu']) ? $this->params['totUsu'] : 1000;
-		$totRet		= isset($this->params['totRet']) ? $this->params['totRet'] : 20;
+		$totRet		= isset($this->params['totRet']) ? $this->params['totRet'] : 30;
 		//$totApl		= 10; // pra cada retirada haverá uma aplicação na mesma quantidade
 		$dataUs 	= array();
 		$dataRe 	= array();
