@@ -1047,7 +1047,12 @@ class Site {
 	 */
 	public function novo()
 	{
+		$dataC = (!empty($Site->params['data'])) ? $Site->params['data'] : date('d-m-Y');
+		$this->viewVars['dataC'] = $dataC;
 
+		// helper
+		include(APP.'View/Helper/Html.php');
+		$this->viewVars['Html'] = new Html();
 	}
 
 	/**

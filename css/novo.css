@@ -1,6 +1,34 @@
+.novo
+{
+	margin: 50px auto;
+	width: 500px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	padding: 10px;
+}
 .divReg select
 {
 	padding: 3px;
 	background-color: transparent;
 	border: none;
+}
+
+#btEditar,
+#btNovo
+{
+	display: none;
+}
+.divData
+{
+	text-align: center;
+}
+.divNovoBts
+{
+	text-align: center;
+}
+#ajaxResp
+{
+	color: red;
+	width: 100px;
+	margin: 0px auto;
 }

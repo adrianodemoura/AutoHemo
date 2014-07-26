@@ -114,6 +114,10 @@ body
 {
 	background-image: url("../img/bt_salvar.png");
 }
+#btEditar
+{
+	background-image: url("../img/bt_editar.png");
+}
 #btExcluir
 {
 	background-image: url("../img/bt_excluir.png");

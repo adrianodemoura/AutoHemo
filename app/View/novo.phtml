@@ -1,24 +1,23 @@
 <?php
-	// helper
-    include(APP.'View/Helper/Html.php');
-    $Html = new Html();
+	
 ?>
 <div class='container novo' class='row-fluid'>
 	<p>
-	Escolha uma data para uma nova apliação.
+	<center>Escolha uma data para uma nova apliação.</center>
 	</p>
 
 	<div>
-
-	<?php 
-		$dataC = (!empty($Site->params['data'])) ? $Site->params['data'] : date('d-m-Y');
-		echo $Html->getInputData('0.Retirada.data', array('value'=>$dataC)); 
-	?>
-	<br />
-	<div id='ajaxResp'></div>
-
-	<br />
-	<input type='button' name='btCancelar' id='btCancelar' value='Cancelar'
-		class='botao' onclick="document.location.href='<?= $Site->base ?>lista'" />
+		<div class='divData'>
+		<center>
+		<?= $Html->getInputData('0.Retirada.data', array('value'=>$dataC)); ?>
+		</center>
+		</div>
+		<div class='divNovoBts'>
+			<input class='botao' type='button' name='btCancelar' id='btCancelar' value='Cancelar' onclick="document.location.href='<?= $Site->base ?>lista'" />
+			<input class='botao' type='button' name='btEditar' id='btEditar' value='Editar Aplicação' />
+			<input class='botao' type='button' name='btNovo' id='btNovo' value='Criar Aplicação' />
+		</div>
 	</div>
+	
 </div>
+<div id='ajaxResp'></div>

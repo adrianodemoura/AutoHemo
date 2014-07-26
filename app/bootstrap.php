@@ -30,6 +30,9 @@
             foreach($Site->viewVars as $_var => $_vlr) ${$_var} = $_vlr;
         }
     }
+    // enxugando o objeto site
+    unset($Site->viewVars);
+
     // por segurança o model não vai pra view
     unset($Site->Model);
 
