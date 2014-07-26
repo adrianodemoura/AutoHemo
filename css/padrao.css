@@ -48,26 +48,26 @@ body
 #msgFlash
 {
 	position: absolute;
-	text-align: left;
-	line-height: 50px;
-	width: 550px;
-	top: 0px;
-	left: 140px;
+	text-align: center;
+	line-height: 30px;
+	width: 600px;
+	left: 50%;
+	margin-left: -300px;
 	z-index: 9000;
-	background-color: #f8f8f8;
+	top: 40px;
+	border-radius: 10px;
+	color: #333;
 }
 .msgOk
 {
-	/*background-color: green;*/
-	color: green;
+	background-color: #9af9b5;
 	font-weight: bold;
 	font-size: 16px;
 }
 
 .msgErro
 {
-	/*background-color: red;*/
-	color: red;
+	background-color: red;
 	font-weight: bold;
 	font-size: 14px;
 }

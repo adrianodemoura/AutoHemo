@@ -22,7 +22,7 @@
 				echo $Html->getInputData('0.Retirada.data', array('value'=>$dataC)); 
 			?>
 		</div>
-		<div style="margin-top: 20px;">
+		<div>
 			<?php 
 				foreach($Site->ultimas as $_l => $_data) : 
 				$_data = str_replace('/', '-', $_data);
@@ -32,7 +32,7 @@
 			<p class='pDatApli'>
 				<a class='linkDatApli' href='<?= $Site->base.'controle/data:'.$_data ?>'><?= $_data ?></a></p>
 			<?php else : ?>
-			<p class='pDatApli' style='padding: 4px 0px 4px 0px;'><?= $dataC ?>
+			<p class='pDatApli'><?= $dataC ?>
 			<?php endif ?>
 			
 			<?php endforeach ?>

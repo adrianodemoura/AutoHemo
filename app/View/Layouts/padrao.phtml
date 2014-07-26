@@ -38,7 +38,7 @@ $(document).ready(function()
     <?php endif ?>
 
     <?php if (isset($_SESSION['msgFlash'])) : ?>
-    $("#msgFlash").delay(10000).fadeOut(1000);
+    $("#msgFlash").delay(4000).fadeOut(1000);
     <?php endif ?>
 
     <?php if (!empty($Site->onRead)) : foreach($Site->onRead as $_l => $_script) : ?>
@@ -51,15 +51,9 @@ $(document).ready(function()
 </head>
 
 <body>
-    <?php if (isset($_SESSION['msgFlash'])) : ?>
-    <div id='msgFlash'  class='<?= $_SESSION['msgFlash']['class'] ?>'>
-        <?= $_SESSION['msgFlash']['texto'] ?>
-        <?php unset($_SESSION['msgFlash']) ?>
-    </div>
-    <?php endif ?>
-
 	<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
+
         <div class="container">
             <div class="navbar-header page-scroll">
                 <div>
@@ -136,9 +130,18 @@ $(document).ready(function()
         <!-- /.container-fluid -->
     </nav>
 
+	<section>
+	<?php if (isset($_SESSION['msgFlash'])) : ?>
+	<div id='msgFlash'  class='<?= $_SESSION['msgFlash']['class'] ?>'>
+		<?= $_SESSION['msgFlash']['texto'] ?>
+		<?php unset($_SESSION['msgFlash']) ?>
+	</div>
+	<?php endif ?>
+	</section>
+
     <section>
     <div class="pagina container">
-    <?= $conteudo ?>
+		<?= $conteudo ?>
 
     </div>
     </section>

@@ -64,21 +64,21 @@
 			value="<?= $data['0']['Usuario']['cidade_id'] ?>" style="width: 50px; text-align: center;" />
 		<input type='text' name='cidade' id='UsuarioCidade' autocomplete="off"
 			value="<?= $data['0']['Cidade']['nome'].'/'.$data['0']['Cidade']['uf'] ?>" />
-		<span style="font-size: 12px; margin: 0px 0px 0px 3px;">Digite a sua cidade aqui</span>
+		<span style="font-size: 12px; margin: 0px 0px 0px 3px;">Digite o nome de sua cidade.</span>
 		
 		<div id="ajaxRespCidade" class="resBelTo"></div>
 
 	</div>
 
 	<hr>
-	<div style="margin: 0px 0px 14px 0px;">
-		<p style='margin: 10px 0px 0px 205px;'>
-			Mantenha estes dois campos em branco para não alterar a senha.
-		</p>
+	<div style="margin: 20px 0px 14px 0px;">
 		<label>Senha: </label>
 		<input type='password' name='data[0][Usuario][senha]' id='UsuarioSenha' 
 			value="" />
 		<span>Repita a senha: </span><input type='password' name='senha2' id='UsuarioSenha2'  value="" />
+		<p style='margin: 10px 0px 0px 205px;'>
+			Mantenha estes dois campos em branco para não alterar a senha.
+		</p>
 	</div>
 
 	<hr>

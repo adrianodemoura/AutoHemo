@@ -55,11 +55,13 @@
 {
 	width: 120px;
 	text-align: center;
+	padding: 5px 0px 5px 0px;
+	margin: 0px;
 }
 .linkDatApli
 {
 	display: block;
-	padding: 4px 0px 4px 0px;
+	padding: 2px 0px 2px 0px;
 }
 .linkDatApli:hover
 {

@@ -23,6 +23,9 @@
 	<div class='cold-md-10'><!-- direita -->
 
 		<div class='barra'><!-- barra -->
+			<p>
+				Utilize os campos abaixo para filtrar suas aplicações.
+			</p>
 			<form name='formFiltro' id='formFiltro' method='post' action='<?= $Site->base ?>lista'>
 			<?php if ($_SESSION['Usuario']['perfilId']==1) : ?>
 			<?= $Html->getInput('0.Filtro.usuario_id', $filtros['usuario_id']);	?>
@@ -43,7 +46,7 @@
 				<input class='botao' type='button' name='btNovo' 	 id='btNovo' 	value='Nova Aplicação'
 					onclick="document.location.href='<?= $Site->base ?>novo'" />
 
-				<input class='botao' type='submit' name='btEnviar' id='btEnviar' value='Enviar' />
+				<input class='botao' type='submit' name='btEnviar' id='btEnviar' value='Filtrar' />
 
 				<input class='botao' type='submit' name='btExportar' id='btExportar' value='ExportarCSV' />
 
