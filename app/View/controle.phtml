@@ -16,7 +16,7 @@
 <div class='row-fluid'>
 	<div class='col-md-2'><!-- esquerda -->
 		<div style="text-align: center;"><!-- data -->
-			<label>Data:</label>
+			<label>Data da Aplicação</label>
 			<?php 
 				$dataC = (!empty($Site->params['data'])) ? $Site->params['data'] : date('d-m-Y');
 				echo $Html->getInputData('0.Retirada.data', array('value'=>$dataC)); 
