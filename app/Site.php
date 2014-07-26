@@ -341,7 +341,7 @@ class Site {
 	{
 		if (isset($_POST['data']))
 		{
-			// salvando as regtiradas e as aplicações
+			// salvando as retiradas e as aplicações
 			include_once(APP.'Model/Retirada.php');
 			$Retirada 	= new Retirada();
 			$dataC 		= $_POST['data']['0']['Retirada']['data'];
@@ -412,9 +412,9 @@ class Site {
 			if ($_arrMods['Local']['retirada']) $locaisRetiradas[$_arrMods['Local']['id']] = $_arrMods['Local']['nome'];
 		}
 
-		$this->viewVars['data'] 	= $data;
-		$this->viewVars['locais']	= $locais;
-		$this->viewVars['locaisRetiradas'] = $locaisRetiradas;
+		$this->viewVars['data'] 			= $data;
+		$this->viewVars['locais']			= $locais;
+		$this->viewVars['locaisRetiradas'] 	= $locaisRetiradas;
 	}
 
 	/**
@@ -981,7 +981,10 @@ class Site {
 
 		// implementando usuários
 		$filtros['usuario_id']['options'] = $Aplicacao->esquema['usuario_id']['options'];
-		array_unshift($filtros['usuario_id']['options'], '-- Todos os Usuários --');
+		//array_unshift($filtros['usuario_id']['options'], '-- Todos os Usuários --');
+		$filtros['usuario_id']['options']['0'] = '-- Todos os Usuários --';
+		ksort($filtros['usuario_id']['options']);
+
 		if ($_SESSION['Usuario']['perfilId']>1) $filtros['usuario_id']['input']['disabled'] = 'disabled';
 
 		// atualizando a view
@@ -1082,5 +1085,105 @@ class Site {
 		$this->sqls['Aplicacao'] 	= $Aplicacao->sqls;
 	}
 
+	/**
+	 * Popula a base de dados
+	 * 
+	 * @return	void
+	 */
+	public function popular()
+	{
+		// somente administrador
+		if (!isset($_SESSION['Usuario']))
+		{
+			$this->setMsgFlash('É preciso estar autenticado para executar esta ação','msgErro');
+			redirect($this->base.'login');
+		} elseif ($_SESSION['Usuario']['perfilId']>1)
+		{
+			$this->setMsgFlash('Usuário inválido para esta ação','msgErro');
+			redirect($this->base.'lista');
+		}
+
+		// aumentando o tempo de execução para 5 minutos
+		set_time_limit(300);
+		ini_set('memory_limit', '-1');
+		//ini_set('memory_limit', '128M');
+
+		// globais
+		$totUsu	 	= isset($this->params['totUsu']) ? $this->params['totUsu'] : 1000;
+		$totRet		= isset($this->params['totRet']) ? $this->params['totRet'] : 20;
+		//$totApl		= 10; // pra cada retirada haverá uma aplicação na mesma quantidade
+		$dataUs 	= array();
+		$dataRe 	= array();
+		$dataAp 	= array();
+		$medidas 	= array(2.5,5,10,15,20);
+		$locaisRe	= array(1,2);
+		$locaisAp	= array(1,2,3,4,5,6);
+
+		// objetos envolvidos
+		require_once('Model/Usuario.php'); 		$Usuario 	= new Usuario();
+		require_once('Model/Retirada.php');		$Retirada 	= new Retirada();
+		require_once('Model/Aplicacao.php');	$Aplicacao 	= new Aplicacao();
+
+		// populando usuários
+		for($i=1; $i<=$totUsu; $i++)
+		{
+			$id = '00000'.$i;
+			$id = substr($id,strlen($id)-4,4);
+			$dataUs['0']['Usuario']['nome'] 		= 'Usuário Teste Auto Hemo'.$id;
+			$dataUs['0']['Usuario']['email'] 		= 'email'.$id.'@autohemo.org';
+			$dataUs['0']['Usuario']['tele_resi'] 	= rand(318812,338812).$id;
+			$dataUs['0']['Usuario']['celular'] 		= rand(318812,338812).$id;
+			$dataUs['0']['Usuario']['aniversario'] 	= '2606';
+			$dataUs['0']['Usuario']['senha'] 		= 'debian67';
+			$dataUs['0']['Usuario']['ativo'] 		= 1;
+			$dataUs['0']['Usuario']['perfil_id']	= rand(3,4);
+			$dataUs['0']['Usuario']['cidade_id'] 	= rand(1,5507);
+			$dataUs['0']['Usuario']['ativo'] 		= 1;
+			if (!$Usuario->save($dataUs))
+			{
+				debug($dataUs);
+				debug($Usuario->erros);
+				die('Erro ao tentar salvar Usuário');
+			} else
+			{
+				// populando retiradas
+				for($o=1; $o<=$totRet; $o++)
+				{
+					$qtdRetirada = $medidas[rand(0,4)];
+					$dataRe['0']['Retirada']['data'] 	= randomDate('2014-01-01 12:00:00','31-12-2014 12:00:00');
+					$dataRe['0']['Retirada']['local_id'] = $locaisRe[rand(0,1)];
+					$dataRe['0']['Retirada']['reti_qtd'] = $qtdRetirada;
+					$dataRe['0']['Retirada']['usuario_id']= $Usuario->ultimoId;
+					if (!$Retirada->save($dataRe))
+					{
+						debug($dataRe);
+						debug($Retirada->erros);
+						die('Erro ao tentar salvar Retirada');
+					} else
+					{
+						$dataAp['0']['Aplicacao']['data'] 		= $dataRe['0']['Retirada']['data'];
+						$dataAp['0']['Aplicacao']['apli_qtd'] 	= $qtdRetirada;
+						$dataAp['0']['Aplicacao']['local_id'] 	= $locaisAp[rand(0,5)];
+						$dataAp['0']['Aplicacao']['retirada_id']= $Retirada->ultimoId;
+						$dataAp['0']['Aplicacao']['usuario_id'] = $Usuario->ultimoId;
+						if (!$Aplicacao->save($dataAp))
+						{
+							debug($dataAp);
+							debug($Aplicacao->erros);
+							die('Erro ao tentar salvar Aplicação');
+						}
+					}
+				}
+			}
+		}
+
+		$this->sqls['Usuario'] 		= $Usuario->sqls;
+		$this->sqls['Retirada'] 	= $Retirada->sqls;
+		$this->sqls['Aplicacao'] 	= $Aplicacao->sqls;
+		$this->viewVars['totUsu'] 	= $totUsu;
+		$this->viewVars['totRet'] 	= $totRet;
+		$this->viewVars['totApl'] 	= $totRet;
+		
+	}
 
 }

@@ -94,9 +94,9 @@ class Retirada extends Model {
 	/**
 	 * Executa método antes de salvar a retirada
 	 *
-	 * - As retiradas só seram salves se possuir alguma quantidade.
-	 * - Caso a retirada NÃO possua quantidade mas possui ID (já foi salva antes), as aplicações desta serão excluída
-	 * - A quantidade das aplicações NÃO podem extrapolar a quantidade das retiradas
+	 * - As retiradas só seram salvas se possuir alguma quantidade.
+	 * - Caso a retirada NÃO possua quantidade mas possui ID (já foi salva antes), as aplicações desta serão excluídas
+	 * - A quantidade das aplicações NÃO podem extrapolar a quantidade da retiradas
 	 *
 	 * @return boolean		Verdadeiro para continuar, Falso pra cancelar
 	 */
@@ -146,6 +146,7 @@ class Retirada extends Model {
 
 	/**
 	 * Executa método depois de salvar a retirada
+	 * - Se foi identificada que a retirada foi ZERADA, então se exclui as aplicações dela.
 	 *
 	 * @return void
 	 */
@@ -169,6 +170,7 @@ class Retirada extends Model {
 
 	/**
 	 * Executa código depois do método delete
+	 * - Exclui todas as aplicações da retirada excluída
 	 *
 	 * @return 	void
 	 */

@@ -109,13 +109,13 @@
 			<?php endif ?>
 			<tr <?php if($idRet!=$idRetC) : ?> class='liAtiva' <?php endif; ?>>
 			<td><!-- editar -->
-				<?php if($idRet!=$idRetC) : ?>
+				<?php if ($_SESSION['Usuario']['id']==$_arrMods['Usuario']['id']) : if($idRet!=$idRetC) : ?>
 				<a href='<?= $linkEditCont ?>'>
 				<img class='btLista' id='bt<?= $_l ?>' src='<?= $Site->base ?>/img/bt_editar.png' border='0px' 
 					title='Clique aqui para editar esta aplicação ...'
 				/>
 				</a>
-				<?php endif ?>
+				<?php endif; endif ?>
 			</td>
 			<?php
 				foreach($campos as $_l => $_cmp) : 
