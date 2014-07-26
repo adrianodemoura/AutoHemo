@@ -951,7 +951,14 @@ class Site {
 					}
 				}
 			}
+			$_SESSION['filtroLista'] = $filtros;
+			$_SESSION['paramsLista'] = $params;
+		} elseif (isset($_SESSION['filtroLista']))
+		{
+			$filtros = $_SESSION['filtroLista'];
+			$params = $_SESSION['paramsLista'];
 		}
+		$params['pag'] = $pag;
 
 		// opções especifica de cada relatório
 		switch($nome)
