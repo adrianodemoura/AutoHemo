@@ -1103,13 +1103,13 @@ class Site {
 			redirect($this->base.'lista');
 		}
 
-		// aumentando o tempo de execução para 5 minutos
-		set_time_limit(300);
+		// aumentando o tempo de execução para 20 minutos
+		set_time_limit(1200);
 		ini_set('memory_limit', '-1');
 		//ini_set('memory_limit', '128M');
 
 		// globais
-		$totUsu	 	= isset($this->params['totUsu']) ? $this->params['totUsu'] : 1000;
+		$totUsu	 	= isset($this->params['totUsu']) ? $this->params['totUsu'] : 10000;
 		$totRet		= isset($this->params['totRet']) ? $this->params['totRet'] : 30;
 		//$totApl		= 10; // pra cada retirada haverá uma aplicação na mesma quantidade
 		$dataUs 	= array();
