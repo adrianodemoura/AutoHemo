@@ -52,7 +52,6 @@ class Aplicacao extends Model {
 			'tit'			=> 'Local',
 			'filtro'		=> true,
 			'notEmpty'		=> true,
-			'emptyFiltro'	=> '-- Todos os Locais de Aplicação --',
 			'belongsTo' 	=> array
 			(
 				'Local'		=> array
@@ -68,14 +67,13 @@ class Aplicacao extends Model {
 			'tit'			=> 'Paciente',
 			'filtro'		=> true,
 			'notEmpty'		=> true,
-			'emptyFiltro'	=> '-- Todos os Pacientes --',
 			'belongsTo' 	=> array
 			(
 				'Usuario'		=> array
 				(
 					'key'	=> 'id',
 					'fields'=> array('id','nome'),
-					'order'	=> array('nome')
+					'order'	=> array('nome'),
 				),
 			),
 		),

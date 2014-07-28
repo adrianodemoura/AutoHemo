@@ -850,20 +850,19 @@ class Site {
 		$filtros= array();
 
 		// filtro padrão
-		$filtros['data_ini']['tit'] 	= 'Data Inicial';
+		$filtros['data_ini']['tit'] 			= 'Data Inicial';
 
-		$filtros['data_fim']['tit'] 	= 'Data Final';
+		$filtros['data_fim']['tit'] 			= 'Data Final';
 
-		$filtros['usuario_id']['tit'] 	= 'Usuário';
-		$filtros['usuario_id']['value'] = $_SESSION['Usuario']['id'];
-		$filtros['usuario_id']['options']['0'] = '-- Todos os Usuários --';
+		$filtros['usuario_id']['tit'] 			= 'Usuário';
+		$filtros['usuario_id']['value'] 		= $_SESSION['Usuario']['id'];
 
-		$filtros['local_id']['tit'] 	= 'Local da Aplicação';
-		$filtros['local_id']['value'] 	= 0;
-		$filtros['local_id']['options']['0'] = '-- Todos os Locais --';
+		$filtros['local_id']['tit'] 			= 'Local da Aplicação';
+		$filtros['local_id']['value'] 			= 0;
+		$filtros['local_id']['options']['0'] 	= '-- Todos os Locais --';
 
-		$filtros['retirada_id']['tit'] 	= 'Local da Retirada';
-		$filtros['retirada_id']['value']= 0;
+		$filtros['retirada_id']['tit'] 			= 'Local da Retirada';
+		$filtros['retirada_id']['value'] 		= 0;
 		$filtros['retirada_id']['options']['0'] = '-- Todos os Locais --';
 
 		// buscando os locais para popular as opçoes da retirada e aplicacao
@@ -901,10 +900,11 @@ class Site {
 		$dataFim['dia'] = date('t');
 		$dataFim['mes'] = date('m');
 		$dataFim['ano'] = date('Y');
-		$filtros['data_ini']['value'] 	= '01'.'/'.date('m').'/'.date('Y');
-		$filtros['data_fim']['value'] 	= date('t/m/Y');
-		$params 	= array();
-		$params['order'] = array('Usuario.nome','Aplicacao.data','Retirada.id');
+		$filtros['data_ini']['value'] = '01'.'/'.date('m').'/'.date('Y');
+		$filtros['data_fim']['value'] = date('t/m/Y');
+
+		$params = array();
+		$params['order'] = array('Usuario.nome','Aplicacao.data');
 		$params['where']['Aplicacao.data BETWEEN'] = array($dataIni, $dataFim);
 
 		if (!isset($_POST['data']) || $_SESSION['Usuario']['perfilId']>1)
@@ -980,12 +980,12 @@ class Site {
 		}
 
 		// implementando usuários
-		$filtros['usuario_id']['options'] = $Aplicacao->esquema['usuario_id']['options'];
-		//array_unshift($filtros['usuario_id']['options'], '-- Todos os Usuários --');
-		$filtros['usuario_id']['options']['0'] = '-- Todos os Usuários --';
-		ksort($filtros['usuario_id']['options']);
-
 		if ($_SESSION['Usuario']['perfilId']>1) $filtros['usuario_id']['input']['disabled'] = 'disabled';
+
+		// options usuarios
+		$filtros['usuario_id']['options'] = $Aplicacao->esquema['usuario_id']['options'];
+		$filtros['usuario_id']['options']['0'] 	= '-- Todos os Usuários --';
+		ksort($filtros['usuario_id']['options']);
 
 		// atualizando a view
 		$this->sqls['Aplicacao'] 	= $Aplicacao->sqls;

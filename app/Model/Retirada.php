@@ -54,13 +54,14 @@ class Retirada extends Model {
 			'emptyFiltro'	=> '-- Todos os Pacientes --',
 			'belongsTo' 	=> array
 			(
-				'Sistema.Usuario'	=> array
+				'Usuario'	=> array
 				(
 					'key'	=> 'id',
 					'fields'=> array('id','nome'),
 					'order'	=> array('nome'),
-					'ajax'	=> 'sistema/usuarios/get_options/',
+					'ajax'	=> 'usuarios/get_options/',
 					'txtPesquisa' => 'Digite o nome do paciente para pesquisar ...',
+					'limit'	=> 1000
 				),
 			),
 		),
@@ -78,6 +79,7 @@ class Retirada extends Model {
 					'order'	=> array('nome'),
 					'ajax'	=> 'autohemo/locais/get_options/',
 					'txtPesquisa' => 'Digite o nome do local para pesquisar ...',
+					'limit'	=> 100
 				),
 			),
 		),

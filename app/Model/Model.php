@@ -195,6 +195,7 @@ class Model {
 	{
 		$this->name = get_class($this);
 		if (empty($this->alias)) $this->alias = $this->name;
+		$this->erros = array();
 	}
 
 	/**
@@ -312,14 +313,22 @@ class Model {
 	 */
 	public function query($sql='')
 	{
+		if (!empty($this->erros))
+		{
+			debug($this->sqls);
+			debug($sql);
+			debug($this->erros);
+			die('erro grave !!!');
+		}
+
 		$data 	= array();
 		$this->open();
-		if (!empty($this->erros)) return $data;
 
 		$_data 	= $this->db->query($sql);
 		$erro 	= $this->db->errorInfo();
 		$l 		= 0;
 		$ini	= microtime(true);
+
 		if (empty($erro['2']))
 		{
 			try
@@ -352,7 +361,7 @@ class Model {
 			}
 		} else
 		{
-			array_push($this->erros, array('codigo'=>$erro['1'],'mensagem'=>$erro['2']));
+			array_push($this->erros, array('model'=>$this->name,'codigo'=>$erro['1'],'mensagem'=>$erro['2']));
 		}
 
 		$ts = round(microtime(true)-$_SERVER['REQUEST_TIME'],4);
@@ -782,21 +791,24 @@ class Model {
 			}
 		}
 
-		// recuperando options para belongsTo
-		if (!empty($cmpsBelongs))
+		if ($tipo=='all')
 		{
-			foreach($cmpsBelongs as $_l => $_cmp)
+			// recuperando options para belongsTo
+			if (!empty($cmpsBelongs))
 			{
-				$this->esquema[$_cmp]['options'] = $this->getOptions($_cmp);
+				foreach($cmpsBelongs as $_l => $_cmp)
+				{
+					$this->esquema[$_cmp]['options'] = $this->getOptions($_cmp);
+				}
 			}
-		}
-		// recuperando options para belongsToFunc
-		if (!empty($cmpsBelongsFunc))
-		{
-			foreach($cmpsBelongsFunc as $_l => $_cmp)
+			// recuperando options para belongsToFunc
+			if (!empty($cmpsBelongsFunc))
 			{
-				$func = $this->esquema[$_cmp]['optionsFunc'];
-				$this->esquema[$_cmp]['options'] = $this->$func();
+				foreach($cmpsBelongsFunc as $_l => $_cmp)
+				{
+					$func = $this->esquema[$_cmp]['optionsFunc'];
+					$this->esquema[$_cmp]['options'] = $this->$func();
+				}
 			}
 		}
 
@@ -841,7 +853,7 @@ class Model {
 								$where .= "$_cmp='$_vlr'";
 						}
 					}
-					$limite = isset($_arrProp['limit']) ? $_arrProp['limit'] : null;
+					$limite = isset($_arrProp['limit']) ? $_arrProp['limit'] : 100;
 
 					require_once($_mod.'.php');
 					$belo 	= new $_mod();
