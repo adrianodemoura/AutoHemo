@@ -13,6 +13,9 @@ var base = '<?= $Site->base?>'
 <script type="text/javascript" src="<?= $Site->base ?>js/padrao.js"></script>
 <script type="text/javascript" src="<?= $Site->base ?>js/bootstrap.min.js"></script>
 
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
 <?php if (file_exists(WWW.'js/'.$Site->pagina.'.js')) : ?>
 <script type="text/javascript" src="<?= $Site->base ?>js/<?= $Site->pagina ?>.js"></script>
 <?php endif ?>
@@ -46,13 +49,19 @@ $(document).ready(function()
     <?php endforeach; endif ?>
 
 });
+
 </script>
+
+<meta property="og:site_name" content="Autohemo" />
+<meta property="og:title" content="<?= $Site->titulo ?>" />
+<meta property="og:image" content="<?= $Site->base ?>bt_facebook.png" />
 
 </head>
 
 <body>
 	<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
+        <?php include_once(APP.'View/Elements/compartilhar.php') ?>
 
         <div class="container">
             <div class="navbar-header page-scroll">
@@ -69,7 +78,7 @@ $(document).ready(function()
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    
+                   
                     <?php if (isset($_SESSION['Usuario'])) : ?>
                     <li class="page-scroll">
                         <a href="<?= $Site->base ?>controle">

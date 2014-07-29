@@ -8,10 +8,11 @@ body
 .navbar
 {
 	border-bottom: 3px solid #aaa;
+	height: 80px;
 }
 .pagina
 {
-	margin-top: 50px;
+	margin-top: 80px;
 	padding: 15px 0px 0px 0px;
 	background-color: #fff;
 	min-height: 1000px;
@@ -56,18 +57,20 @@ body
 	z-index: 9000;
 	top: 40px;
 	border-radius: 10px;
-	color: #333;
+	/*color: #333;*/
 }
 .msgOk
 {
-	background-color: #9af9b5;
+	/*background-color: #9af9b5;*/
+	color: #4fd155;
 	font-weight: bold;
 	font-size: 16px;
 }
 
 .msgErro
 {
-	background-color: red;
+	/*background-color: red;*/
+	color: red;
 	font-weight: bold;
 	font-size: 14px;
 }
@@ -145,4 +148,18 @@ body
 #btCancelar
 {
 	background-image: url("../img/bt_cancelar.png");
+}
+
+.btsRedeSocial
+{
+	/*background-color: #ddd;*/
+	position: absolute;
+	top: 45px;
+	left: 140px;
+	min-width: 300px;
+	z-index: 9001;
+}
+.bt_twitter
+{
+/*	background-color: #ddd;*/
 }
