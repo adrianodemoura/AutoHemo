@@ -53,7 +53,9 @@
 
 				<div style="line-height: 40px;">
 					<?php if (count($data)) : ?>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Total de Aplicações: <?= $paginacao['tot']; ?></span>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>
+						Total de Aplicações: <?= number_format($paginacao['tot'],'0',',','.'); ?>
+					</span>
 					<?php else : ?>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>A pesquisa retornou vazio</span>
 					<?php endif ?>
