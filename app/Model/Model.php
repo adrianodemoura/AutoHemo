@@ -318,7 +318,13 @@ class Model {
 			debug($this->sqls);
 			debug($sql);
 			debug($this->erros);
-			die('erro grave !!!');
+			if (in_array($this->erros['0']['codigo'], array(1045,1049)))
+			{
+				die('<script>document.location.href="instalacao"</script>');
+			} else
+			{
+				die('erro grave, contacte o administrador do sistema !!!');
+			}
 		}
 
 		$data 	= array();
