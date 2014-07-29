@@ -1109,7 +1109,7 @@ class Site {
 		//ini_set('memory_limit', '128M');
 
 		// globais
-		$totUsu	 	= isset($this->params['totUsu']) ? $this->params['totUsu'] : 10000;
+		$totUsu	 	= isset($this->params['totUsu']) ? $this->params['totUsu'] : 1000;
 		$totRet		= isset($this->params['totRet']) ? $this->params['totRet'] : 30;
 		//$totApl		= 10; // pra cada retirada haverá uma aplicação na mesma quantidade
 		$dataUs 	= array();
