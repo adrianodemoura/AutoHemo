@@ -92,6 +92,10 @@ body
 {
 	background-color: #eee;
 }
+.navbar-brand
+{
+  margin-top: -5px;
+}
 .botao
 {
 	min-width: 90px;

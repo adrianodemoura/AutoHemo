@@ -18,9 +18,24 @@
 	}
 
 ?>
+
+
+<div class="containerlogin">
+<div class="left">
+Bem-vindo ao AutoHemo.
+<br><br>
+Com intuito de colaborar e incentivar a prática da Auto-hemoterapia, aqui você poderá realizar seus controles de cada aplicação. Como também relatar como se sente com as aplicações.
+</div>
+
+
+
+  <div class="right">
 <div class='login'>
 
-<form name='formLogin' method='post' action='<?= $Site->base ?>login' class="form-signin" />
+<div class='loginfont'>
+<center>Acessar o sistema</center>
+</div>
+  <form name='formLogin' method='post' action='<?= $Site->base ?>login' class="form-signin" />
 	<div class='linha'>
 		<input type='text' name='data[email]' id='email' autofocus="autofocus" 
 			class="email form-control"
@@ -44,11 +59,13 @@
 	</div>
 
 </form>
-</div>
-<br /><br />
-<div>
 <center>
+	<div class='loginbottom'>
 	<a href='<?= $Site->base ?>muda_senha'>Esqueci a senha</a>
 	&nbsp;&nbsp;|&nbsp;&nbsp; <a href='<?= $Site->base ?>novo_registro'>Registre-se</a>
+	</div>
 </center>
+</div>
+</div>
+</div>
 </div>

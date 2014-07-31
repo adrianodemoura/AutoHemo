@@ -67,7 +67,7 @@ $(document).ready(function()
             <div class="navbar-header page-scroll">
                 <div>
                 <div style="float: left;">
-                <a class="navbar-brand" href="<?= $Site->base ?>"><?= $Site->sistema ?></a>
+                <a class="navbar-brand" href="<?= $Site->base ?>"><img src="/img/logo-autohemo.png"> <?= $Site->sistema ?></a>
                 </div>
                 <div style="margin: 17px 0px 0px 0px; float: left;">
                     <?php if (!empty($Site->titPagina)) echo '<span class="titPagina">:: '.$Site->titPagina.'</span>' ?>
@@ -127,9 +127,14 @@ $(document).ready(function()
                         </a>
                     </li>
                     <?php else : ?>
-                    <li class="page-scroll">
-                        <a href="<?= $Site->base ?>login">Login</a>
-                    </li>
+
+                    
+                    <div class="social">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=www.autohemo.org" target="_blank"><img src="/img/facebook.png"></a>
+                    <a href="https://twitter.com/intent/tweet?url=www.autohemo.org&text=Auto hemoterapia é aqui&via=YOURTWITTERACCOUNTNAME" target="_blank"><img src="/img/twitter.png"></a>
+                    <a href="https://plus.google.com/share?url=www.autohemo.org" target="_blank"><img src="/img/google_plus.png"></a>
+		    </div>
+
                     <?php endif ?>
 
                 </ul>
