@@ -1,18 +1,35 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400);
 body
 {
-	 font-family: "Ubuntu", arial, times;
-	 background-color: #ddd;
+	font-family: "Ubuntu", arial, times;
+	background-color: #ddd;
+	background: url(../img/bg.jpg); 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
+
 .navbar
 {
-	border-bottom: 3px solid #aaa;
-	height: 60px;
+ height: 60px;
+ background:  rgba(0, 0, 0, 0.68);
 }
-.navbar a
+
+.navbar-brand
 {
-	color: #fff;
+  color: #fff !important;
 }
+
+.navbar-default .navbar-nav>li>a
+{
+  color: #fff !important;
+}
+.navbar-default .navbar-nav>li>a:hover
+{
+	background-color: #505050;
+}
+
 .pagina
 {
 	margin-top: 60px;
@@ -22,7 +39,7 @@ body
 }
 .titPagina
 {
-	color: #5E5E5E;
+	color: #fff;
 }
 .erros
 {
