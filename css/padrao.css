@@ -1,18 +1,21 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400);
 body
 {
-	 /*background-image: url("../img/bt_editar.png");*/
 	 font-family: "Ubuntu", arial, times;
 	 background-color: #ddd;
 }
 .navbar
 {
 	border-bottom: 3px solid #aaa;
-	height: 80px;
+	height: 60px;
+}
+.navbar a
+{
+	color: #fff;
 }
 .pagina
 {
-	margin-top: 80px;
+	margin-top: 60px;
 	padding: 15px 0px 0px 0px;
 	background-color: #fff;
 	min-height: 1000px;

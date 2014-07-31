@@ -50,7 +50,7 @@ class Site {
 	 * Página principal
 	 *
 	 */
-	public $pagina 		= 'principal';
+	public $pagina 		= 'lista';
 
 	/**
 	 * Esquema
@@ -132,7 +132,7 @@ class Site {
 		$arrPag = explode('/',$_SERVER['REQUEST_URI']);
 		unset($arrPag['0']);
 		$pagina = (count($arrSel)==2) ? $arrPag['1'] : $arrPag['2'];
-		$pagina = empty($pagina) ? 'principal' : $pagina;
+		$pagina = empty($pagina) ? 'lista' : $pagina;
 		$this->pagina = $pagina;
 
 		// se possui parâmetros
@@ -186,7 +186,7 @@ class Site {
 		if (isset($_SESSION['Usuario']))
 		{
 			$this->msg = 'O Usuário já foi autenticado';
-			redirect($this->base.'principal');
+			redirect($this->base.'lista');
 		}
 		include_once(APP.'Model/Usuario.php');
 		$this->Model 	= new Usuario();
@@ -838,7 +838,6 @@ class Site {
 	{
 		if (!isset($_SESSION['Usuario']))
 		{
-			$this->setMsgFlash('Somente para usuário autenticados','msgErro');
 			redirect($this->base.'login');
 		}
 
