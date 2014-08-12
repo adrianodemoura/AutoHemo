@@ -1,6 +1,8 @@
 <?php
 	$Site->titulo = 'AutoHemo - Login';
 	$Site->titPagina = '';
+	$nome 	= isset($nome) 	? $nome : '';
+	$email 	= isset($email) ? $email : '';
 
 	if (isset($_SESSION['Usuario']))
 	{
@@ -21,51 +23,84 @@
 
 
 <div class="containerlogin">
-<div class="left">
-Bem-vindo ao AutoHemo.
-<br><br>
-Com intuito de colaborar e incentivar a prática da Auto-hemoterapia, aqui você poderá realizar seus controles de cada aplicação. Como também relatar como se sente com as aplicações.
-</div>
 
+	<div class="left">
+		Bem-vindo ao AutoHemo.
+		<br><br>
+		Com intuito de colaborar e incentivar a prática da Auto-hemoterapia, aqui você poderá realizar seus controles de cada aplicação. Como também relatar como se sente com as aplicações.
+	</div><!-- FIM left -->
 
+	<div class="right">
+		<div class='login'>
 
-  <div class="right">
-<div class='login'>
+			<div class='loginfont'>
+			<center>Acessar o sistema</center>
+			</div>
 
-<div class='loginfont'>
-<center>Acessar o sistema</center>
-</div>
-  <form name='formLogin' method='post' action='<?= $Site->base ?>login' class="form-signin" />
-	<div class='linha'>
-		<input type='text' name='data[email]' id='email' autofocus="autofocus" 
-			class="email form-control"
-			placeholder="e-mail"
-			value=''
-			/>
-	</div>
+			<form name='formLogin' method='post' action='<?= $Site->base ?>login' class="form-signin" />
+				<div class='linha'>
+					<input type='text' name='data[email]' id='email' autofocus="autofocus" 
+						class="email form-control"
+						placeholder="e-mail"
+						value=''
+						/>
+				</div>
 
-	<div class='linha'>
-		<input type='password' name='data[senha]' id='senha' 
-			class="password form-control"
-			placeholder="senha"
-			value=''
-			/>
-	</div>
+				<div class='linha'>
+					<input type='password' name='data[senha]' id='senha' 
+						class="password form-control"
+						placeholder="senha"
+						value=''
+						/>
+				</div>
 
-	<div class='botoes'>
-	<center>
-		<input type='submit' name='btEnviar' value = 'Enviar' class="btn btn-large btn-primary" />
-	</center>
-	</div>
+				<div class='botoes'>
+				<center>
+					<input type='submit' name='btEnviar' value = 'Enviar' class="btn btn-large btn-primary" />
+				</center>
+				</div>
 
-</form>
-<center>
-	<div class='loginbottom'>
-	<a href='<?= $Site->base ?>muda_senha'>Esqueci a senha</a>
-	&nbsp;&nbsp;|&nbsp;&nbsp; <a href='<?= $Site->base ?>novo_registro'>Registre-se</a>
-	</div>
-</center>
-</div>
-</div>
-</div>
-</div>
+			</form>
+			<center>
+				<div class='loginbottom'>
+				<a href='<?= $Site->base ?>muda_senha'>Esqueci a senha</a>
+				<!-- &nbsp;&nbsp;|&nbsp;&nbsp; <a href='<?= $Site->base ?>novo_registro'>Registre-se</a> -->
+				</div>
+			</center>
+		</div><!-- FIM login -->
+
+		<div class="novo_registro">
+			<div>
+				<h4>Novo no AutoHemo ?</h4><span>inscreva-se</span>
+
+				<div class='row-fluid'>
+				<form name='formTrocar' method='post' action='<?= $Site->base ?>novo_registro' 
+					onsubmit="return validaNovoUser();">
+					<br />
+					<input type='text' name='data[0][Usuario][nome]' class="form-control" autocomplete="off"
+						id='UsuarioNome' autofocus='autofocus' placeholder='Nome completo' value='<?= $nome ?>' 
+						style='width: 270px;' />
+					<input type='text' name='data[0][Usuario][email]' class="form-control" autocomplete="off"
+						id='UsuarioEmail' placeholder='e-mail' value='<?= $email ?>' 
+						style='width: 270px;' />
+					<input type='submit' name='btSalvar' value='Salvar' class='btn btn-primary' />
+					<br />
+
+					<?php if (!isset($msg)) : ?>
+						<div class='informe_novo'>
+							Informe o seu nome e seu e-mail, o link de ativação será enviado para o seu e-mail.
+						</div>
+					
+					<?else : ?>
+						<div class='msg <?= $class ?>'>
+							<?= $msg ?>
+						</div>
+					<?php endif ?>
+
+				</form>
+				</div>
+			</div>
+		</div><!-- FIM novo_registro -->
+
+	</div><!-- FIM right -->
+</div><!-- FIM containerlogin -->

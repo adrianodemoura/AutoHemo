@@ -633,7 +633,8 @@ class Site {
 			$this->sqls['Usuario'] = $Usuario->sqls;
 			if (count($data))
 			{
-				$this->viewVars['msgErro'] = 'Este e-mail já se encontra cadastrado !!!';
+				$_SESSION['novoUserMsgErro'] = 'Este e-mail já se encontra cadastrado !!!';
+				redirect($this->base.'login');
 			} else // se não, cria o registro mas com status inativo
 			{
 				$data = $_POST['data'];
@@ -643,7 +644,8 @@ class Site {
 				$data['0']['Usuario']['troc_senh_cod'] 	= encripta(date('d/m/Y H:i:s'));
 				if (!$Usuario->save($data))
 				{
-					$this->viewVars['msgErro'] = 'Não foi possível salvar o novo registro ';
+					$_SESSION['novoUserMsgErro'] = 'Não foi possível salvar o novo registro ';
+					redirect($this->base.'login');
 				} else
 				{
 					require_once(APP.'Config/email.php');
@@ -690,15 +692,42 @@ class Site {
 					$enviado = $Mail->Send();
 					if (!$enviado)
 					{
-						$this->viewVars['msgErro'] = 'Não foi possível enviar o e-mail de validação. '.$Mail->ErrorInfo;
+						$_SESSION['novoUserMsgErro'] = 'Não foi possível enviar o e-mail de validação. '.$Mail->ErrorInfo;
 					} else
 					{
-						$this->viewVars['msgOk'] = 'As instruções para ativação da conta, foi enviada com sucesso para o e-mail '.$email;
+						$_SESSION['novoUserMsgOk'] = 'As instruções para ativação da conta, foi enviada com sucesso para o e-mail '.$email;
 					}
+					redirect($this->base.'login');
 				}
 			}
 
 		}
+	}
+
+	/**
+	 * Exibe a tela de login
+	 *
+	 * @return void
+	 */
+	public function login()
+	{
+		$msg 	= null;
+		$class 	= null;
+		if (isset($_SESSION['novoUserMsgOk']))
+		{
+			$msg 	= $_SESSION['novoUserMsgOk'];
+			unset($_SESSION['novoUserMsgOk']);
+			$class 	= 'msgOk';
+		}
+		if (isset($_SESSION['novoUserMsgErro']))
+		{
+			$msg = $_SESSION['novoUserMsgErro'];
+			unset($_SESSION['novoUserMsgErro']);
+			$class 	= 'msgErro';
+		}
+
+		$this->viewVars['msg'] 		= $msg;
+		$this->viewVars['class'] 	= $class;
 	}
 
 	/**

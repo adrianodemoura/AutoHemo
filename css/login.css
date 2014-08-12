@@ -65,16 +65,6 @@ margin-bottom: 15px;
  margin-top: 15px; 
 }
 
-
-
-
-
-
-
-
-
-
-
 /*
  * Copyright (c) 2012-2013 Thibaut Courouble
  * http://www.cssflow.com
@@ -231,4 +221,41 @@ input[type=submit]:active {
 
 .lt-ie9 input[type=text], .lt-ie9 input[type=password] {
   line-height: 34px;
+}
+
+/**
+ *
+ */
+.novo_registro
+{
+  background-color: #fff;
+  padding: 10px;
+  background: white;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  margin: 0px auto;
+  width: 300px;
+}
+
+.novo_registro h4
+{
+  float: left;
+  margin: 0px 10px 0px 0px;
+  color: #999;
+}
+.novo_registro span
+{
+  color: #999;
+}
+.novo_registro .msg
+{
+  padding: 10px 0px 10px 0px;
+  font-size: 12px;
+}
+.novo_registro .informe_novo
+{
+  font-size: 12px;
+  color: #999;
+  margin: 10px 0px 0px 0px;
 }
