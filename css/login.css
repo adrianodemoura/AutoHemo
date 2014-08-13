@@ -287,3 +287,11 @@ input[type=submit]:active {
   color: #999;
   margin: 10px 0px 0px 0px;
 }
+
+/**
+ *
+ */
+#btSalvar
+{
+  background: #a4fcc5;
+}
