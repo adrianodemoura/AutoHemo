@@ -56,7 +56,7 @@
 
 				<div class='botoes'>
 				<center>
-					<input type='submit' name='btEnviar' value = 'Enviar' class="btn btn-large btn-primary" />
+					<input type='submit' name='btEnviar' value = 'Entrar' class="btn btn-large btn-primary" />
 				</center>
 				</div>
 
@@ -77,18 +77,24 @@
 				<form name='formTrocar' method='post' action='<?= $Site->base ?>novo_registro' 
 					onsubmit="return validaNovoUser();">
 					<br />
+					<div class='linha'>
 					<input type='text' name='data[0][Usuario][nome]' class="form-control" autocomplete="off"
 						id='UsuarioNome' autofocus='autofocus' placeholder='Nome completo' value='<?= $nome ?>' 
 						style='width: 270px;' />
+					</div>
+					<div class='linha'>
 					<input type='text' name='data[0][Usuario][email]' class="form-control" autocomplete="off"
 						id='UsuarioEmail' placeholder='e-mail' value='<?= $email ?>' 
 						style='width: 270px;' />
-					<input type='submit' name='btSalvar' value='Salvar' class='btn btn-primary' />
-					<br />
+					</div>
+					<div class='botoes'>
+					<center><input type='submit' name='btSalvar' value='Inscreva-se no Autohemo' class='btn btn-primary' /></center>
+					
+					</div>
 
 					<?php if (!isset($msg)) : ?>
 						<div class='informe_novo'>
-							Informe o seu nome e seu e-mail, o link de ativação será enviado para o seu e-mail.
+							O link de ativação será enviado para o seu e-mail.
 						</div>
 					
 					<?else : ?>
