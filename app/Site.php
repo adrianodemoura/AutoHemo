@@ -36,7 +36,7 @@ class Site {
 	 * @var 	string
 	 * @access 	public
 	 */
-	public $titulo		= 'Auto Hemoterapia';	
+	public $titulo		= 'Auto-hemoterapia';	
 
 	/**
 	 * Título do sistema
@@ -44,7 +44,7 @@ class Site {
 	 * @var 	string
 	 * @access 	public
 	 */
-	public $sistema 	= 'Auto Hemoterapia';
+	public $sistema 	= 'Auto-hemoterapia';
 
 	/**
 	 * Página principal
