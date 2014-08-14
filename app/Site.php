@@ -350,7 +350,7 @@ class Site {
 
 			if ($Retirada->save($_POST['data']))
 			{
-				$msg 	= 'A Retirada foi salva com sucesso ...';
+				$msg 	= 'A Aplicação foi salva com sucesso ...';
 				$class 	= 'msgOk';
 
 				$aplicacoes = isset($_POST['aplicacao']) ? $_POST['aplicacao'] : array();
@@ -366,16 +366,16 @@ class Site {
 					$Aplicacao = new Aplicacao();
 					if ($Aplicacao->save($aplicacoes))
 					{
-						$msg = 'A Retirada e a Aplicação foi salva com sucesso !!!';
+						$msg = 'A Aplicação foi salva com sucesso !!!';
 					} else
 					{
-						$msg 	= 'A Retirada foi salva com sucesso, mas nenhuma aplicação foi criada ...';
+						$msg 	= 'A Aplicação foi salva com sucesso, mas nenhum local foi implementado ...';
 					}
 					$this->sqls['Aplicacao'] = $Aplicacao->sqls;
 				}
 			} else
 			{
-				$msg 	= 'Erro ao salvar retirada !!!';
+				$msg 	= 'Erro ao salvar Aplicação !!!';
 				$class 	= 'msgErro';
 				if (isset($Retirada->erros['0']))
 				{
