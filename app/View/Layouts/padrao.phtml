@@ -84,13 +84,21 @@ $(document).ready(function()
                    
                     <?php if (isset($_SESSION['Usuario'])) : ?>
                     <li class="page-scroll">
+                    <a href="<?= $Site->base ?>comentarios">
+                        <img src="<?= $Site->base ?>img/bt_comentarios.png" />
+                        Comentários
+                        </a>
+                    </li>
+
+                    <li class="page-scroll">
                         <a href="<?= $Site->base ?>controle">
                         <img src="<?= $Site->base ?>img/bt_controle.png" />
                         Controle Diário
                         </a>
                     </li>
+
                     <li class="page-scroll">
-                    <a href="<?= $Site->base ?>lista">
+                    <a href="<?= $Site->base ?>lista/nome:rel001">
                         <img src="<?= $Site->base ?>img/bt_lista.png" />
                         Minhas Aplicações
                         </a>
