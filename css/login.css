@@ -171,7 +171,7 @@ margin-bottom: 15px;
 }
 
 .login input {
-  font-family: 'Lucida Grande', Tahoma, Verdana, sans-serif;
+  font-family: 'Ubuntu', Verdana, sans-serif;
   font-size: 14px;
 }
 
@@ -271,6 +271,8 @@ input[type=text]:focus, input[type=password]:focus {
   float: left;
   margin: 0px 10px 0px 0px;
   color: #999;
+  font-family: lato, ubuntu, arial;
+  font-size: 20px;
 }
 .novo_registro span
 {
